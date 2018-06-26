@@ -36,7 +36,7 @@ Test demo app here: https://steemit.github.io/example-steemconnect-angular/
 
 */api/me* - Get user profile (require user or app token)
 
-*/api/broadcast* - Broadcast posting operation for user (require app token)
+*/api/* - Broadcast posting operation for user (require app token)
 
 ## OAuth2
 */api/oauth2/authorize* - Issue new app token (require user token)
