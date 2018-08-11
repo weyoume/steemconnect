@@ -111,6 +111,8 @@
     "mocha-make-stub": "^2.3.2",
     "mysql2": "^1.6.1",
     "nsp": "^2.7.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
     "react-addons-test-utils": "^15.3.2",
     "redux-mock-store": "^1.2.0",
     "webpack-dev-middleware": "^1.12.0",
