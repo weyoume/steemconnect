@@ -7,13 +7,16 @@ const logger = require(`${__dirname}/../../helpers/logger`).child({ module: 'db'
 const db = {};
 var dotenv = require('dotenv')()
 console.log(process.env)
-const sequelize = new Sequelize('ezconnect', 'lopu', 'woowoo', {
+const sequelize = new Sequelize({
+	database: 'ezconnect',
+	username: 'lopu',
+	password: 'woowoo',
 	host : 'localhost',
 	logging: false,
 	dialect : 'postgres',
-  dialectOptions: {
-		ssl: false
-	},
+  // dialectOptions: {
+	// 	ssl: false
+	// },
   operatorsAliases: false,
   pool: {
     max: 150,
