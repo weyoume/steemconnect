@@ -7,19 +7,20 @@ const logger = require(`${__dirname}/../../helpers/logger`).child({ module: 'db'
 const db = {};
 var dotenv = require('dotenv')()
 console.log(process.env)
-const sequelize = new Sequelize(process.env['dburl'], {
-	"logging": false,
-	"dialect" : "postgres",
-  "dialectOptions": {
-		"ssl": false
+const sequelize = new Sequelize('ezconnect', 'lopu', 'woowoo', {
+	host : 'localhost',
+	logging: false,
+	dialect : 'postgres',
+  dialectOptions: {
+		ssl: false
 	},
-  "operatorsAliases": false,
-  "pool": {
-    "max": 150,
-    "min": 0,
-    "idle": 10000
+  operatorsAliases: false,
+  pool: {
+    max: 150,
+    min: 0,
+    idle: 10000
 	},
-	"port":5432
+	port:5432
 });
 
 config.logging = function (msg) {
