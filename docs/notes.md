@@ -105,13 +105,49 @@ or
 ```
 
 We run sequelize in the root of our ezconnect repo to autogenerate some tables from json schema's
+The configuration is set in db/config/config.json and is used at db/model/index.js to initialize sequelize
 
 ```console
-[user@linux ezconnect]$ sequelize db:migrate --url 'postgresql://user:password@localhost:5432/ezconnect'
+[user@linux ezconnect]$ sequelize db:migrate
 ```
 
-or
+## HELPFUL POSTGRES KNOWLEDGE 
 
-```console
-[user@linux ezconnect]$ ./scripts/migrate_with_sequelize.sh
+```\dg``` shows roles AKA users
+```bash
+user=# \dg
+                             List of roles
+ Role name |                   Attributes                   | Member of
+-----------+------------------------------------------------+-----------
+ user      | Create DB                                      | {}
+ postgres  | Superuser, Create role, Create DB, Replication | {}
+```
+
+add attributes to role
+
+```bash
+user=# ALTER ROLE user WITH SUPERUSER CREATEROLE REPLICATION;
+ALTER ROLE
+user=# \dg
+                             List of roles
+ Role name |                   Attributes                   | Member of
+-----------+------------------------------------------------+-----------
+ lopu      | Superuser, Create role, Create DB, Replication | {}
+ postgres  | Superuser, Create role, Create DB, Replication | {}
+
+user=# _
+```
+
+if you fall into authentication woes then you'll have to read about md5, trust, peer, ident authentication methods, ident is annoying, so we want md5, trust, or peer
+
+## TO RESTART POSTGRESQL
+
+```bash
+[user@linux ezconnect]$ /etc/init.d/postgresql reload
+```
+
+or 
+
+```bash
+[user@linux ezconnect]$ ./scripts/repost.sh
 ```
