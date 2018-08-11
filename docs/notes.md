@@ -7,6 +7,17 @@ npm i
 
 ### INSTALL POSTGRESQL VIA APT-GET/YUM
 
+```bash
+[user@linux ~]$ sudo yum -y install postgresql94 postgresql94-server
+[user@linux ~]$ sudo service postgresql94 initdb
+# Use MD5 Authentication
+[user@linux ~]$ sudo sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql94/data/pg_hba.conf
+#start
+[user@linux ~]$ sudo service postgresql94 start
+```
+
+or 
+
 ```./scripts/install_postgresql_yum.sh``` 
 
 or 
@@ -37,7 +48,7 @@ you can then enter the postgresql shell via
 [user@linux ezconnect]$ whoami
 user
 [user@linux ezconnect]$ sudo -u postgres psql
-psql (9.2.24)
+psql (9.4.17)
 Type "help" for help.
 
 postgres=# CREATE ROLE user LOGIN;
@@ -53,8 +64,8 @@ ALTER USER
 ##### check the port in the PSQL Shell
 ```bash
 [user@linux ezconnect]$ sudo -u postgres psql
-[sudo] password for user:
-psql (9.2.24)
+[sudo] password for user: _______
+psql (9.4.17)
 Type "help" for help.
 
 postgres=# SHOW port;
