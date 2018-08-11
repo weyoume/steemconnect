@@ -80,7 +80,7 @@ class Index extends React.Component {
               <div className="newsletter">
                 <Form
                   onSubmit={() => {}}
-                  action="//busy.us14.list-manage.com/subscribe/post?u=c8daffe293678b527521abf65&amp;id=0a6cefe541"
+                  action=""
                   method="post"
                   name="mc-embedded-subscribe-form"
                   target="_blank"
