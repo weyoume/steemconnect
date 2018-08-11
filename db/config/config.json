@@ -1,7 +1,7 @@
 {
   "dburl": "dburl",
 	"logging": false,
-	"dialect" : "postgresql",
+	"dialect" : "mysql",
   "dialectOptions": {
     "ssl": true
 	},
