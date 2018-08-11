@@ -13,7 +13,7 @@ sudo yum -y install postgresql94 postgresql94-server
 
 sudo service postgresql initdb
 # Use MD5 Authentication
-sudo sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql9/data/pg_hba.conf
+sudo sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql94/data/pg_hba.conf
 #start
 sudo /sbin/chkconfig --levels 235 postgresql on
 sudo service postgresql start
