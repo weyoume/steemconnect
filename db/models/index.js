@@ -3,13 +3,11 @@ const path = require('path');
 const Sequelize = require('sequelize');
 
 const basename = path.basename(module.filename);
-const config = require(`${__dirname}/../config/config.json`);
 const logger = require(`${__dirname}/../../helpers/logger`).child({ module: 'db' });
 const db = {};
 var dotenv = require('dotenv')()
 console.log(process.env)
-const sequelize = new Sequelize(process.env[config.dburl], {
-  "dburl": process.env[config.dburl],
+const sequelize = new Sequelize(process.env['dburl'], {
 	"logging": false,
 	"dialect" : "postgres",
   "dialectOptions": {
@@ -23,6 +21,7 @@ const sequelize = new Sequelize(process.env[config.dburl], {
 	},
 	"port":5432
 });
+
 config.logging = function (msg) {
   logger.debug(msg);
 };
