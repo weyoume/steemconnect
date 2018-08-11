@@ -9,7 +9,6 @@ const db = {};
 var dotenv = require('dotenv')()
 console.log(process.env)
 const sequelize = new Sequelize(process.env[config.dburl], config);
-
 config.logging = function (msg) {
   logger.debug(msg);
 };
