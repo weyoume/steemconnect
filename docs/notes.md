@@ -34,9 +34,9 @@ you can then enter the postgresql shell via
 ##### create a psql user, the one which will be running the sequelize command below
 
 ```console
-[lopu@ip-172-31-45-193 ezconnect]$ whoami
+[user@linux ezconnect]$ whoami
 user
-[lopu@ip-172-31-45-193 ezconnect]$ sudo -u postgres psql
+[user@linux ezconnect]$ sudo -u postgres psql
 psql (9.2.24)
 Type "help" for help.
 
@@ -87,10 +87,21 @@ we're going to use
 postgresql://user:password@localhost:5432/ezconnect
 ```
 
+## just a precaution
+
+an npm version of mysql needs to be installed, either mysql or mysql2, it's a dev dependancy but you may need to install it via
+```bash
+[user@linux ~]$ npm i -g mysql
+```
+or
+```bash
+[user@linux ~]$ npm i -g mysql2
+```
+
 ## install sequelize
 
 ```console
-[lopu@ip-172-31-45-193 ezconnect]$ npm i -g sequelize-cli
+[user@linux ezconnect]$ npm i -g sequelize-cli
 ```
 
 We run sequelize in the root of our ezconnect repo to autogenerate some tables from json schema's
