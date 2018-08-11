@@ -17,7 +17,7 @@ Add config vars
 BROADCASTER_USERNAME = Main Steem account holding posting permissions e.g 'ezconnect'
 BROADCASTER_POSTING_WIF = Posting wif of the main account
 JWT_SECRET = Random string
-DATABASE_URL = PostgreSQL database URL
+dburl = PostgreSQL database URL
 DEBUG = sc2:*
 ```
 

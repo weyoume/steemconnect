@@ -9,7 +9,7 @@
     "BROADCASTER_USERNAME": {
       "required": true
     },
-    "DATABASE_URL": {
+    "dburl": {
       "required": true
     },
     "NODE_MODULES_CACHE": {
