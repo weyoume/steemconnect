@@ -6,8 +6,8 @@ const basename = path.basename(module.filename);
 const config = require(`${__dirname}/../config/config.json`);
 const logger = require(`${__dirname}/../../helpers/logger`).child({ module: 'db' });
 const db = {};
-const sequelize = new Sequelize(process.env[config.use_env_variable], config);
 var dotenv = require('dotenv')()
+const sequelize = new Sequelize(process.env[config.use_env_variable], config);
 
 config.logging = function (msg) {
   logger.debug(msg);
