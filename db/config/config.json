@@ -1,0 +1,15 @@
+{
+	"database": "ezconnect",
+	"username": "lopu",
+	"password": "woowoo",
+	"host" : "localhost",
+	"logging": false,
+	"dialect" : "postgres",
+  "operatorsAliases": false,
+  "pool": {
+    "max": 150,
+    "min": 0,
+    "idle": 10000
+	},
+	"port":5432
+}

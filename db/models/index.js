@@ -3,29 +3,12 @@ const path = require('path');
 const Sequelize = require('sequelize');
 
 const basename = path.basename(module.filename);
+const config = require(`${__dirname}/../config/config.json`);
 const logger = require(`${__dirname}/../../helpers/logger`).child({ module: 'db' });
 const db = {};
 var dotenv = require('dotenv')()
 console.log(process.env)
-const sequelize = new Sequelize({
-	database: 'ezconnect',
-	username: 'lopu',
-	password: 'woowoo',
-	host : 'localhost',
-	logging: false,
-	dialect : 'postgres',
-  // dialectOptions: {
-	// 	ssl: false
-	// },
-  operatorsAliases: false,
-  pool: {
-    max: 150,
-    min: 0,
-    idle: 10000
-	},
-	port:5432
-});
-
+const sequelize = new Sequelize(config);
 config.logging = function (msg) {
   logger.debug(msg);
 };
