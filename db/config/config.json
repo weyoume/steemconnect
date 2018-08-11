@@ -3,7 +3,7 @@
 	"logging": false,
 	"dialect" : "mysql",
   "dialectOptions": {
-    "ssl": true
+    "ssl": false
 	},
   "pool": {
     "max": 100,
