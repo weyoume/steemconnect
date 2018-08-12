@@ -1,13 +1,13 @@
 # HELPFUL STUFF 
 
 ### RUN ASAP
-```bash
+```console
 npm i
 ```
 
 ### INSTALL POSTGRESQL VIA APT-GET/YUM
 
-```bash
+```console
 [user@linux ~]$ sudo yum -y install postgresql94 postgresql94-server
 [user@linux ~]$ sudo service postgresql94 initdb
 # Use MD5 Authentication
@@ -44,7 +44,7 @@ you can then enter the postgresql shell via
 
 ##### create a psql user, the one which will be running the sequelize command below
 
-```bash
+```console
 [user@linux ezconnect]$ whoami
 user
 [user@linux ezconnect]$ sudo -u postgres psql
@@ -62,7 +62,7 @@ ALTER USER
 ```
 
 ##### check the port in the PSQL Shell
-```bash
+```console
 [user@linux ezconnect]$ sudo -u postgres psql
 [sudo] password for user: _______
 psql (9.4.17)
@@ -101,31 +101,31 @@ postgresql://user:password@localhost:5432/ezconnect
 ## just a precaution
 
 an npm version of mysql needs to be installed, either mysql or mysql2, it's a dev dependancy but you may need to install it via
-```bash
+```console
 [user@linux ~]$ npm i -g mysql
 ```
 or
-```bash
+```console
 [user@linux ~]$ npm i -g mysql2
 ```
 
 ## install sequelize
 
-```bash
+```console
 [user@linux ezconnect]$ npm i -g sequelize-cli
 ```
 
 We run sequelize in the root of our ezconnect repo to autogenerate some tables from json schema's
 The configuration is set in db/config/config.json and is used at db/model/index.js to initialize sequelize
 
-```bash
+```console
 [user@linux ezconnect]$ sequelize db:migrate
 ```
 
 ## HELPFUL POSTGRES KNOWLEDGE 
 
 ```\dg``` shows roles AKA users
-```bash
+```console
 user=# \dg
                              List of roles
  Role name |                   Attributes                   | Member of
@@ -136,7 +136,7 @@ user=# \dg
 
 add attributes to role
 
-```bash
+```console
 user=# ALTER ROLE user WITH SUPERUSER CREATEROLE REPLICATION;
 ALTER ROLE
 user=# \dg
@@ -153,12 +153,12 @@ if you fall into authentication woes then you'll have to read about md5, trust, 
 
 ## TO RESTART POSTGRESQL
 
-```bash
+```console
 [user@linux ezconnect]$ /etc/init.d/postgresql reload
 ```
 
 or 
 
-```bash
+```console
 [user@linux ezconnect]$ ./scripts/repost.sh
 ```
