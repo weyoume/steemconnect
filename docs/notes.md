@@ -1,7 +1,7 @@
 # HELPFUL STUFF 
 
 ### RUN ASAP
-```console
+```bash
 npm i
 ```
 
@@ -44,7 +44,7 @@ you can then enter the postgresql shell via
 
 ##### create a psql user, the one which will be running the sequelize command below
 
-```console
+```bash
 [user@linux ezconnect]$ whoami
 user
 [user@linux ezconnect]$ sudo -u postgres psql
@@ -111,14 +111,14 @@ or
 
 ## install sequelize
 
-```console
+```bash
 [user@linux ezconnect]$ npm i -g sequelize-cli
 ```
 
 We run sequelize in the root of our ezconnect repo to autogenerate some tables from json schema's
 The configuration is set in db/config/config.json and is used at db/model/index.js to initialize sequelize
 
-```console
+```bash
 [user@linux ezconnect]$ sequelize db:migrate
 ```
 
