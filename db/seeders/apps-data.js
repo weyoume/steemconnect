@@ -24,7 +24,7 @@ module.exports = {
         client_id: 'simple-app',
         secret: 'secretkey-abc-456',
         owner: 'val',
-        redirect_uris: JSON.stringify(['http://localhost:3000/demo', 'http://localhost:3000', 'https://sc2-angular.herokuapp.com', 'https://auth.ezira.io/demo', 'https://ezira.io/callback']),
+        redirect_uris: JSON.stringify(['http://localhost:5555/demo', 'http://localhost:5555', 'https://sc2-angular.herokuapp.com', 'https://auth.ezira.io/demo', 'https://ezira.io/callback']),
         name: 'Simple App',
         description: 'This is a test app.',
         icon: 'https://byteball.co/img/logo.jpg',
