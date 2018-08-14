@@ -118,6 +118,7 @@ or
 We run sequelize in the root of our ezauth repo to autogenerate some tables from json schema's
 The configuration is set in db/config/config.json and is used at db/model/index.js to initialize sequelize
 
+MAKE SURE THAT DB ezauth OR WHATEVER YOU WANT TO USE EXISTS FIRST
 ```console
 [user@linux ezauth]$ sequelize db:migrate
 ```
