@@ -45,9 +45,9 @@ you can then enter the postgresql shell via
 ##### create a psql user, the one which will be running the sequelize command below
 
 ```console
-[user@linux ezconnect]$ whoami
+[user@linux ezauth]$ whoami
 user
-[user@linux ezconnect]$ sudo -u postgres psql
+[user@linux ezauth]$ sudo -u postgres psql
 psql (9.4.17)
 Type "help" for help.
 
@@ -55,7 +55,7 @@ postgres=# CREATE ROLE user LOGIN;
 CREATE ROLE
 postgres=# CREATE DATABASE user;
 CREATE DATABASE
-postgres=# CREATE DATABASE ezconnect;
+postgres=# CREATE DATABASE ezauth;
 CREATE DATABASE
 postgres=# ALTER USER user WITH PASSWORD 'password';
 ALTER USER
@@ -63,7 +63,7 @@ ALTER USER
 
 ##### check the port in the PSQL Shell
 ```console
-[user@linux ezconnect]$ sudo -u postgres psql
+[user@linux ezauth]$ sudo -u postgres psql
 [sudo] password for user: _______
 psql (9.4.17)
 Type "help" for help.
@@ -95,7 +95,7 @@ postgresql://localhost/mydb?user=other&password=secret
 we're going to use
 
 ```
-postgresql://user:password@localhost:5432/ezconnect
+postgresql://user:password@localhost:5432/ezauth
 ```
 
 ## just a precaution
@@ -112,14 +112,14 @@ or
 ## install sequelize
 
 ```console
-[user@linux ezconnect]$ npm i -g sequelize-cli
+[user@linux ezauth]$ npm i -g sequelize-cli
 ```
 
-We run sequelize in the root of our ezconnect repo to autogenerate some tables from json schema's
+We run sequelize in the root of our ezauth repo to autogenerate some tables from json schema's
 The configuration is set in db/config/config.json and is used at db/model/index.js to initialize sequelize
 
 ```console
-[user@linux ezconnect]$ sequelize db:migrate
+[user@linux ezauth]$ sequelize db:migrate
 ```
 
 ## HELPFUL POSTGRES KNOWLEDGE 
@@ -154,11 +154,11 @@ if you fall into authentication woes then you'll have to read about md5, trust, 
 ## TO RESTART POSTGRESQL
 
 ```console
-[user@linux ezconnect]$ /etc/init.d/postgresql reload
+[user@linux ezauth]$ /etc/init.d/postgresql reload
 ```
 
 or 
 
 ```console
-[user@linux ezconnect]$ ./scripts/repost.sh
+[user@linux ezauth]$ ./scripts/repost.sh
 ```
