@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import fetch from 'isomorphic-fetch';
-import steem from '@steemit/steem-js';
+import ezira from 'ezj';
 import { notification, Modal } from 'antd';
 import { browserHistory } from 'react-router';
 import CreateAppForm from '../Form/CreateApp';
@@ -48,17 +48,17 @@ class CreateApp extends React.Component {
     this.setState({ isLoading: true });
     const clientId = this.state.values.username;
 
-    /** Calculate required STEEM to create new account */
+    /** Calculate required EZIRA to create new account */
     const accountCreationFee = await getAccountCreationFee();
 
     /** Generate account authorities */
     const publicKeys = config.offline_generated_public_keys;
-    const owner = { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[publicKeys.owner, 1]] };
-    const active = { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[publicKeys.active, 1]] };
-    const posting = { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[publicKeys.posting, 1]] };
+    const owner = { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[publicKeys.owner, 1]] };
+    const active = { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[publicKeys.active, 1]] };
+    const posting = { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[publicKeys.posting, 1]] };
 
     /** Create proxy account */
-    await steem.broadcast.accountCreateWithDelegationAsync(
+    await ezira.broadcast.accountCreateWithDelegationAsync(
       auth.wif,
       accountCreationFee,
       '0.000000 VESTS',

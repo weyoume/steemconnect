@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import steem from '@steemit/steem-js';
+import ezira from 'ezj';
 import { notification } from 'antd';
 import AccountForm from '../Form/AccountForm';
 import SignForm from '../Form/Sign';
@@ -31,7 +31,7 @@ class CreateAccount extends Component {
   sign = (auth) => {
     const { account } = this.state;
     const { intl } = this.props;
-    const publicKeys = steem.auth.generateKeys(account.name, account.password, ['owner', 'active', 'posting', 'memo']);
+    const publicKeys = ezira.auth.generateKeys(account.name, account.password, ['owner', 'active', 'posting', 'memo']);
     const owner = { weight_threshold: 1, account_auths: [], key_auths: [[publicKeys.owner, 1]] };
     const active = { weight_threshold: 1, account_auths: [], key_auths: [[publicKeys.active, 1]] };
     const posting = {
@@ -39,9 +39,9 @@ class CreateAccount extends Component {
       account_auths: [],
       key_auths: [[publicKeys.posting, 1]],
     };
-    steem.broadcast.accountCreateWithDelegation(
+    ezira.broadcast.accountCreateWithDelegation(
       auth.wif,
-      account.steem,
+      account.ezira,
       account.vests,
       auth.username,
       account.name,

@@ -1,7 +1,7 @@
 const bunyan = require('bunyan');
 
 const logger = bunyan.createLogger({
-  name: 'steemconnect',
+  name: 'ezauth',
   serializers: bunyan.stdSerializers,
   streams: [{
     level: process.env.LOG_LEVEL || 'info',

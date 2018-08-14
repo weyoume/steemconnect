@@ -1,9 +1,8 @@
-[![CircleCI Build Status](https://circleci.com/gh/steemit/sc2.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/steemit/sc2)
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/steemconnect/localized.svg)](https://crowdin.com/project/steemconnect)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/steemit/sc2/dev/LICENSE)
-[![SteemConnect channel on Discord](https://img.shields.io/badge/chat-discord-738bd7.svg)](https://discord.gg/G95rNZs)
+[![CircleCI Build Status](https://circleci.com/gh/eziranetwork/ezauth.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/eziranetwork/ezauth)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eziranetwork/ezauth/dev/LICENSE)
+[![Ezira channel on Discord](https://img.shields.io/badge/chat-discord-738bd7.svg)](https://discord.gg/djnEYKN)
 
-# SteemConnect v2
+# Ezira Authenticator API and Console UI
 
 ## Install
 
@@ -14,21 +13,28 @@ npm install
 
 Add config vars
 ```
-BROADCASTER_USERNAME = Main Steem account holding posting permissions e.g 'ezconnect'
-BROADCASTER_POSTING_WIF = Posting wif of the main account
-JWT_SECRET = Random string
-dburl = PostgreSQL database URL
-DEBUG = sc2:*
+EZNODE_URL=https://api.ezira.io
+EZNODE_URL_SERVER=https://api.ezira.io
+BROADCASTER_USERNAME=EZIRA_CHAIN_ACCOUNT_NAME_STRING
+BROADCASTER_POSTING_KEY=EZIRA_CHAIN_ACCOUNT_POSTING_PRIVATE_KEY
+JWT_SECRET=somerandomstringsecret
+DEBUG=sc2:*
+dburl=postgresql://user:pass@localhost:port/db
+PORT=5555
+CSP_DEFAULT='self'
+CSP_SCRIPT_SRC='self','unsafe-eval','unsafe-inline'
+CSP_CONNECT_SRC='self',*.ezira.io
+CSP_FRAME_SRC='self'
+CSP_STYLE_SRC='self','unsafe-inline'
+CSP_IMG_SRC='self',stereplacelateremitimages.com,stereplacelateremit-production-imageproxy-thumbnail.s3.amazonaws.com,data:
+CSP_FONT_SRC='self'
+
 ```
 
 ## Run
 ```
 npm start
 ```
-
-## Demo
-
-Test demo app here: https://steemit.github.io/example-steemconnect-angular/
 
 ## Api
 

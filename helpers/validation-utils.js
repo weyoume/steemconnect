@@ -1,11 +1,11 @@
-const steem = require('@steemit/steem-js');
+const ezira = require('ezj');
 const moment = require('moment');
 
 const isEmpty = value => value === undefined || value === null || value === '';
 
 const allowedSymbols = [
-  { symbol: 'SBD', precision: 3 },
-  { symbol: 'STEEM', precision: 3 },
+  { symbol: 'EZC', precision: 3 },
+  { symbol: 'EZIRA', precision: 3 },
   { symbol: 'SP', precision: 3 },
   { symbol: 'VESTS', precision: 6 },
 ];
@@ -42,12 +42,12 @@ const normalizeUsername = username => ((username && username.charAt(0) === '@') 
 
 const userExists = async (username) => {
   const nUsername = normalizeUsername(username);
-  const accounts = await steem.api.getAccountsAsync([nUsername]);
+  const accounts = await ezira.api.getAccountsAsync([nUsername]);
   return accounts && accounts.length > 0 && accounts.find(a => a.name === nUsername);
 };
 
 const contentExists = async (auhtor, permlink) => {
-  const content = await steem.api.getContentAsync(auhtor, permlink);
+  const content = await ezira.api.getContentAsync(auhtor, permlink);
   return content && parseInt(content.id, 10) !== 0;
 };
 

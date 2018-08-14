@@ -1,5 +1,5 @@
 const cloneDeep = require('lodash/cloneDeep');
-const { formatter } = require('@steemit/steem-js');
+const { formatter } = require('ezj');
 const changeCase = require('change-case');
 const diacritics = require('diacritics');
 

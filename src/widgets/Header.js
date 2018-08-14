@@ -4,7 +4,7 @@ import { Menu, Dropdown } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import SteemitAvatar from './SteemitAvatar';
+import EziraAvatar from './EziraAvatar';
 import './Header.less';
 import { logout, authenticate } from '../actions/auth';
 import { getAccounts } from '../utils/localStorage';
@@ -74,7 +74,7 @@ export default class Header extends Component {
             overlay={
               <Menu className="switch-account-menu" onClick={this.changeAccount}>
                 <Menu.Item key="switch-account-active" className="active">
-                  <SteemitAvatar username={username} size="72" />
+                  <EziraAvatar username={username} size="72" />
                   <div className="account-information">
                     <span className="account-name">{user}</span>
                     <span className="username">@{username}</span>
@@ -85,7 +85,7 @@ export default class Header extends Component {
                 </Menu.Item>
                 {accounts.filter(account => account.username !== username).map(account =>
                   <Menu.Item key={account.username}>
-                    <SteemitAvatar username={account.username} size="36" /><span className="other-account">{account.username}</span>
+                    <EziraAvatar username={account.username} size="36" /><span className="other-account">{account.username}</span>
                   </Menu.Item>
                 )}
                 <Menu.Item key="switch-account-actions" className="actions" disabled>
@@ -97,7 +97,7 @@ export default class Header extends Component {
             }
           >
             <a className="ant-dropdown-link" href={undefined}>
-              <span className="account-name">{username}</span>&nbsp;<SteemitAvatar username={username} />
+              <span className="account-name">{username}</span>&nbsp;<EziraAvatar username={username} />
             </a>
           </Dropdown>
           }

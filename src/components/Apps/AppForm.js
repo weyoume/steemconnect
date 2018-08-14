@@ -131,7 +131,7 @@ class AppForm extends Component {
     const redirectUris = data.redirect_uris && data.redirect_uris.join('\n');
     const allowedIPs = data.allowed_ips && data.allowed_ips.join('\n');
     return (
-      <Form onSubmit={this.handleSubmit} className="steemconnect-form">
+      <Form onSubmit={this.handleSubmit} className="ezauth-form">
         <Form.Item
           label={<FormattedMessage id="app_name" />}
         >

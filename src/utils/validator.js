@@ -1,14 +1,14 @@
-import steem from '@steemit/steem-js';
+import ezira from 'ezj';
 
 export const isUsername = async (username) => {
-  const accounts = await steem.api.getAccountsAsync([username]);
+  const accounts = await ezira.api.getAccountsAsync([username]);
   return !!accounts[0];
 };
 
 export const isNotUsername = async username => !await isUsername(username);
 
 export const accountExist = (rule, value, callback) => {
-  steem.api.getAccounts([value], (err, result) => {
+  ezira.api.getAccounts([value], (err, result) => {
     if (result && result.find(a => a.name === value)) {
       callback();
     } else {
@@ -18,7 +18,7 @@ export const accountExist = (rule, value, callback) => {
 };
 
 export const accountNotExist = (rule, value, callback) => {
-  steem.api.getAccounts([value], (err, result) => {
+  ezira.api.getAccounts([value], (err, result) => {
     if (result && result.find(a => a.name === value)) {
       callback(['Account name is not available']);
     } else {
@@ -27,7 +27,7 @@ export const accountNotExist = (rule, value, callback) => {
   });
 };
 
-// https://github.com/steemit/condenser/blob/eaf8a02658b8deaef376ec90b81d0866e52582cc/app/utils/ChainValidation.js#L4
+// https://github.com/eziranetwork/ezauth/blob/eaf8a02658b8deaef376ec90b81d0866e52582cc/app/utils/ChainValidation.js#L4
 export const validateAccountName = (rule, value, callback, intl) => {
   let i;
   let label;

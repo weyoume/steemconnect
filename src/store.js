@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import steem from '@steemit/steem-js';
+import ezira from 'ezj';
 import auth from './reducers/auth';
 import appLocale from './reducers/appLocale';
 
@@ -9,8 +9,8 @@ const reducers = combineReducers({
   appLocale,
 });
 
-if (process.env.STEEMD_URL) {
-  steem.api.setOptions({ url: process.env.STEEMD_URL });
+if (process.env.EZNODE_URL) {
+  ezira.api.setOptions({ url: process.env.EZNODE_URL });
 }
 
 const store = createStore(
