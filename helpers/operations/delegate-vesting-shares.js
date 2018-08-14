@@ -1,7 +1,7 @@
 const cloneDeep = require('lodash/cloneDeep');
 const join = require('lodash/join');
-const steem = require('@steemit/steem-js');
-const { formatter } = require('@steemit/steem-js');
+const ezira = require('ezj');
+const { formatter } = require('ezj');
 const { isAsset, isEmpty, userExists, normalizeUsername } = require('../validation-utils');
 
 const optionalFields = ['delegator'];
@@ -9,7 +9,7 @@ const optionalFields = ['delegator'];
 const parse = async (query) => {
   const cQuery = cloneDeep(query);
   const [amount, symbol] = cQuery.vesting_shares.split(' ');
-  const globalProps = await steem.api.getDynamicGlobalPropertiesAsync();
+  const globalProps = await ezira.api.getDynamicGlobalPropertiesAsync();
 
   cQuery.delegatee = normalizeUsername(cQuery.delegatee);
   cQuery.delegator = normalizeUsername(cQuery.delegator);
@@ -19,7 +19,7 @@ const parse = async (query) => {
       (
         (parseFloat(amount) *
         parseFloat(globalProps.total_vesting_shares)) /
-        parseFloat(globalProps.total_vesting_fund_steem)
+        parseFloat(globalProps.total_vesting_fund_ezira)
       ).toFixed(6),
       'VESTS',
     ], ' ');
@@ -51,32 +51,32 @@ const normalize = async (query) => {
   const cQuery = cloneDeep(query);
 
   let sUsername = normalizeUsername(query.delegatee);
-  let accounts = await steem.api.getAccountsAsync([sUsername]);
+  let accounts = await ezira.api.getAccountsAsync([sUsername]);
   let account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
   if (account) {
     cQuery.toName = account.name;
-    cQuery.toReputation = steem.formatter.reputation(account.reputation);
+    cQuery.toReputation = ezira.formatter.reputation(account.reputation);
   }
 
   if (query.delegator) {
     sUsername = normalizeUsername(query.delegator);
-    accounts = await steem.api.getAccountsAsync([sUsername]);
+    accounts = await ezira.api.getAccountsAsync([sUsername]);
     account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
     if (account) {
       cQuery.fromName = account.name;
-      cQuery.fromReputation = steem.formatter.reputation(account.reputation);
+      cQuery.fromReputation = ezira.formatter.reputation(account.reputation);
     }
   }
 
   const [amount, symbol] = cQuery.vesting_shares.split(' ');
   if (amount && symbol === 'VESTS') {
-    const globalProps = await steem.api.getDynamicGlobalPropertiesAsync();
+    const globalProps = await ezira.api.getDynamicGlobalPropertiesAsync();
     cQuery.amount = join(
       [
-        formatter.vestToSteem(
+        formatter.vestToEzira(
           cQuery.vesting_shares,
           globalProps.total_vesting_shares,
-          globalProps.total_vesting_fund_steem
+          globalProps.total_vesting_fund_ezira
         ).toFixed(3),
         'SP',
       ], ' ');

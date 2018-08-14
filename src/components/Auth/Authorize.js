@@ -12,7 +12,7 @@ import intersection from 'lodash/intersection';
 import difference from 'lodash/difference';
 import { authorize, login, addPostingAuthority } from '../../utils/auth';
 import { getAccounts } from '../../utils/localStorage';
-import SteemitAvatar from '../../widgets/SteemitAvatar';
+import EziraAvatar from '../../widgets/EziraAvatar';
 import Loading from '../../widgets/Loading';
 import SignForm from '../Form/Sign';
 import ChooseAccountForm from '../Form/ChooseAccount';
@@ -155,10 +155,10 @@ export default class Authorize extends Component {
                     <div className="Avatar-link" />
                     <div className="Avatar-container">
                       {!app &&
-                      <SteemitAvatar username={clientId} size="40" />}
+                      <EziraAvatar username={clientId} size="40" />}
                       {app &&
                       <img
-                        src={`https://steemitimages.com/40x40/${app.icon}`}
+                        src={`https://stereplacelateremitimages.com/40x40/${app.icon}`}
                         alt="icon"
                       />}
                     </div>
@@ -218,7 +218,7 @@ export default class Authorize extends Component {
               }
             </div>
             <div className="Sign__footer">
-              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_steemconnect" /></Link>
+              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_ezauth" /></Link>
             </div>
           </div>
         </div>}

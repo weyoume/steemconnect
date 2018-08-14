@@ -70,37 +70,15 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@steemit/libcrypto@^1.0.1":
+"@stereplacelateremit/libcrypto@^1.0.1":
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@steemit/libcrypto/-/libcrypto-1.0.1.tgz#c31ab3e5deb667628169b3d54d746b015de31a79"
+  resolved "https://registry.yarnpkg.com/@stereplacelateremit/libcrypto/-/libcrypto-1.0.1.tgz#c31ab3e5deb667628169b3d54d746b015de31a79"
 
-"@steemit/rpc-auth@^1.1.0":
+"@stereplacelateremit/rpc-auth@^1.1.0":
   version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@steemit/rpc-auth/-/rpc-auth-1.1.1.tgz#8f6239e89783d2b251b49e9e1b9486b5d167f944"
+  resolved "https://registry.yarnpkg.com/@stereplacelateremit/rpc-auth/-/rpc-auth-1.1.1.tgz#8f6239e89783d2b251b49e9e1b9486b5d167f944"
   dependencies:
-    "@steemit/libcrypto" "^1.0.1"
-
-"@steemit/steem-js@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@steemit/steem-js/-/steem-js-0.7.1.tgz#9e9ead34ce9438513ad49e8f7d4d48d32d9c3c39"
-  dependencies:
-    "@steemit/rpc-auth" "^1.1.0"
-    bigi "^1.4.2"
-    bluebird "^3.4.6"
-    browserify-aes "^1.0.6"
-    bs58 "^4.0.0"
-    buffer "^5.0.6"
-    bytebuffer "^5.0.1"
-    create-hash "^1.1.2"
-    create-hmac "^1.1.4"
-    cross-env "^5.0.0"
-    cross-fetch "^1.1.1"
-    debug "^2.6.8"
-    detect-node "^2.0.3"
-    ecurve "^1.0.5"
-    lodash "^4.16.4"
-    secure-random "^1.1.1"
-    ws "^3.3.2"
+    "@stereplacelateremit/libcrypto" "^1.0.1"
 
 "@types/geojson@^1.0.0":
   version "1.0.6"

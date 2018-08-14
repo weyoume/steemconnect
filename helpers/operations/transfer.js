@@ -1,6 +1,6 @@
 const cloneDeep = require('lodash/cloneDeep');
 const join = require('lodash/join');
-const steem = require('@steemit/steem-js');
+const ezira = require('ezj');
 const { isAsset, isEmpty, userExists, normalizeUsername } = require('../validation-utils');
 
 const optionalFields = ['memo'];
@@ -25,7 +25,7 @@ const validate = async (query, errors) => {
     errors.push({ field: 'from', error: 'error_user_exist', values: { user: query.from } });
   }
 
-  if (!isEmpty(query.amount) && !['STEEM', 'SBD'].includes(query.amount.split(' ')[1])) {
+  if (!isEmpty(query.amount) && !['EZIRA', 'EZC'].includes(query.amount.split(' ')[1])) {
     errors.push({ field: 'amount', error: 'error_amount_symbol' });
   } else if (!isEmpty(query.amount) && !isAsset(query.amount)) {
     errors.push({ field: 'amount', error: 'error_amount_format' });
@@ -41,20 +41,20 @@ const validate = async (query, errors) => {
 const normalize = async (query) => {
   const cQuery = cloneDeep(query);
   let sUsername = normalizeUsername(query.to);
-  let accounts = await steem.api.getAccountsAsync([sUsername]);
+  let accounts = await ezira.api.getAccountsAsync([sUsername]);
   let account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
   if (account) {
     cQuery.toName = account.name;
-    cQuery.toReputation = steem.formatter.reputation(account.reputation);
+    cQuery.toReputation = ezira.formatter.reputation(account.reputation);
   }
 
   if (query.from) {
     sUsername = normalizeUsername(query.from);
-    accounts = await steem.api.getAccountsAsync([sUsername]);
+    accounts = await ezira.api.getAccountsAsync([sUsername]);
     account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
     if (account) {
       cQuery.fromName = account.name;
-      cQuery.toReputation = steem.formatter.reputation(account.reputation);
+      cQuery.toReputation = ezira.formatter.reputation(account.reputation);
     }
   }
 

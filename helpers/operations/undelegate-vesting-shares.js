@@ -1,6 +1,6 @@
 const cloneDeep = require('lodash/cloneDeep');
 const join = require('lodash/join');
-const steem = require('@steemit/steem-js');
+const ezira = require('ezj');
 const { isEmpty, userExists, normalizeUsername } = require('../validation-utils');
 
 const optionalFields = ['delegator', 'vesting_shares'];
@@ -28,20 +28,20 @@ const normalize = async (query) => {
   const cQuery = cloneDeep(query);
 
   let sUsername = normalizeUsername(query.delegatee);
-  let accounts = await steem.api.getAccountsAsync([sUsername]);
+  let accounts = await ezira.api.getAccountsAsync([sUsername]);
   let account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
   if (account) {
     cQuery.toName = account.name;
-    cQuery.toReputation = steem.formatter.reputation(account.reputation);
+    cQuery.toReputation = ezira.formatter.reputation(account.reputation);
   }
 
   if (query.delegator) {
     sUsername = normalizeUsername(query.delegator);
-    accounts = await steem.api.getAccountsAsync([sUsername]);
+    accounts = await ezira.api.getAccountsAsync([sUsername]);
     account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
     if (account) {
       cQuery.fromName = account.name;
-      cQuery.fromReputation = steem.formatter.reputation(account.reputation);
+      cQuery.fromReputation = ezira.formatter.reputation(account.reputation);
     }
   }
 

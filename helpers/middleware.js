@@ -4,10 +4,10 @@ const { tokens, apps } = require('../db/models');
 
 /**
  * Check if user allow app proxy account to post on his behalf
- * And if app allow @steemconnect to post on his behalf
+ * And if app allow @test.ezira.auth to post on his behalf
  */
 const verifyPermissions = async (req, res, next) => {
-  const accounts = await req.steem.api.getAccountsAsync([req.proxy, req.user]);
+  const accounts = await req.ezira.api.getAccountsAsync([req.proxy, req.user]);
 
   const userAccountAuths = accounts[1].posting.account_auths.map(account => account[0]);
   if (userAccountAuths.indexOf(req.proxy) === -1) {
@@ -65,7 +65,7 @@ const authenticate = roles => async (req, res, next) => {
     if (!appStatus || (appStatus && appStatus.is_disabled)) {
       res.status(401).json({
         error: 'application_disabled',
-        error_description: 'This application has been disabled by SteemConnect',
+        error_description: 'This application has been disabled by EzAuth',
       });
       return;
     }

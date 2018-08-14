@@ -10,7 +10,7 @@ import MyApps from './components/Apps/MyApps';
 import AuthorizedApps from './components/Apps/AuthorizedApps';
 import EditApp from './components/Apps/EditApp';
 import CreateApp from './components/Apps/CreateApp';
-import Steemjs from './components/Docs/Steemjs';
+import Ezj from './components/Docs/Ezj';
 import OAuth2 from './components/Docs/OAuth2';
 import Sign from './components/Sign';
 import Generate from './components/GenerateLink';
@@ -43,7 +43,7 @@ export default (
       <Route path="/@:username/permissions" component={Permissions} />
       <Route path="/apps/@:clientId" component={App} />
     </Route>
-    <Route path="/docs/steemjs" component={Steemjs} />
+    <Route path="/docs/ezj" component={Ezj} />
     <Route path="/accounts/create" component={CreateAccount} />
     <Route path="/accounts/recover" component={RecoverAccount} />
     <Route path="/accounts/request-recovery" component={RequestAccountRecovery} />

@@ -29,7 +29,7 @@ export default class Sign extends Component {
         <h5>
           <br />
           <FormattedMessage id="transaction_id" />:<br />
-          <a href={`https://steemd.com/tx/${result.id}`} target="_blank" rel="noreferrer noopener">
+          <a href={`https://alpha.ezira.io/tx/${result.id}`} target="_blank" rel="noreferrer noopener">
             {result.id}
           </a>
         </h5>}

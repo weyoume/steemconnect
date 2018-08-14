@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import steem from '@steemit/steem-js';
+import ezira from 'ezj';
 import { Form, Icon, Input, Button } from 'antd';
 import { accountExist } from '../../utils/validator';
 import './Sign.less';
@@ -37,14 +37,14 @@ class Sign extends React.Component {
       if (!err) {
         const { username, password } = values;
         const { roles, intl } = this.props;
-        const accounts = await steem.api.getAccountsAsync([username]);
+        const accounts = await ezira.api.getAccountsAsync([username]);
         const account = accounts[0];
 
         /** Change password to public WIF */
-        const privateWif = steem.auth.isWif(password)
+        const privateWif = ezira.auth.isWif(password)
           ? password
-          : steem.auth.toWif(username, password, roles[0]);
-        const publicWif = steem.auth.wifToPublic(privateWif);
+          : ezira.auth.toWif(username, password, roles[0]);
+        const publicWif = ezira.auth.wifToPublic(privateWif);
 
         /** Check if public WIF is valid */
         let wifIsValid = false;

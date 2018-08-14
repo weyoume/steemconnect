@@ -1,7 +1,7 @@
-import steem from '@steemit/steem-js';
+import ezira from 'ezj';
 import fetch from 'isomorphic-fetch';
-import { decode } from '@steemit/steem-js/lib/auth/memo';
-import { key_utils } from '@steemit/steem-js/lib/auth/ecc'; // eslint-disable-line camelcase
+import { decode } from 'ezj/lib/auth/memo';
+import { key_utils } from 'ezj/lib/auth/ecc'; // eslint-disable-line camelcase
 
 export const login = ({ username, wif, role = 'posting' }, cb) => {
   fetch(`/api/login/challenge?username=${username}&role=${role}`)
@@ -20,12 +20,12 @@ export const hasAuthority = (user, clientId, role = 'posting') => {
 };
 
 export const addPostingAuthority = ({ username, wif, clientId }, cb) => {
-  steem.api.getAccounts([username], (err, result) => {
+  ezira.api.getAccounts([username], (err, result) => {
     const { posting, memo_key, json_metadata } = result[0];
     const postingNew = posting;
     if (!hasAuthority(result[0], clientId)) {
       postingNew.account_auths.push([clientId, parseInt(posting.weight_threshold, 10)]);
-      steem.broadcast.accountUpdate(
+      ezira.broadcast.accountUpdate(
         wif,
         username,
         undefined,
@@ -50,7 +50,7 @@ export const authorize = ({ clientId, scope, responseType = 'token' }, cb) => {
     .catch(err => cb(err, null));
 };
 
-// https://github.com/steemit/condenser/blob/634c13cd0d2fafa28592e9d5f43589e201198248/app/components/elements/SuggestPassword.jsx#L97
+// https://github.com/eziranetwork/ezauth/blob/634c13cd0d2fafa28592e9d5f43589e201198248/app/components/elements/SuggestPassword.jsx#L97
 export const createSuggestedPassword = () => {
   const PASSWORD_LENGTH = 32;
   const privateKey = key_utils.get_random_key();
@@ -58,10 +58,10 @@ export const createSuggestedPassword = () => {
 };
 
 export const getAccountCreationFee = async () => {
-  const chainConfig = await steem.api.getConfigAsync();
-  const chainProps = await steem.api.getChainPropertiesAsync();
+  const chainConfig = await ezira.api.getConfigAsync();
+  const chainProps = await ezira.api.getChainPropertiesAsync();
   const accountCreationFee = chainProps.account_creation_fee;
-  const steemModifier = chainConfig.STEEM_CREATE_ACCOUNT_WITH_STEEM_MODIFIER;
-  const accountCreationSteemFee = parseFloat(accountCreationFee.split(' ')[0]) * steemModifier;
-  return `${accountCreationSteemFee.toFixed(3)} STEEM`;
+  const eziraModifier = chainConfig.EZIRA_CREATE_ACCOUNT_WITH_EZIRA_MODIFIER;
+  const accountCreationEziraFee = parseFloat(accountCreationFee.split(' ')[0]) * eziraModifier;
+  return `${accountCreationEziraFee.toFixed(3)} EZIRA`;
 };

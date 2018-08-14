@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import steem from '@steemit/steem-js';
+import ezira from 'ezj';
 import changeCase from 'change-case';
 import { Link } from 'react-router';
 import { Button } from 'antd';
@@ -197,7 +197,7 @@ export default class Sign extends Component {
           ]
         );
       }
-      steem.broadcast.send(
+      ezira.broadcast.send(
         {
           extensions: [],
           operations: operationsToSend,
@@ -222,7 +222,7 @@ export default class Sign extends Component {
       /* Broadcast */
       const customOp = customOperations.find(o => o.operation === changeCase.snakeCase(type));
       const mappedType = customOp ? customOp.type : type;
-      steem.broadcast[`${changeCase.camelCase(mappedType)}With`](auth.wif, params, (err, result) => {
+      ezira.broadcast[`${changeCase.camelCase(mappedType)}With`](auth.wif, params, (err, result) => {
         if (!err) {
           if (result && (query.cb || query.redirect_uri) && query.auto_return) {
             window.location.href = query.cb || query.redirect_uri;
@@ -262,7 +262,7 @@ export default class Sign extends Component {
               <object data="/img/logo.svg" type="image/svg+xml" id="logo" />
             </div>
             {step === 'signin' &&
-            <div className="Sign__signin-warning"><FormattedMessage id="steemconnect_website_confirm" /></div>}
+            <div className="Sign__signin-warning"><FormattedMessage id="ezauth_website_confirm" /></div>}
             <div className="Sign__wrapper">
               {step === 'validationErrors' && <SignValidationErrors errors={validationErrors} />}
               {step === 'form' && normalizedQuery &&
@@ -300,7 +300,7 @@ export default class Sign extends Component {
               {step === 'result' && error && <SignError error={error} resetForm={this.resetForm} />}
             </div>
             <div className="Sign__footer">
-              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_steemconnect" /></Link>
+              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_ezauth" /></Link>
             </div>
           </div>
         </div>}

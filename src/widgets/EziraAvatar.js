@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import './SteemitAvatar.less';
+import './EziraAvatar.less';
 
-const SteemitAvatar = ({
+const EziraAvatar = ({
   username,
   size = '36',
   className = '',
@@ -13,20 +13,20 @@ const SteemitAvatar = ({
     }}
   >
     <div
-      className={`SteemitAvatar ${className}`}
+      className={`EziraAvatar ${className}`}
       style={{
         height: `${size}px`,
         width: `${size}px`,
-        backgroundImage: `url(https://steemitimages.com/u/${username}/avatar)`,
+        backgroundImage: `url(https://stereplacelateremitimages.com/u/${username}/avatar)`,
       }}
     />
   </span>
 ;
 
-SteemitAvatar.propTypes = {
+EziraAvatar.propTypes = {
   username: PropTypes.string,
   size: PropTypes.string,
   className: PropTypes.string,
 };
 
-export default SteemitAvatar;
+export default EziraAvatar;
