@@ -5,12 +5,12 @@
     "node": ">=8.1.4",
     "npm": "4.6.1"
   },
-  "bin": "./bin/www",
-  "main": "./bin/www",
+  "bin": "./bin/ezauth",
+  "main": "./bin/ezauth",
   "private": true,
   "scripts": {
-    "start": "./bin/www",
-    "start-dev": "nodemon --ignore src ./bin/www | bunyan -o short",
+    "start": "./bin/ezauth",
+    "start-dev": "nodemon --ignore src ./bin/ezauth | bunyan -o short",
     "eslint-autofix": "eslint --fix \"src/**/*.js\" \"*.js\"",
     "test": "npm run lint && nsp check --output summary",
     "lint": "eslint \"src/**/*.js\" \"routes/**/*.js\" \"helpers/**/*.js\"",

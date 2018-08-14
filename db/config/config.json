@@ -1,5 +1,5 @@
 {
-	"database": "ezconnect",
+	"database": "ezauth",
 	"username": "lopu",
 	"password": "woowoo",
 	"host" : "localhost",
