@@ -17,7 +17,7 @@ const EziraAvatar = ({
       style={{
         height: `${size}px`,
         width: `${size}px`,
-        backgroundImage: `url(https://stereplacelateremitimages.com/u/${username}/avatar)`,
+        backgroundImage: `url(https://steemitimages.com/u/${username}/avatar)`,
       }}
     />
   </span>

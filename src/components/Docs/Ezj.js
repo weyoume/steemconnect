@@ -23,7 +23,7 @@ const Method = ({ method }) => {
       <p><a href={apiLink} target="_blank" rel="noopener noreferrer">Try it</a></p>
       <pre>
         <code>
-          {`ezira.api.${changeCase.camelCase(method.method)}(${inlineParams}function(err, result) {
+          {`ezhelp.js.api.${changeCase.camelCase(method.method)}(${inlineParams}function(err, result) {
   console.log(err, result);
 });`}
         </code>

@@ -1,9 +1,9 @@
 const cloneDeep = require('lodash/cloneDeep');
-const { formatter } = require('ezj');
+const { formatter } = require('ezhelp.js');
 const changeCase = require('change-case');
 const diacritics = require('diacritics');
 
-const optionalFields = ['parent_author', 'parent_permlink', 'title', 'json_metadata'];
+const optionalFields = ['parent_author', 'parent_permlink', 'title', 'json'];
 
 const parse = (query) => {
   const cQuery = cloneDeep(query);
@@ -18,13 +18,13 @@ const parse = (query) => {
     cQuery.permlink = cQuery.permlink
       || changeCase.paramCase(diacritics.remove(cQuery.title)).slice(0, 255);
   }
-  let jsonMetadata = {};
+  let json = {};
   try {
-    jsonMetadata = JSON.parse(decodeURIComponent(cQuery.json_metadata));
+    json = JSON.parse(decodeURIComponent(cQuery.json));
   } catch (e) {
-    jsonMetadata = {};
+    json = {};
   }
-  cQuery.json_metadata = jsonMetadata;
+  cQuery.json = json;
   return cQuery;
 };
 

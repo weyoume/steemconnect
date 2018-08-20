@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import changeCase from 'change-case';
 import { Link } from 'react-router';
 import { Button } from 'antd';
@@ -107,7 +107,7 @@ export default class Sign extends Component {
     let Placeholder = SignPlaceholderDefault;
     Placeholder = (type === 'comment') ? SignPlaceholderComment : Placeholder;
     Placeholder = (changeCase.snakeCase(type) === 'profile_update') ? SignPlaceholderNonFiltered : Placeholder;
-    Placeholder = (['transfer', 'delegate_vesting_shares', 'undelegate_vesting_shares'].includes(changeCase.snakeCase(type))) ? SignPlaceholderTransferDelegate : Placeholder;
+    Placeholder = (['transfer', 'delegateESCOR', 'undelegateESCOR'].includes(changeCase.snakeCase(type))) ? SignPlaceholderTransferDelegate : Placeholder;
     return Placeholder;
   }
 

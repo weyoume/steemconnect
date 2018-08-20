@@ -7,7 +7,7 @@ const { tokens, apps } = require('../db/models');
  * And if app allow @test.ezira.auth to post on his behalf
  */
 const verifyPermissions = async (req, res, next) => {
-  const accounts = await req.ezira.api.getAccountsAsync([req.proxy, req.user]);
+  const accounts = await req.ezhelp.js.api.getAccountsAsync([req.proxy, req.user]);
 
   const userAccountAuths = accounts[1].posting.account_auths.map(account => account[0]);
   if (userAccountAuths.indexOf(req.proxy) === -1) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Card, notification } from 'antd';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import { Link } from 'react-router';
 import RecoverAccountForm from '../Form/RecoverAccount';
 import Loading from '../../widgets/Loading';
@@ -39,12 +39,12 @@ class RecoverAccount extends React.Component {
     const onSuccess = () => {
       notification.success({
         message: intl.formatMessage({ id: 'success' }),
-        description: intl.formatMessage({ id: 'account_recovered' }, { account: values.account_to_recover }),
+        description: intl.formatMessage({ id: 'account_recovered' }, { account: values.accountToRecover }),
       });
     };
 
     await this.recoverAccount(
-      values.account_to_recover,
+      values.accountToRecover,
       values.old_password,
       values.new_password,
       onError,
@@ -83,7 +83,7 @@ class RecoverAccount extends React.Component {
       await ezira.broadcast.sendAsync({ extensions: [],
         operations: [
           ['recover_account', {
-            account_to_recover: accountToRecover,
+            accountToRecover: accountToRecover,
             new_owner_authority: newOwnerAuthority,
             recent_owner_authority: recentOwnerAuthority,
           }],
@@ -93,12 +93,12 @@ class RecoverAccount extends React.Component {
       // change password probably requires a separate transaction (single trx has not been tested)
       await ezira.broadcast.sendAsync({ extensions: [],
         operations: [
-          ['account_update', {
+          ['accountUpdate', {
             account: accountToRecover,
             active: { weight_threshold: 1, account_auths: [], key_auths: [[newActive, 1]] },
             posting: { weight_threshold: 1, account_auths: [], key_auths: [[newPosting, 1]] },
-            memo_key: newMemo,
-            json_metadata: '',
+            memoKey: newMemo,
+            json: '',
           }],
         ] }, [newOwnerPrivate]);
       onSuccess();

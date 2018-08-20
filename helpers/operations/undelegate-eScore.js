@@ -1,16 +1,16 @@
 const cloneDeep = require('lodash/cloneDeep');
 const join = require('lodash/join');
-const ezira = require('ezj');
+const ezhelp.js = require('ezhelp.js');
 const { isEmpty, userExists, normalizeUsername } = require('../validation-utils');
 
-const optionalFields = ['delegator', 'vesting_shares'];
+const optionalFields = ['delegator', 'ESCOR'];
 
 const parse = async (query) => {
   const cQuery = cloneDeep(query);
 
   cQuery.delegatee = normalizeUsername(cQuery.delegatee);
   cQuery.delegator = normalizeUsername(cQuery.delegator);
-  cQuery.vesting_shares = join([parseFloat(0).toFixed(6), 'VESTS'], ' ');
+  cQuery.ESCOR = join([parseFloat(0).toFixed(6), 'ESCOR'], ' ');
 
   return cQuery;
 };
@@ -28,7 +28,7 @@ const normalize = async (query) => {
   const cQuery = cloneDeep(query);
 
   let sUsername = normalizeUsername(query.delegatee);
-  let accounts = await ezira.api.getAccountsAsync([sUsername]);
+  let accounts = await ezhelp.js.api.getAccountsAsync([sUsername]);
   let account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
   if (account) {
     cQuery.toName = account.name;
@@ -37,7 +37,7 @@ const normalize = async (query) => {
 
   if (query.delegator) {
     sUsername = normalizeUsername(query.delegator);
-    accounts = await ezira.api.getAccountsAsync([sUsername]);
+    accounts = await ezhelp.js.api.getAccountsAsync([sUsername]);
     account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
     if (account) {
       cQuery.fromName = account.name;

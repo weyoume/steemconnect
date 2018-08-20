@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import fetch from 'isomorphic-fetch';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import { notification, Modal } from 'antd';
 import { browserHistory } from 'react-router';
 import CreateAppForm from '../Form/CreateApp';
@@ -48,7 +48,7 @@ class CreateApp extends React.Component {
     this.setState({ isLoading: true });
     const clientId = this.state.values.username;
 
-    /** Calculate required EZIRA to create new account */
+    /** Calculate required ECO to create new account */
     const accountCreationFee = await getAccountCreationFee();
 
     /** Generate account authorities */
@@ -61,7 +61,7 @@ class CreateApp extends React.Component {
     await ezira.broadcast.accountCreateWithDelegationAsync(
       auth.wif,
       accountCreationFee,
-      '0.000000 VESTS',
+      '0.000000 ESCOR',
       auth.username,
       clientId,
       owner,

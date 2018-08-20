@@ -12,11 +12,11 @@ const parse = (query) => {
   cQuery.receiver = normalizeUsername(cQuery.receiver);
   cQuery.escrow_id = parseInt(cQuery.escrow_id, 0);
 
-  let [amount, symbol] = cQuery.ezc_amount.split(' ');
-  cQuery.ezc_amount = join([parseFloat(amount).toFixed(3), symbol], ' ');
+  let [amount, symbol] = cQuery.EUSDamount.split(' ');
+  cQuery.EUSDamount = join([parseFloat(amount).toFixed(3), symbol], ' ');
 
-  [amount, symbol] = cQuery.ezira_amount.split(' ');
-  cQuery.ezira_amount = join([parseFloat(amount).toFixed(3), symbol], ' ');
+  [amount, symbol] = cQuery.ECOamount.split(' ');
+  cQuery.ECOamount = join([parseFloat(amount).toFixed(3), symbol], ' ');
 
   return cQuery;
 };
@@ -54,16 +54,16 @@ const validate = async (query, errors) => {
     errors.push({ field: 'escrow_id', error: 'error_integer_format' });
   }
 
-  if (!isEmpty(query.ezc_amount) && query.ezc_amount.split(' ')[1] !== 'EZC') {
-    errors.push({ field: 'ezc_amount', error: 'error_amount_symbol' });
-  } else if (!isEmpty(query.ezc_amount) && !isAsset(query.ezc_amount)) {
-    errors.push({ field: 'ezc_amount', error: 'error_amount_format' });
+  if (!isEmpty(query.EUSDamount) && query.EUSDamount.split(' ')[1] !== 'EUSD') {
+    errors.push({ field: 'EUSDamount', error: 'error_amount_symbol' });
+  } else if (!isEmpty(query.EUSDamount) && !isAsset(query.EUSDamount)) {
+    errors.push({ field: 'EUSDamount', error: 'error_amount_format' });
   }
 
-  if (!isEmpty(query.ezira_amount) && query.ezira_amount.split(' ')[1] !== 'EZIRA') {
-    errors.push({ field: 'ezira_amount', error: 'error_amount_symbol' });
-  } else if (!isEmpty(query.ezira_amount) && !isAsset(query.ezira_amount)) {
-    errors.push({ field: 'ezira_amount', error: 'error_amount_format' });
+  if (!isEmpty(query.ECOamount) && query.ECOamount.split(' ')[1] !== 'ECO') {
+    errors.push({ field: 'ECOamount', error: 'error_amount_symbol' });
+  } else if (!isEmpty(query.ECOamount) && !isAsset(query.ECOamount)) {
+    errors.push({ field: 'ECOamount', error: 'error_amount_format' });
   }
 };
 

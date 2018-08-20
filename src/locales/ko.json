@@ -18,7 +18,7 @@
   "lp_feature_2_title": "계정 관리",
   "lp_feature_2_description": "모든 Ezira 에코시스템 계정은 EzAuth에 연결되어 있으므로, 하나의 대시보드로 자격 증명, 서명 키 및 기타 모든 항목을 제어할 수 있습니다.",
   "lp_feature_3_title": "Ezira 지갑",
-  "lp_feature_3_description": "Ezira 활동을 확인하고, 잔액을 확인하고, EzAuth 대시보드에서 EZIRA 결제액을 보내세요.",
+  "lp_feature_3_description": "Ezira 활동을 확인하고, 잔액을 확인하고, EzAuth 대시보드에서 ECO 결제액을 보내세요.",
   "lp_opensource_title": "오픈 소스입니다.",
   "lp_opensource_description": "GitHub 리포지토리를 확인하고 참여를 시작하세요!",
   "lp_opensource_button": "GitHub 확인",

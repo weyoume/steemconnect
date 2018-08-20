@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import SignForm from '../Form/Sign';
 import SignSuccess from '../Sign/Success';
 import SignError from '../Sign/Error';
@@ -47,8 +47,8 @@ export default class Revoke extends Component {
     const { username } = this.props.params;
     this.setState({ step: 2 });
 
-    ezira.api.getAccounts([auth.username], (err, result) => {
-      const { posting, memo_key, json_metadata } = result[0];
+    ezhelp.js.api.getAccounts([auth.username], (err, result) => {
+      const { posting, memoKey, json } = result[0];
       const postingNew = posting;
 
       posting.account_auths.map((account, idx) => (
@@ -62,8 +62,8 @@ export default class Revoke extends Component {
         undefined,
         undefined,
         postingNew,
-        memo_key,
-        json_metadata,
+        memoKey,
+        json,
         (errBc, resultBc) => {
           if (!errBc) {
             if (redirectUri && autoReturn) {

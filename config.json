@@ -3,10 +3,10 @@
   "authorized_operations": [
     "vote",
     "comment",
-    "delete_comment",
+    "deleteComment",
     "comment_options",
-    "custom_json",
-    "claim_reward_balance"
+    "customJson",
+    "claimRewardBalance"
   ],
   "offline_generated_public_keys": {
     "owner"		: "EZT4tnGAB4q9aUmjWzbk6qhs3f81LCzcaRNSVdNqdCJ9VoFG4nJS4",

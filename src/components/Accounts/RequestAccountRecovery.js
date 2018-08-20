@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Card, notification } from 'antd';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import RequestAccountRecoveryForm from '../Form/RequestAccountRecovery';
 import Loading from '../../widgets/Loading';
 import SignForm from '../Form/Sign';
@@ -51,8 +51,8 @@ class RecoverAccount extends React.Component {
 
     await this.requestAccountRecovery(
       auth.wif,
-      values.recovery_account,
-      values.account_to_recover,
+      values.recoveryAccount,
+      values.accountToRecover,
       values.new_password,
       onError,
       onSuccess);

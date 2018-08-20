@@ -18,7 +18,7 @@
   "lp_feature_2_title":"Управление своим Аккаунтом",
   "lp_feature_2_description":"Все аккаунты в экосистеме Ezira привязаны к Вашему EzAuth, поэтому Вы можете управлять учетными данными, ключами, использующимися для подписи и всем остальным при помощи единой панели управления.",
   "lp_feature_3_title":"Ezira Кошелек",
-  "lp_feature_3_description":"Проверяйте свою активность и балансы в Ezira, отправьте платежи в EZIRA с панели инструментов EzAuth.",
+  "lp_feature_3_description":"Проверяйте свою активность и балансы в Ezira, отправьте платежи в ECO с панели инструментов EzAuth.",
   "lp_opensource_title":"Мы с открытым исходным кодом",
   "lp_opensource_description":"Проверьте репозиторий GitHub и начните вносить свой вклад!",
   "lp_opensource_button":"Проверьте GitHub",
@@ -28,5 +28,5 @@
   "lp_subscribe_title":"Будьте в курсе",
   "lp_subscribe_description":"Использование EzAuth только начинается. Введите свой адрес электронной почты, чтобы получить ранний доступ к обновлениям проекта и самому EzAuth!",
   "lp_subscribe_button":"Получить доступ",
-  "lp_footer":"Ezira Network + проект Busy"
+  "lp_footer":"Ezira Network"
 }

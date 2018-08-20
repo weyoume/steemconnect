@@ -1,5 +1,5 @@
 {
-  "name": "sc2",
+  "name": "ezauth",
   "version": "0.1.0",
   "engines": {
     "node": ">=8.1.4",
@@ -22,7 +22,8 @@
     "test"
   ],
   "dependencies": {
-    "ezj": "^0.7.1",
+    "ezhelp.js": "^0.7.1",
+    "ezauth.js": "1.0.0",
     "antd": "^2.13.11",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
@@ -85,7 +86,6 @@
     "redux-logger": "^2.6.1",
     "redux-promise-middleware": "^4.0.0",
     "redux-thunk": "^2.1.0",
-    "sc2-sdk": "0.0.1",
     "sequelize": "^4.26.0",
     "serve-favicon": "^2.4.5",
     "store": "^1.3.20",

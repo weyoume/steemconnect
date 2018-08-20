@@ -4,11 +4,11 @@ import { FormattedMessage } from 'react-intl';
 const SignPlaceholderComment = ({
                                   query,
                                 }) => {
-  let jsonMetadata = {};
+  let json = {};
   try {
-    jsonMetadata = JSON.parse(query.json_metadata);
+    json = JSON.parse(query.json);
   } catch (e) {
-    jsonMetadata = {};
+    json = {};
   }
   return (
     <div className="Placeholder__operation-content">
@@ -29,11 +29,11 @@ const SignPlaceholderComment = ({
           <span>{query.body}</span>
         </li>
         }
-        {query.json_metadata &&
+        {query.json &&
         <li>
-          <strong><FormattedMessage id="json_metadata" /></strong>
+          <strong><FormattedMessage id="json" /></strong>
           <span>
-            <pre>{JSON.stringify(jsonMetadata, null, 2)}</pre>
+            <pre>{JSON.stringify(json, null, 2)}</pre>
           </span>
         </li>
         }
