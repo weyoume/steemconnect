@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import { notification } from 'antd';
 import AccountForm from '../Form/AccountForm';
 import SignForm from '../Form/Sign';
@@ -42,7 +42,7 @@ class CreateAccount extends Component {
     ezira.broadcast.accountCreateWithDelegation(
       auth.wif,
       account.ezira,
-      account.vests,
+      account.ESCOR,
       auth.username,
       account.name,
       owner,
@@ -61,7 +61,7 @@ class CreateAccount extends Component {
         } else {
           notification.success({
             message: intl.formatMessage({ id: 'success' }),
-            description: intl.formatMessage({ id: 'success_account_create' }, { account: account.name }),
+            description: intl.formatMessage({ id: 'success_accountCreate' }, { account: account.name }),
           });
         }
       }

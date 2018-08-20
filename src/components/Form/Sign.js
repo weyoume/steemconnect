@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import { Form, Icon, Input, Button } from 'antd';
 import { accountExist } from '../../utils/validator';
 import './Sign.less';
@@ -37,7 +37,7 @@ class Sign extends React.Component {
       if (!err) {
         const { username, password } = values;
         const { roles, intl } = this.props;
-        const accounts = await ezira.api.getAccountsAsync([username]);
+        const accounts = await ezhelp.js.api.getAccountsAsync([username]);
         const account = accounts[0];
 
         /** Change password to public WIF */
@@ -51,7 +51,7 @@ class Sign extends React.Component {
         let role;
         for (let i = 0; i < roles.length; i += 1) {
           if (
-            (roles[i] === 'memo' && account.memo_key === publicWif) ||
+            (roles[i] === 'memo' && account.memoKey === publicWif) ||
             (roles[i] !== 'memo' && this.keyAuthsHasPublicWif(account[roles[i]].key_auths, publicWif))
           ) {
             wifIsValid = true;

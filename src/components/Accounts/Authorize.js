@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import SignForm from '../Form/Sign';
 import SignSuccess from '../Sign/Success';
 import SignError from '../Sign/Error';
@@ -41,7 +41,7 @@ export default class Authorize extends Component {
     const { username, role, weight } = this.state;
     this.setState({ step: 2 });
 
-    ezira.api.getAccounts([auth.username], (err, accounts) => {
+    ezhelp.js.api.getAccounts([auth.username], (err, accounts) => {
       if (!hasAuthority(accounts[0], username, role)) {
         const updatedAuthority = accounts[0][role];
         updatedAuthority.account_auths.push([username, parseInt(weight, 10)]);
@@ -57,8 +57,8 @@ export default class Authorize extends Component {
           owner,
           active,
           posting,
-          accounts[0].memo_key,
-          accounts[0].json_metadata,
+          accounts[0].memoKey,
+          accounts[0].json,
           (errBc, result) => {
             if (!errBc) {
               if (redirectUri && autoReturn) {

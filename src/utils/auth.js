@@ -1,4 +1,4 @@
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 import fetch from 'isomorphic-fetch';
 import { decode } from 'ezj/lib/auth/memo';
 import { key_utils } from 'ezj/lib/auth/ecc'; // eslint-disable-line camelcase
@@ -20,8 +20,8 @@ export const hasAuthority = (user, clientId, role = 'posting') => {
 };
 
 export const addPostingAuthority = ({ username, wif, clientId }, cb) => {
-  ezira.api.getAccounts([username], (err, result) => {
-    const { posting, memo_key, json_metadata } = result[0];
+  ezhelp.js.api.getAccounts([username], (err, result) => {
+    const { posting, memoKey, json } = result[0];
     const postingNew = posting;
     if (!hasAuthority(result[0], clientId)) {
       postingNew.account_auths.push([clientId, parseInt(posting.weight_threshold, 10)]);
@@ -31,8 +31,8 @@ export const addPostingAuthority = ({ username, wif, clientId }, cb) => {
         undefined,
         undefined,
         postingNew,
-        memo_key,
-        json_metadata,
+        memoKey,
+        json,
         (errA, resultA) => cb(errA, resultA));
     } else {
       cb(null, {});
@@ -58,10 +58,10 @@ export const createSuggestedPassword = () => {
 };
 
 export const getAccountCreationFee = async () => {
-  const chainConfig = await ezira.api.getConfigAsync();
-  const chainProps = await ezira.api.getChainPropertiesAsync();
+  const chainConfig = await ezhelp.js.api.getConfigAsync();
+  const chainProps = await ezhelp.js.api.getChainPropertiesAsync();
   const accountCreationFee = chainProps.account_creation_fee;
-  const eziraModifier = chainConfig.EZIRA_CREATE_ACCOUNT_WITH_EZIRA_MODIFIER;
+  const eziraModifier = chainConfig.CREATE_ACCOUNT_WITH_ECO_MODIFIER;
   const accountCreationEziraFee = parseFloat(accountCreationFee.split(' ')[0]) * eziraModifier;
-  return `${accountCreationEziraFee.toFixed(3)} EZIRA`;
+  return `${accountCreationEziraFee.toFixed(3)} ECO`;
 };

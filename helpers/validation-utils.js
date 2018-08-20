@@ -1,13 +1,14 @@
-const ezira = require('ezj');
+const ezhelp.js = require('ezhelp.js');
 const moment = require('moment');
 
 const isEmpty = value => value === undefined || value === null || value === '';
 
 const allowedSymbols = [
-  { symbol: 'EZC', precision: 3 },
-  { symbol: 'EZIRA', precision: 3 },
-  { symbol: 'SP', precision: 3 },
-  { symbol: 'VESTS', precision: 6 },
+  { symbol: 'EUSD', precision: 3 },
+  { symbol: 'ECO', precision: 3 },
+  { symbol: 'ePOWER', precision: 3 },
+  { symbol: 'ECO', precision: 3 },
+  { symbol: 'ESCOR', precision: 6 },
 ];
 
 const isAsset = (value) => {
@@ -42,12 +43,12 @@ const normalizeUsername = username => ((username && username.charAt(0) === '@') 
 
 const userExists = async (username) => {
   const nUsername = normalizeUsername(username);
-  const accounts = await ezira.api.getAccountsAsync([nUsername]);
+  const accounts = await ezhelp.js.api.getAccountsAsync([nUsername]);
   return accounts && accounts.length > 0 && accounts.find(a => a.name === nUsername);
 };
 
 const contentExists = async (auhtor, permlink) => {
-  const content = await ezira.api.getContentAsync(auhtor, permlink);
+  const content = await ezhelp.js.api.getContentAsync(auhtor, permlink);
   return content && parseInt(content.id, 10) !== 0;
 };
 

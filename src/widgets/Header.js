@@ -52,9 +52,9 @@ export default class Header extends Component {
     const { username, auth } = this.props;
     const accounts = getAccounts();
     let user = '';
-    if (auth && auth.user && auth.user.json_metadata) {
+    if (auth && auth.user && auth.user.json) {
       try {
-        const metadata = JSON.parse(auth.user.json_metadata);
+        const metadata = JSON.parse(auth.user.json);
         if (metadata && metadata.profile && metadata.profile.name) {
           user = metadata.profile.name;
         } else {

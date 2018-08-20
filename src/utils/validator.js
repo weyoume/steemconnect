@@ -1,14 +1,14 @@
-import ezira from 'ezj';
+import ezira from 'ezhelp.js';
 
 export const isUsername = async (username) => {
-  const accounts = await ezira.api.getAccountsAsync([username]);
+  const accounts = await ezhelp.js.api.getAccountsAsync([username]);
   return !!accounts[0];
 };
 
 export const isNotUsername = async username => !await isUsername(username);
 
 export const accountExist = (rule, value, callback) => {
-  ezira.api.getAccounts([value], (err, result) => {
+  ezhelp.js.api.getAccounts([value], (err, result) => {
     if (result && result.find(a => a.name === value)) {
       callback();
     } else {
@@ -18,7 +18,7 @@ export const accountExist = (rule, value, callback) => {
 };
 
 export const accountNotExist = (rule, value, callback) => {
-  ezira.api.getAccounts([value], (err, result) => {
+  ezhelp.js.api.getAccounts([value], (err, result) => {
     if (result && result.find(a => a.name === value)) {
       callback(['Account name is not available']);
     } else {

@@ -6,15 +6,15 @@ const http = require('http');
 const https = require('https');
 const csp = require('express-csp-header');
 const cors = require('cors');
-const ezira = require('ezj');
+const ezhelp.js = require('ezhelp.js');
 const db = require('./db/models');
 const { strategy } = require('./helpers/middleware');
 const logger = require('./helpers/logger');
 
 if (process.env.EZNODE_URL_SERVER) {
-  ezira.api.setOptions({ url: process.env.EZNODE_URL_SERVER });
+  ezhelp.js.api.setOptions({ url: process.env.EZNODE_URL_SERVER });
 } else if (process.env.EZNODE_URL) {
-  ezira.api.setOptions({ url: process.env.EZNODE_URL });
+  ezhelp.js.api.setOptions({ url: process.env.EZNODE_URL });
 }
 
 http.globalAgent.maxSockets = Infinity;
@@ -31,13 +31,13 @@ app.use((req, res, next) => {
 // Content security policies
 app.use(csp({
   policies: {
-    'default-src': (process.env.CSP_DEFAULT || "'self'").split(','),
-    'script-src': (process.env.CSP_SCRIPT_SRC || "'self','unsafe-eval','unsafe-inline'").split(','),
-    'connect-src': (process.env.CSP_CONNECT_SRC || "'self'").split(','),
-    'frame-src': (process.env.CSP_FRAME_SRC || "'self'").split(','),
-    'style-src': (process.env.CSP_STYLE_SRC || "'self'").split(','),
-    'img-src': (process.env.CSP_IMG_SRC || "'self'").split(','),
-    'font-src': (process.env.CSP_FONT_SRC || "'self'").split(','),
+    'default-src': (process.env.CONTENT_DEFAULT || "'self'").split(','),
+    'script-src': (process.env.CONTENT_SCRIPT_SRC || "'self','unsafe-eval','unsafe-inline'").split(','),
+    'connect-src': (process.env.CONTENT_CONNECT_SRC || "'self'").split(','),
+    'frame-src': (process.env.CONTENT_FRAME_SRC || "'self'").split(','),
+    'style-src': (process.env.CONTENT_STYLE_SRC || "'self'").split(','),
+    'img-src': (process.env.CONTENT_IMG_SRC || "'self'").split(','),
+    'font-src': (process.env.CONTENT_FONT_SRC || "'self'").split(','),
   },
 }));
 

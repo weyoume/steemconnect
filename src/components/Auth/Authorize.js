@@ -158,7 +158,7 @@ export default class Authorize extends Component {
                       <EziraAvatar username={clientId} size="40" />}
                       {app &&
                       <img
-                        src={`https://stereplacelateremitimages.com/40x40/${app.icon}`}
+                        src={`https://steemitimages.com/40x40/${app.icon}`}
                         alt="icon"
                       />}
                     </div>
