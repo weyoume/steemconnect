@@ -1,7 +1,7 @@
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 import fetch from 'isomorphic-fetch';
-import { decode } from 'ezj/lib/auth/memo';
-import { key_utils } from 'ezj/lib/auth/ecc'; // eslint-disable-line camelcase
+import { decode } from 'wehelpjs/lib/auth/memo';
+import { key_utils } from 'wehelpjs/lib/auth/ecc'; // eslint-disable-line camelcase
 
 export const login = ({ username, wif, role = 'posting' }, cb) => {
   fetch(`/api/login/challenge?username=${username}&role=${role}`)
@@ -20,12 +20,12 @@ export const hasAuthority = (user, clientId, role = 'posting') => {
 };
 
 export const addPostingAuthority = ({ username, wif, clientId }, cb) => {
-  ezhelp.js.api.getAccounts([username], (err, result) => {
+  wehelpjs.api.getAccounts([username], (err, result) => {
     const { posting, memoKey, json } = result[0];
     const postingNew = posting;
     if (!hasAuthority(result[0], clientId)) {
       postingNew.account_auths.push([clientId, parseInt(posting.weight_threshold, 10)]);
-      ezira.broadcast.accountUpdate(
+      wehelpjs.broadcast.accountUpdate(
         wif,
         username,
         undefined,
@@ -50,7 +50,7 @@ export const authorize = ({ clientId, scope, responseType = 'token' }, cb) => {
     .catch(err => cb(err, null));
 };
 
-// https://github.com/eziranetwork/ezauth/blob/634c13cd0d2fafa28592e9d5f43589e201198248/app/components/elements/SuggestPassword.jsx#L97
+// https://github.com/eziranetwork/weauth/blob/634c13cd0d2fafa28592e9d5f43589e201198248/app/components/elements/SuggestPassword.jsx#L97
 export const createSuggestedPassword = () => {
   const PASSWORD_LENGTH = 32;
   const privateKey = key_utils.get_random_key();
@@ -58,10 +58,10 @@ export const createSuggestedPassword = () => {
 };
 
 export const getAccountCreationFee = async () => {
-  const chainConfig = await ezhelp.js.api.getConfigAsync();
-  const chainProps = await ezhelp.js.api.getChainPropertiesAsync();
+  const chainConfig = await wehelpjs.api.getConfigAsync();
+  const chainProps = await wehelpjs.api.getChainPropertiesAsync();
   const accountCreationFee = chainProps.account_creation_fee;
-  const eziraModifier = chainConfig.CREATE_ACCOUNT_WITH_ECO_MODIFIER;
-  const accountCreationEziraFee = parseFloat(accountCreationFee.split(' ')[0]) * eziraModifier;
-  return `${accountCreationEziraFee.toFixed(3)} ECO`;
+  const priceModifier = chainConfig.CREATE_ACCOUNT_WITH_ECO_MODIFIER;
+  const accountCreationFeeInECO = parseFloat(accountCreationFee.split(' ')[0]) * priceModifier;
+  return `${accountCreationFeeInECO.toFixed(3)} ECO`;
 };

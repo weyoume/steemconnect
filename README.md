@@ -1,8 +1,8 @@
-[![CircleCI Build Status](https://circleci.com/gh/eziranetwork/ezauth.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/eziranetwork/ezauth)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eziranetwork/ezauth/dev/LICENSE)
-[![Ezira channel on Discord](https://img.shields.io/badge/chat-discord-738bd7.svg)](https://discord.gg/djnEYKN)
+[![CircleCI Build Status](https://circleci.com/gh/eziranetwork/weauth.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/eziranetwork/weauth)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eziranetwork/weauth/dev/LICENSE)
+[![WeYouMe channel on Discord](https://img.shields.io/badge/chat-discord-738bd7.svg)](https://discord.gg/djnEYKN)
 
-# Ezira Authenticator API and Console UI
+# weAuth API and Console UI
 
 ## Install
 
@@ -13,12 +13,12 @@ npm install
 
 Add config vars
 ```
-EZNODE_URL=https://api.ezira.io
-EZNODE_URL_SERVER=https://api.ezira.io
-BROADCASTER_USERNAME=EZCHAIN_CHAIN_ACCOUNT_NAME_STRING
-BROADCASTER_POSTING_KEY=EZCHAIN_CHAIN_ACCOUNT_POSTING_PRIVATE_KEY
+NODE_API_URL=https://api.ezira.io
+NODE_API_URL_SERVER=https://api.ezira.io
+BROADCASTER_USERNAME=CHAIN_ACCOUNT_NAME_STRING
+BROADCASTER_POSTING_KEY=CHAIN_ACCOUNT_POSTING_PRIVATE_KEY
 JWT_SECRET=somerandomstringsecret
-DEBUG=sc2:*
+DEBUG=weauth:*
 dburl=postgresql://user:pass@localhost:port/db
 PORT=5555
 CONTENT_DEFAULT='self'

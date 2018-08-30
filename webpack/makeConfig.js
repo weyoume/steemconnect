@@ -23,7 +23,8 @@ function makePlugins(options) {
         // This has effect on the react lib size
         NODE_ENV: isDevelopment ? JSON.stringify('development') : JSON.stringify('production'),
         ENABLE_LOGGER: JSON.stringify(process.env.ENABLE_LOGGER),
-        EZNODE_URL: JSON.stringify(process.env.EZNODE_URL || 'https://api.ezira.io'),
+        NODE_API_URL: JSON.stringify(process.env.NODE_API_URL || 'https://api.ezira.io'),
+        NODE_API_URL_SERVER: JSON.stringify(process.env.NODE_API_URL_SERVER || 'https://api.ezira.io'),
         IS_BROWSER: JSON.stringify(true),
       },
     }),

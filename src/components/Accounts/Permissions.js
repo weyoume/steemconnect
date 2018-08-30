@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 import numeral from 'numeral';
 import changeCase from 'change-case';
 import Loading from '../../widgets/Loading';
@@ -25,7 +25,7 @@ export default class Permissions extends Component {
 
   componentDidMount = () => {
     this.setState({ isLoading: true });
-    ezhelp.js.api.getAccounts([this.props.params.username], (err, result) => {
+    wehelpjs.api.getAccounts([this.props.params.username], (err, result) => {
       this.setState({
         error: err,
         account: result[0],

@@ -1,14 +1,14 @@
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 
 export const isUsername = async (username) => {
-  const accounts = await ezhelp.js.api.getAccountsAsync([username]);
+  const accounts = await wehelpjs.api.getAccountsAsync([username]);
   return !!accounts[0];
 };
 
 export const isNotUsername = async username => !await isUsername(username);
 
 export const accountExist = (rule, value, callback) => {
-  ezhelp.js.api.getAccounts([value], (err, result) => {
+  wehelpjs.api.getAccounts([value], (err, result) => {
     if (result && result.find(a => a.name === value)) {
       callback();
     } else {
@@ -18,7 +18,7 @@ export const accountExist = (rule, value, callback) => {
 };
 
 export const accountNotExist = (rule, value, callback) => {
-  ezhelp.js.api.getAccounts([value], (err, result) => {
+  wehelpjs.api.getAccounts([value], (err, result) => {
     if (result && result.find(a => a.name === value)) {
       callback(['Account name is not available']);
     } else {
@@ -27,7 +27,7 @@ export const accountNotExist = (rule, value, callback) => {
   });
 };
 
-// https://github.com/eziranetwork/ezauth/blob/eaf8a02658b8deaef376ec90b81d0866e52582cc/app/utils/ChainValidation.js#L4
+// https://github.com/eziranetwork/weauth/blob/eaf8a02658b8deaef376ec90b81d0866e52582cc/app/utils/ChainValidation.js#L4
 export const validateAccountName = (rule, value, callback, intl) => {
   let i;
   let label;

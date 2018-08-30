@@ -1,5 +1,5 @@
 {
-  "name": "sc2",
+  "name": "weauth",
   "scripts": {
   },
   "env": {
@@ -18,11 +18,11 @@
     "JWT_SECRET": {
       "generator": "secret"
     },
-    "EZNODE_URL": {
+    "NODE_API_URL": {
       "required": true
     },
-    "EZNODE_URL_SERVER": "",
-    "DEBUG": "sc2:*",
+    "NODE_API_URL_SERVER": "",
+    "DEBUG": "weauth:*",
     "LOG_LEVEL": "info",
     "CONTENT_DEFAULT": {
       "required": true

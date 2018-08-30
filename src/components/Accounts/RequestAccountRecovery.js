@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Card, notification } from 'antd';
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 import RequestAccountRecoveryForm from '../Form/RequestAccountRecovery';
 import Loading from '../../widgets/Loading';
 import SignForm from '../Form/Sign';
@@ -66,8 +66,8 @@ class RecoverAccount extends React.Component {
            newPassword,
            onError,
            onSuccess) => {
-      const newOwnerPrivate = ezira.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
-      const newOwner = ezira.auth.wifToPublic(newOwnerPrivate);
+      const newOwnerPrivate = wehelpjs.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
+      const newOwner = wehelpjs.auth.wifToPublic(newOwnerPrivate);
       const newOwnerAuthority = {
         weight_threshold: 1,
         account_auths: [],
@@ -75,7 +75,7 @@ class RecoverAccount extends React.Component {
       };
 
       try {
-        await ezira.broadcast.requestAccountRecoveryAsync(
+        await wehelpjs.broadcast.requestAccountRecoveryAsync(
           creatorOwnerPrivate,
           recoveryAccount,
           accountToRecover,

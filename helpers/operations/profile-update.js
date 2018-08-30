@@ -1,11 +1,11 @@
 const changeCase = require('change-case');
 const { userExists, isEmpty, normalizeUsername } = require('../validation-utils');
 const customOperations = require('./custom-operations');
-const ezhelp.js = require('ezhelp.js');
+const wehelpjs = require('wehelpjs');
 
 const parse = async (query) => {
   const username = normalizeUsername(query.account);
-  const accounts = await ezhelp.js.api.getAccountsAsync([username]);
+  const accounts = await wehelpjs.api.getAccountsAsync([username]);
   const account = accounts.find(a => a.name === username);
   let json = {};
 

@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import changeCase from 'change-case';
-import pkg from 'ezj/package.json';
-import methods from 'ezj/lib/api/methods';
-import operations from 'ezj/lib/broadcast/operations';
+import pkg from 'wehelpjs/package.json';
+import methods from 'wehelpjs/lib/api/methods';
+import operations from 'wehelpjs/lib/broadcast/operations';
 
 const Method = ({ method }) => {
   const inlineParams = method.params
@@ -23,7 +23,7 @@ const Method = ({ method }) => {
       <p><a href={apiLink} target="_blank" rel="noopener noreferrer">Try it</a></p>
       <pre>
         <code>
-          {`ezhelp.js.api.${changeCase.camelCase(method.method)}(${inlineParams}function(err, result) {
+          {`wehelpjs.api.${changeCase.camelCase(method.method)}(${inlineParams}function(err, result) {
   console.log(err, result);
 });`}
         </code>
@@ -55,7 +55,7 @@ const Operation = ({ operation }) => {
       <p><b><FormattedMessage id="required_authority" />:</b> {inlineRoles}. <a href={signLink} target="_blank" rel="noopener noreferrer"><FormattedMessage id="try_it" /></a></p>
       <pre>
         <code>
-          {`ezira.broadcast.${changeCase.camelCase(operation.operation)}(wif, ${inlineParams}function(err, result) {
+          {`wehelpjs.broadcast.${changeCase.camelCase(operation.operation)}(wif, ${inlineParams}function(err, result) {
   console.log(err, result);
 });`}
         </code>
@@ -68,15 +68,15 @@ Operation.propTypes = {
   operation: PropTypes.shape(),
 };
 
-const Ezj = () =>
+const wehelpjs = () =>
   <div className="container my-5">
-    <h1><FormattedMessage id="ezj" /></h1>
+    <h1><FormattedMessage id="wehelpjs" /></h1>
     <p>
       <FormattedMessage
-        id="ezj_doc"
+        id="wehelpjs_doc"
         values={{
           version: pkg.version,
-          source: <a href="https://github.io/eziranetwork/ezj"><FormattedMessage id="source_code" /></a>,
+          source: <a href="https://github.io/eziranetwork/wehelpjs"><FormattedMessage id="source_code" /></a>,
           api: <a href="#api"><FormattedMessage id="api_methods" /></a>,
           operations: <a href="#broadcast"><FormattedMessage id="api_methods" /></a>,
         }}
@@ -93,4 +93,4 @@ const Ezj = () =>
   </div>
 ;
 
-export default Ezj;
+export default wehelpjs;

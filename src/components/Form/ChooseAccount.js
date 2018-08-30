@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Icon } from 'antd';
-import EziraAvatar from '../../widgets/EziraAvatar';
+import PlatformAvatar from '../../widgets/PlatformAvatar';
 import { getAccounts } from '../../utils/localStorage';
 import './ChooseAccount.less';
 
@@ -50,7 +50,7 @@ export default class ChooseAccount extends Component {
           {accounts.map(account =>
             <li key={`acc_${account.username}`}>
               <a href={undefined} onClick={() => this.changeAccount(account.username)}>
-                <EziraAvatar username={account.username} size="50" /><span className="username">{account.username}</span>
+                <PlatformAvatar username={account.username} size="50" /><span className="username">{account.username}</span>
               </a>
               <Icon type="close" onClick={() => this.removeAccount(account.username)} />
             </li>

@@ -6,15 +6,15 @@ const http = require('http');
 const https = require('https');
 const csp = require('express-csp-header');
 const cors = require('cors');
-const ezhelp.js = require('ezhelp.js');
+const wehelpjs = require('wehelpjs');
 const db = require('./db/models');
 const { strategy } = require('./helpers/middleware');
 const logger = require('./helpers/logger');
 
-if (process.env.EZNODE_URL_SERVER) {
-  ezhelp.js.api.setOptions({ url: process.env.EZNODE_URL_SERVER });
-} else if (process.env.EZNODE_URL) {
-  ezhelp.js.api.setOptions({ url: process.env.EZNODE_URL });
+if (process.env.NODE_API_URL_SERVER) {
+  wehelpjs.api.setOptions({ url: process.env.NODE_API_URL_SERVER });
+} else if (process.env.NODE_API_URL) {
+  wehelpjs.api.setOptions({ url: process.env.NODE_API_URL });
 }
 
 http.globalAgent.maxSockets = Infinity;
@@ -82,7 +82,7 @@ app.enable('trust proxy');
 app.disable('x-powered-by');
 
 app.use((req, res, next) => {
-  req.ezira = ezira;
+  req.wehelpjs = wehelpjs;
   req.db = db;
   next();
 });

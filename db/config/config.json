@@ -1,5 +1,5 @@
 {
-	"database": "ezauth",
+	"database": "weauth",
 	"username": "lopu",
 	"password": "woowoo",
 	"host" : "localhost",
