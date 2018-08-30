@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Card, notification } from 'antd';
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 import { Link } from 'react-router';
 import RecoverAccountForm from '../Form/RecoverAccount';
 import Loading from '../../widgets/Loading';
@@ -52,17 +52,17 @@ class RecoverAccount extends React.Component {
     this.setState({ isLoading: false });
   };
 
-  // https://github.com/eziranetwork/ezauth/blob/0b3af70996c08423a770db2ef23189cd4e7d12be/app/redux/TransactionSaga.js#L481
+  // https://github.com/eziranetwork/weauth/blob/0b3af70996c08423a770db2ef23189cd4e7d12be/app/redux/TransactionSaga.js#L481
   recoverAccount = async (accountToRecover, oldPassword, newPassword, onError, onSuccess) => {
-    const oldOwnerPrivate = ezira.auth.isWif(oldPassword) ? oldPassword :
-      ezira.auth.toWif(accountToRecover, oldPassword, 'owner');
+    const oldOwnerPrivate = wehelpjs.auth.isWif(oldPassword) ? oldPassword :
+      wehelpjs.auth.toWif(accountToRecover, oldPassword, 'owner');
 
-    const oldOwner = ezira.auth.wifToPublic(oldOwnerPrivate);
+    const oldOwner = wehelpjs.auth.wifToPublic(oldOwnerPrivate);
 
-    const newOwnerPrivate = ezira.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
-    const newOwner = ezira.auth.wifToPublic(newOwnerPrivate);
+    const newOwnerPrivate = wehelpjs.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
+    const newOwner = wehelpjs.auth.wifToPublic(newOwnerPrivate);
     const pwPubkey = (name, pw, role) =>
-      ezira.auth.wifToPublic(ezira.auth.toWif(name, pw.trim(), role));
+      wehelpjs.auth.wifToPublic(wehelpjs.auth.toWif(name, pw.trim(), role));
     const newActive = pwPubkey(accountToRecover, newPassword.trim(), 'active');
     const newPosting = pwPubkey(accountToRecover, newPassword.trim(), 'posting');
     const newMemo = pwPubkey(accountToRecover, newPassword.trim(), 'memo');
@@ -80,7 +80,7 @@ class RecoverAccount extends React.Component {
     };
 
     try {
-      await ezira.broadcast.sendAsync({ extensions: [],
+      await wehelpjs.broadcast.sendAsync({ extensions: [],
         operations: [
           ['recover_account', {
             accountToRecover: accountToRecover,
@@ -91,7 +91,7 @@ class RecoverAccount extends React.Component {
 
       // change password
       // change password probably requires a separate transaction (single trx has not been tested)
-      await ezira.broadcast.sendAsync({ extensions: [],
+      await wehelpjs.broadcast.sendAsync({ extensions: [],
         operations: [
           ['accountUpdate', {
             account: accountToRecover,

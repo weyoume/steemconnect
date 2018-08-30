@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 import SignForm from '../Form/Sign';
 import SignSuccess from '../Sign/Success';
 import SignError from '../Sign/Error';
@@ -41,7 +41,7 @@ export default class Authorize extends Component {
     const { username, role, weight } = this.state;
     this.setState({ step: 2 });
 
-    ezhelp.js.api.getAccounts([auth.username], (err, accounts) => {
+    wehelpjs.api.getAccounts([auth.username], (err, accounts) => {
       if (!hasAuthority(accounts[0], username, role)) {
         const updatedAuthority = accounts[0][role];
         updatedAuthority.account_auths.push([username, parseInt(weight, 10)]);
@@ -51,7 +51,7 @@ export default class Authorize extends Component {
         const posting = role === 'posting' ? updatedAuthority : undefined;
 
         /** Add authority on user account */
-        ezira.broadcast.accountUpdate(
+        wehelpjs.broadcast.accountUpdate(
           auth.wif,
           auth.username,
           owner,

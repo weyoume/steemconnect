@@ -4,15 +4,15 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('apps', [
       {
-        client_id: 'test.ezira.app',
+        client_id: 'test.WeYouMe.app',
         secret: '5KRteSXcJfVk6hpkqgNQtZL3ea9yWDQnqERXWJQF1CEaLSjqR9n',
-        owner: 'test.ezira',
+        owner: 'test.WeYouMe',
         redirect_uris: JSON.stringify(['http://localhost:5555/demo', 'http://localhost:5555', 'https://auth.ezira.io/demo', 'https://alpha.ezira.io/callback']),
-        name: 'Ezira.io',
+        name: 'alpha.WeYouMe.io',
         description: 'Ensuring non-brutal life',
         icon: 'https://byteball.co/img/logo.jpg',
-        website: 'https://ezira.io',
-        beneficiaries: JSON.stringify([{ account: 'test.ezira', weight: 1500 }]),
+        website: 'https://alpha.WeYouMe.io',
+        beneficiaries: JSON.stringify([{ account: 'test.WeYouMe', weight: 1500 }]),
         is_approved: true,
         is_public: true,
         is_disabled: false,

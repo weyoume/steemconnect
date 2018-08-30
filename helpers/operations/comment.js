@@ -1,5 +1,5 @@
 const cloneDeep = require('lodash/cloneDeep');
-const { formatter } = require('ezhelp.js');
+const { formatter } = require('wehelpjs');
 const changeCase = require('change-case');
 const diacritics = require('diacritics');
 

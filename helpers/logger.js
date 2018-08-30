@@ -1,7 +1,7 @@
 const bunyan = require('bunyan');
 
 const logger = bunyan.createLogger({
-  name: 'ezauth',
+  name: 'weauth',
   serializers: bunyan.stdSerializers,
   streams: [{
     level: process.env.LOG_LEVEL || 'info',

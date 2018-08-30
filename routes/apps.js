@@ -37,7 +37,7 @@ router.get('/@:clientId', async (req, res, next) => {
 router.post('/@:clientId', authenticate('user'), async (req, res) => {
   const { clientId } = req.params;
 
-  const accounts = await req.ezhelp.js.api.getAccountsAsync([clientId]);
+  const accounts = await req.wehelpjs.api.getAccountsAsync([clientId]);
   if (!accounts[0]) {
     res.status(400).json({ error: `Proxy account @${clientId} does not exist` });
   } else {
@@ -50,9 +50,9 @@ router.post('/@:clientId', authenticate('user'), async (req, res) => {
     });
     const offlinePubKeys = config.offline_generated_public_keys;
     const requiredAuthStr = JSON.stringify({
-      owner: { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[offlinePubKeys.owner, 1]] },
-      active: { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[offlinePubKeys.active, 1]] },
-      posting: { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[offlinePubKeys.posting, 1]] },
+      owner: { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[offlinePubKeys.owner, 1]] },
+      active: { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[offlinePubKeys.active, 1]] },
+      posting: { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[offlinePubKeys.posting, 1]] },
       memo: offlinePubKeys.memo,
     });
 
@@ -131,7 +131,7 @@ router.put('/@:clientId/reset-secret', authenticate('user'), async (req, res, ne
 });
 
 router.all('/authorized', authenticate('user'), async (req, res) => {
-  const accounts = await req.ezhelp.js.api.getAccountsAsync([req.user]);
+  const accounts = await req.wehelpjs.api.getAccountsAsync([req.user]);
   const postingAccountAuths = accounts[0].posting.account_auths;
   const apps = await req.db.apps.findAll({
     where: {

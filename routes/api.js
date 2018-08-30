@@ -1,6 +1,6 @@
 const express = require('express');
 const { authenticate, verifyPermissions } = require('../helpers/middleware');
-const { encode } = require('ezj/lib/auth/memo');
+const { encode } = require('wehelpjs/lib/auth/memo');
 const { issueUserToken } = require('../helpers/token');
 const { getUserMetadata, updateUserMetadata } = require('../helpers/metadata');
 const { getErrorMessage } = require('../helpers/operation');
@@ -14,10 +14,10 @@ router.put('/me', authenticate('app'), async (req, res) => {
   const scope = req.scope.length ? req.scope : config.authorized_operations;
   let accounts;
   try {
-    accounts = await req.ezhelp.js.api.getAccountsAsync([req.user]);
+    accounts = await req.wehelpjs.api.getAccountsAsync([req.user]);
   } catch (err) {
-    req.log.error(err, 'me: ezAPI request failed', req.user);
-    res.status(501).send('ezAPI request failed');
+    req.log.error(err, 'me: API request failed', req.user);
+    res.status(501).send('API request failed');
     return;
   }
   const { user_metadata } = req.body;
@@ -64,10 +64,10 @@ router.all('/me', authenticate(), async (req, res) => {
   const scope = req.scope.length ? req.scope : config.authorized_operations;
   let accounts;
   try {
-    accounts = await req.ezhelp.js.api.getAccountsAsync([req.user]);
+    accounts = await req.wehelpjs.api.getAccountsAsync([req.user]);
   } catch (err) {
-    req.log.error(err, 'me: ezAPI request failed', req.user);
-    res.status(501).send('ezAPI request failed');
+    req.log.error(err, 'me: API request failed', req.user);
+    res.status(501).send('API request failed');
     return;
   }
   let userMetadata;
@@ -123,7 +123,7 @@ router.post('/broadcast', authenticate('app'), verifyPermissions, async (req, re
     });
   } else {
     req.log.error(`Broadcast transaction for @${req.user} from app @${req.proxy}`);
-    req.ezira.broadcast.send(
+    req.wehelpjs.broadcast.send(
       { operations, extensions: [] },
       { posting: process.env.BROADCASTER_POSTING_KEY },
       (err, result) => {
@@ -148,10 +148,10 @@ router.all('/login/challenge', async (req, res) => {
   const token = issueUserToken(username);
   let accounts;
   try {
-    accounts = await req.ezhelp.js.api.getAccountsAsync([username]);
+    accounts = await req.wehelpjs.api.getAccountsAsync([username]);
   } catch (err) {
-    req.log.error(err, 'challenge: ezAPI request failed', username);
-    res.status(501).send('ezAPI request failed');
+    req.log.error(err, 'challenge: API request failed', username);
+    res.status(501).send('API request failed');
     return;
   }
   const publicWif = role === 'memo' ? accounts[0].memoKey : accounts[0][role].key_auths[0][0];

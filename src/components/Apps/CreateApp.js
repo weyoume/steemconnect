@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import fetch from 'isomorphic-fetch';
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 import { notification, Modal } from 'antd';
 import { browserHistory } from 'react-router';
 import CreateAppForm from '../Form/CreateApp';
@@ -53,12 +53,12 @@ class CreateApp extends React.Component {
 
     /** Generate account authorities */
     const publicKeys = config.offline_generated_public_keys;
-    const owner = { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[publicKeys.owner, 1]] };
-    const active = { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[publicKeys.active, 1]] };
-    const posting = { weight_threshold: 1, account_auths: [['test.ezira.auth', 1]], key_auths: [[publicKeys.posting, 1]] };
+    const owner = { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[publicKeys.owner, 1]] };
+    const active = { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[publicKeys.active, 1]] };
+    const posting = { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[publicKeys.posting, 1]] };
 
     /** Create proxy account */
-    await ezira.broadcast.accountCreateWithDelegationAsync(
+    await wehelpjs.broadcast.accountCreateWithDelegationAsync(
       auth.wif,
       accountCreationFee,
       '0.000000 ESCOR',

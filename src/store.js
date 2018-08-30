@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import ezira from 'ezhelp.js';
+import wehelpjs from 'wehelpjs';
 import auth from './reducers/auth';
 import appLocale from './reducers/appLocale';
 
@@ -9,8 +9,8 @@ const reducers = combineReducers({
   appLocale,
 });
 
-if (process.env.EZNODE_URL) {
-  ezhelp.js.api.setOptions({ url: process.env.EZNODE_URL });
+if (process.env.NODE_API_URL) {
+  wehelpjs.api.setOptions({ url: process.env.NODE_API_URL });
 }
 
 const store = createStore(

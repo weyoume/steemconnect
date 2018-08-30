@@ -1,5 +1,5 @@
 const express = require('express');
-const debug = require('debug')('sc2:server');
+const debug = require('debug')('weauth:server');
 const Sequelize = require('sequelize');
 const { issueAppToken, issueAppCode, issueAppRefreshToken } = require('../helpers/token');
 const { authenticate } = require('../helpers/middleware');
@@ -21,7 +21,7 @@ router.get('/oauth2/authorize', async (req, res) => {
     debug(`The app @${clientId} has not been setup.`);
     res.redirect('/404');
   } else {
-    res.render('index', { title: 'EzAuth' });
+    res.render('index', { title: 'weAuth' });
   }
 });
 

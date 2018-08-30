@@ -1,5 +1,5 @@
 const changeCase = require('change-case');
-const operations = require('ezj/lib/broadcast/operations');
+const operations = require('wehelpjs/lib/broadcast/operations');
 const cloneDeep = require('lodash/cloneDeep');
 const get = require('lodash/get');
 const has = require('lodash/has');
@@ -9,7 +9,7 @@ const operationAuthor = require('./operation-author.json');
 const customOperations = require('./operations/custom-operations');
 const helperOperations = require('./operations');
 
-/** Parse error message from Eznode response */
+/** Parse error message from Node response */
 const getErrorMessage = (error) => {
   let errorMessage = '';
   if (has(error, 'data.stack[0].format')) {

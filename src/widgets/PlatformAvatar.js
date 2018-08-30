@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import './EziraAvatar.less';
+import './PlatformAvatar.less';
 
-const EziraAvatar = ({
+const PlatformAvatar = ({
   username,
   size = '36',
   className = '',
@@ -13,7 +13,7 @@ const EziraAvatar = ({
     }}
   >
     <div
-      className={`EziraAvatar ${className}`}
+      className={`PlatformAvatar ${className}`}
       style={{
         height: `${size}px`,
         width: `${size}px`,
@@ -23,10 +23,10 @@ const EziraAvatar = ({
   </span>
 ;
 
-EziraAvatar.propTypes = {
+PlatformAvatar.propTypes = {
   username: PropTypes.string,
   size: PropTypes.string,
   className: PropTypes.string,
 };
 
-export default EziraAvatar;
+export default PlatformAvatar;
