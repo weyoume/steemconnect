@@ -1,6 +1,6 @@
 {
   "name": "weauth",
-  "version": "0.1.1",
+  "version": "0.1.11",
   "engines": {
     "node": ">=8.1.4",
     "npm": "4.6.1"
