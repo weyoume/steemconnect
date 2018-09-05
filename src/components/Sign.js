@@ -107,7 +107,7 @@ export default class Sign extends Component {
     let Placeholder = SignPlaceholderDefault;
     Placeholder = (type === 'comment') ? SignPlaceholderComment : Placeholder;
     Placeholder = (changeCase.snakeCase(type) === 'profile_update') ? SignPlaceholderNonFiltered : Placeholder;
-    Placeholder = (['transfer', 'delegateESCOR', 'undelegateESCOR'].includes(changeCase.snakeCase(type))) ? SignPlaceholderTransferDelegate : Placeholder;
+    Placeholder = (['transfer', 'delegateSCORE', 'undelegateSCORE'].includes(changeCase.snakeCase(type))) ? SignPlaceholderTransferDelegate : Placeholder;
     return Placeholder;
   }
 
@@ -259,7 +259,7 @@ export default class Sign extends Component {
         {step !== 'loading' && <div className="Sign__content">
           <div className="Sign_frame">
             <div className="Sign__header">
-              <object data="/img/logo.svg" type="image/svg+xml" id="logo" />
+              <div className="brand-name"><span>WeYouMe Login</span></div>
             </div>
             {step === 'signin' &&
             <div className="Sign__signin-warning"><FormattedMessage id="native_auth_website_confirm" /></div>}

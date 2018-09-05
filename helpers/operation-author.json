@@ -2,8 +2,8 @@
   "vote": "voter",
   "comment": "author",
   "transfer": "from",
-  "transferECOtoESCORfund": "from",
-  "withdrawESCOR": "account",
+  "transferTMEtoSCOREfund": "from",
+  "withdrawSCORE": "account",
   "limit_order_create": "owner",
   "limit_order_cancel": "owner",
   "feed_publish": "publisher",
@@ -31,8 +31,8 @@
   "cancelTransferFromSavings": "from",
   "decline_voting_rights": "account",
   "claimRewardBalance": "account",
-  "delegateESCOR": "delegator",
-  "undelegateESCOR": "delegator",
+  "delegateSCORE": "delegator",
+  "undelegateSCORE": "delegator",
   "accountCreateWithDelegation": "creator",
   "fill_convert_request": "owner"
 }

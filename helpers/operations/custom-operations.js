@@ -25,8 +25,8 @@ module.exports = [
     params: ['follower', 'following'],
   },
   {
-    operation: 'undelegateESCOR',
-    type: 'delegateESCOR',
+    operation: 'undelegateSCORE',
+    type: 'delegateSCORE',
     params: ['delegator', 'delegatee'],
   },
   {

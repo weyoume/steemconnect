@@ -41,8 +41,8 @@ class CreateAccount extends Component {
     };
     wehelpjs.broadcast.accountCreateWithDelegation(
       auth.wif,
-      account.ECO,
-      account.ESCOR,
+      account.TME,
+      account.SCORE,
       auth.username,
       account.name,
       owner,

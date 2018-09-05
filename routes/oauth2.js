@@ -21,7 +21,7 @@ router.get('/oauth2/authorize', async (req, res) => {
     debug(`The app @${clientId} has not been setup.`);
     res.redirect('/404');
   } else {
-    res.render('index', { title: 'weAuth' });
+    res.render('index', { title: 'WeAuth' });
   }
 });
 

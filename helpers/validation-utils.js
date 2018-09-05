@@ -4,11 +4,11 @@ const moment = require('moment');
 const isEmpty = value => value === undefined || value === null || value === '';
 
 const allowedSymbols = [
-  { symbol: 'EUSD', precision: 3 },
-  { symbol: 'ECO', precision: 3 },
+  { symbol: 'TSD', precision: 3 },
+  { symbol: 'TME', precision: 3 },
   { symbol: 'ePOWER', precision: 3 },
-  { symbol: 'ECO', precision: 3 },
-  { symbol: 'ESCOR', precision: 6 },
+  { symbol: 'TME', precision: 3 },
+  { symbol: 'SCORE', precision: 6 },
 ];
 
 const isAsset = (value) => {

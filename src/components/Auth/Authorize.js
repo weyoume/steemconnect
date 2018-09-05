@@ -136,7 +136,7 @@ export default class Authorize extends Component {
         {step !== 0 && <div className="Sign__content">
           <div className="Sign_frame">
             <div className="Sign__header">
-              <object data="/img/logo.svg" type="image/svg+xml" id="logo" />
+              <div className="brand-name"><span>WeYouMe Login</span></div>
             </div>
             <div className="Sign__wrapper">
               {step === 1 &&

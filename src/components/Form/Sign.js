@@ -99,7 +99,7 @@ class Sign extends React.Component {
     const btnTitle = this.props.btnTitle ? this.props.btnTitle : <FormattedMessage id="sign_in" />;
     return (
       <Form onSubmit={this.handleSubmit} className="SignForm">
-        <h5>{title}</h5>
+        {/* <h5>{title}</h5> */}
         <p><FormattedMessage id="operation_require_roles" values={{ roles: this.props.roles.join(', ') }} /></p>
         <Form.Item hasFeedback>
           {getFieldDecorator('username', {
@@ -125,6 +125,13 @@ class Sign extends React.Component {
             {btnTitle}
           </Button>
         </Form.Item>
+				<Form.Item>
+					<div>
+						<a href="/signup" rel="noopener noreferrer" className="signup-text-link">
+							<FormattedMessage id="signup" />
+						</a>
+					</div>
+				</Form.Item>
       </Form>
     );
   }

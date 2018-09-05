@@ -65,7 +65,7 @@ const authenticate = roles => async (req, res, next) => {
     if (!appStatus || (appStatus && appStatus.is_disabled)) {
       res.status(401).json({
         error: 'application_disabled',
-        error_description: 'This application has been disabled by weAuth',
+        error_description: 'This application has been disabled by WeAuth',
       });
       return;
     }

@@ -48,7 +48,7 @@ class CreateApp extends React.Component {
     this.setState({ isLoading: true });
     const clientId = this.state.values.username;
 
-    /** Calculate required ECO to create new account */
+    /** Calculate required TME to create new account */
     const accountCreationFee = await getAccountCreationFee();
 
     /** Generate account authorities */
@@ -61,7 +61,7 @@ class CreateApp extends React.Component {
     await wehelpjs.broadcast.accountCreateWithDelegationAsync(
       auth.wif,
       accountCreationFee,
-      '0.000000 ESCOR',
+      '0.000000 SCORE',
       auth.username,
       clientId,
       owner,

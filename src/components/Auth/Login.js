@@ -67,11 +67,11 @@ export default class Login extends Component {
         <div className="Sign__content container my-2 login-form Sign__authorize">
           <div className="Sign_frame">
             <div className="Sign__header">
-              <object data="/img/logo.svg" type="image/svg+xml" id="logo" />
+              <div className="brand-name"><span>WeYouMe Login</span></div>
             </div>
             <div className="Sign__wrapper">
               {step === 0 && <Loading />}
-              {step === 1 && <SignForm title={<FormattedMessage id="log_in" />} roles={['memo', 'posting']} sign={this.handleSubmit} />}
+              {step === 1 && <SignForm roles={['memo', 'posting']} sign={this.handleSubmit} />}
               {step === 2 &&
               <ChooseAccountForm
                 addAccount={this.addAccount}

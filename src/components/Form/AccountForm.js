@@ -9,8 +9,8 @@ export default class AccountForm extends Form {
     const password = createSuggestedPassword();
     const data = this.props.data || {
       password,
-      ECO: '0.000 ECO',
-      ESCOR: '0.000000 ESCOR',
+      TME: '0.000 TME',
+      SCORE: '0.000000 SCORE',
     };
     this.state = {
       data,
@@ -49,28 +49,28 @@ export default class AccountForm extends Form {
             <small><FormattedMessage id="password_tip" /></small>
           </div>
           <div className="form-group">
-            <label className="label" htmlFor="ECO"><FormattedMessage id="ECO" /></label>
+            <label className="label" htmlFor="TME"><FormattedMessage id="TME" /></label>
             <input
-              id="ECO"
+              id="TME"
               type="text"
               className="form-control"
-              name="ECO"
+              name="TME"
               onChange={this.onChange}
-              defaultValue={data.ECO}
+              defaultValue={data.TME}
             />
             <small><FormattedMessage id="protocol_tip" /></small>
           </div>
           <div className="form-group">
-            <label className="label" htmlFor="ESCOR"><FormattedMessage id="ESCOR" /></label>
+            <label className="label" htmlFor="SCORE"><FormattedMessage id="SCORE" /></label>
             <input
-              id="ESCOR"
+              id="SCORE"
               type="text"
               className="form-control"
-              name="ESCOR"
+              name="SCORE"
               onChange={this.onChange}
-              defaultValue={data.ESCOR}
+              defaultValue={data.SCORE}
             />
-            <small><FormattedMessage id="ESCOR_tip" /></small>
+            <small><FormattedMessage id="SCORE_tip" /></small>
           </div>
         </div>
         <div className="form-group py-3 text-center">
