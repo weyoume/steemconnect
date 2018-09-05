@@ -61,7 +61,7 @@ export const getAccountCreationFee = async () => {
   const chainConfig = await wehelpjs.api.getConfigAsync();
   const chainProps = await wehelpjs.api.getChainPropertiesAsync();
   const accountCreationFee = chainProps.account_creation_fee;
-  const priceModifier = chainConfig.CREATE_ACCOUNT_WITH_ECO_MODIFIER;
-  const accountCreationFeeInECO = parseFloat(accountCreationFee.split(' ')[0]) * priceModifier;
-  return `${accountCreationFeeInECO.toFixed(3)} ECO`;
+  const priceModifier = chainConfig.CREATE_ACCOUNT_WITH_TME_MODIFIER;
+  const accountCreationFeeInTME = parseFloat(accountCreationFee.split(' ')[0]) * priceModifier;
+  return `${accountCreationFeeInTME.toFixed(3)} TME`;
 };

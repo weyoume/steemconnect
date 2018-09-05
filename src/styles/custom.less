@@ -3,32 +3,78 @@
 @ant-prefix             : ant;
 
 // -------- Colors -----------
-@primary-color          : @blue-6;
-@info-color             : @blue-6;
-@success-color          : @green-6;
-@error-color            : @red-6;
-@highlight-color        : @red-6;
-@warning-color          : @yellow-6;
-@normal-color           : #d9d9d9;
+@red: #ff0c0c;
+@pc: @red; // #ff0c0c
+@pcl0: lighten(@pc, 3%); // #ff2b2b
+@pcl: lighten(@pc, 6%); // #ff1b1b
+@pcl1: lighten(@pc, 10%); // #ff3f3f
+@pcl2: lighten(@pc, 14%); // #ff5353
+@pcl3: lighten(@pc, 18%); // #ff6868
+@pcl4: lighten(@pc, 22%); // #ff7c7c
+@pcl5: lighten(@pc, 26%); // #ff9191
+@pcl6: lighten(@pc, 30%); // #ffa5a5
+@pcl7: lighten(@pc, 34%); // #ffb9b9
+@pcl100: lighten(@pc, 43%); // #ffe7e7
+@pcd0: darken(@pc, 3%); // #ec0000
+@pcd: darken(@pc, 6%); // #fc0000
+@pcd1: darken(@pc, 10%); // #d80000
+@pcd2: darken(@pc, 14%); // #c40000
+@pcd3: darken(@pc, 18%); // #af0000
+@pcd4: darken(@pc, 22%); // #9b0000
+@pcd5: darken(@pc, 26%); // #860000
+@pw: #F5F5F5; // #f5f5f5
+@pw0: darken(@pw, 3%); // #ededed
+@pw1: darken(@pw, 6%); // #e6e6e6
+@pw2: darken(@pw, 10%); // #dcdcdc
+@pw3: darken(@pw, 14%); // #d1d1d1
+@pw4: darken(@pw, 18%); // #c7c7c7
+@pw5: darken(@pw, 22%); // #bdbdbd
+
+.test {
+	color: @red;
+	color: @pc;
+	color: @pcl;
+	color: @pcl0;
+	color: @pcl1;
+	color: @pcl2;
+	color: @pcl3;
+	color: @pcl4;
+	color: @pcl5;
+	color: @pcl6;
+	color: @pcl7;
+	color: @pcl100;
+	color: @pcd;
+	color: @pcd0;
+	color: @pcd1;
+	color: @pcd2;
+	color: @pcd3;
+	color: @pcd4;
+	color: @pcd5;
+	color: @pw;
+	color: @pw0;
+	color: @pw1;
+	color: @pw2;
+	color: @pw3;
+	color: @pw4;
+	color: @pw5;
+}
+
+@info-color: @red;
+@success-color: green;
+@error-color: @red;
+@highlight-color: @red;
+@warning-color: yellow;
+@normal-color: #d9d9d9;
 
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
-@primary-1: color(~`colorPalette("@{primary-color}", 1)`);  // replace tint(@primary-color, 90%)
-@primary-2: color(~`colorPalette("@{primary-color}", 2)`);  // replace tint(@primary-color, 80%)
-// unused
-@primary-3: color(~`colorPalette("@{primary-color}", 3)`);
-@primary-4: color(~`colorPalette("@{primary-color}", 4)`);
+@primary-1: tint(@pc, 90%);
+@primary-2: tint(@pc, 80%);
 // Color used to control the text color in many active and hover states.
-@primary-5: color(~`colorPalette("@{primary-color}", 5)`);  // replace tint(@primary-color, 20%)
-@primary-6: @primary-color;                                 // don't use, use @primary-color
+@primary-5: tint(@pc, 10%);
+@primary-6: @pc; // don't use, use @pc
 // Color used to control the text color of active buttons.
-@primary-7: color(~`colorPalette("@{primary-color}", 7)`);  // replace shade(@primary-color, 5%)
-// unused
-@primary-8: color(~`colorPalette("@{primary-color}", 8)`);
-// unused
-@primary-9: color(~`colorPalette("@{primary-color}", 9)`);
-// unused
-@primary-10: color(~`colorPalette("@{primary-color}", 10)`);
+@primary-7: shade(@pc, 5%);
 
 // Base Scaffolding Variables
 // ---
@@ -61,7 +107,7 @@
 @icon-url               : "/fonts/Iconfont";
 
 // LINK
-@link-color             : @primary-color;
+@link-color             : @pc;
 @link-hover-color       : @primary-5;
 @link-active-color      : @primary-7;
 @link-hover-decoration  : none;
@@ -89,7 +135,7 @@
 // Outline
 @outline-blur-size      : 0;
 @outline-width          : 2px;
-@outline-color          : @primary-color;
+@outline-color          : @pc;
 
 // Default background color for disabled states, Collapse wrappers,
 // and several active and hover states.
@@ -116,7 +162,7 @@
 @btn-border-radius-sm   : @border-radius-base;
 
 @btn-primary-color      : #fff;
-@btn-primary-bg         : @primary-color;
+@btn-primary-bg         : @pc;
 
 @btn-default-color      : @text-color;
 @btn-default-bg         : #fff;
@@ -202,7 +248,7 @@
 @input-border-color          : @border-color-base;
 @input-bg                    : #fff;
 @input-addon-bg              : #eee;
-@input-hover-border-color    : @primary-color;
+@input-hover-border-color    : @pc;
 @input-disabled-bg           : @disabled-bg;
 
 // Tooltip
@@ -245,7 +291,7 @@
 
 // Progress
 // --
-@process-default-color: @primary-color;
+@process-default-color: @pc;
 @progress-remaining-color: @background-color-base;
 
 // Menu
@@ -307,3 +353,109 @@
 @back-top-color: #fff;
 @back-top-bg: rgba(64, 64, 64, 0.4);
 @back-top-hover-bg: rgba(64, 64, 64, 0.6);
+
+.pcl-btn {
+	background-color: @pcl;
+}
+.pcl2-btn {
+	background-color: @pcl2;
+}
+.pcl3-btn {
+	background-color: @pcl3;
+}
+.pcl4-btn {
+	background-color: @pcl4;
+}
+.pcl5-btn {
+	background-color: @pcl5;
+}
+
+.pcd-btn {
+	background-color: @pcd;
+}
+.pcd2-btn {
+	background-color: @pcd2;
+}
+.pcd3-btn {
+	background-color: @pcd3;
+}
+.pcd4-btn {
+	background-color: @pcd4;
+}
+.pcd5-btn {
+	background-color: @pcd5;
+}
+
+.pw-btn {
+	background-color: @pw;
+}
+.pw2-btn {
+	background-color: @pw2;
+}
+.pw3-btn {
+	background-color: @pw3;
+}
+.pw4-btn {
+	background-color: @pw4;
+}
+.pw5-btn {
+	background-color: @pw5;
+}
+
+.pc-text {
+	color: @pc;
+}
+
+.pcl-text {
+	color: @pcl
+}
+.pcl2-text {
+	color: @pcl2;
+}
+.pcl3-text {
+	color: @pcl3;
+}
+.pcl4-text {
+	color: @pcl4;
+}
+.pcl5-text {
+	color: @pcl5;
+}
+
+.pcd-text {
+	color: @pcd
+}
+.pcd2-text {
+	color: @pcd2;
+}
+.pcd3-text {
+	color: @pcd3;
+}
+.pcd4-text {
+	color: @pcd4;
+}
+.pcd5-text {
+	color: @pcd5;
+}
+
+.nav-title {
+	font-weight: 900;
+}
+
+.brand-name {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	// background-color: @pw;
+	padding: 8px 6px;
+	text-align: center;
+	width: 100%;
+	&>span {
+		font-size: 24px;
+		font-weight: 700;
+		font-family: WhitneyMedium;
+		color: darkslategrey;
+		// color: @pc;
+	}
+}

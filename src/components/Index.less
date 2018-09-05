@@ -1,5 +1,5 @@
 @import "../styles/screen-sizes";
-
+@import "../styles/common.less";
 .lp-container {
   width: 100%;
   max-width: 1080px;
@@ -13,11 +13,11 @@
   position: relative;
   width: 100%;
   text-align: center;
-  background: rgb(26,80,153); /* Old browsers */
-  background: -moz-linear-gradient(-45deg,  rgba(26,80,153,1) 0%, rgba(146,215,250,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg,  rgba(26,80,153,1) 0%,rgba(146,215,250,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg,  rgba(26,80,153,1) 0%,rgba(146,215,250,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a5099', endColorstr='#92d7fa',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: darken(@pc, 2%); /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  darken(@pc, 2%) 0%, @pcl 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  darken(@pc, 2%) 0%,@pcl 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  darken(@pc, 2%) 0%,@pcl 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=darken(@pc, 2%), endColorstr=@pcl ,GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,23 +36,53 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 20px;
     padding: 0 20px;
 
     .menu-item {
       align-content: center;
-
+			display: flex;
+			flex-direction: row;
+			align-items: center;
       button {
         color: #fff;
         font-size: 16px;
-        background-color: transparent;
+        // background-color: transparent;
         padding: 0;
 
         .anticon {
           font-size: 12px;
         }
-      }
+			}
     }
+		.horizontal {
+			display: flex;
+			flex-direction: row;
+		}
+		.language-btn {
+			background-color: transparent;
+		}
+		.login-btn {
+			font-family: WhitneyMedium, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			margin-left: 10px;
+			// background: @gg;
+			padding: 8px 12px !important;
+			color: #fff;
+			font-size: 16px;
+			height: 50px;
+			display: block;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			&>a {
+				background: transparent;
+				// height: 50px;
+			}
+			&>span {
+				// padding: 5px 0px;
+				line-height: initial;
+			}
+		}
   }
 
   .hero {
@@ -168,10 +198,6 @@
       top: 540px;
     }
   }
-
-  button[type="submit"] {
-    background: #4bcef2;
-  }
 }
 
 .logo {
@@ -215,7 +241,7 @@
 }
 
 .small-title {
-  color: #4ba1f1;
+  color: @pc;
   display: inline-block;
   margin-bottom: 15px;
 }
@@ -225,16 +251,17 @@
   font-weight: bold;
   color: white !important;
   border-radius: 5px;
-  background: #4ba2f2;
+  background: @pc;
   width: 100%;
   padding: 10px 20px;
   font-size: 18px;
   box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
   text-decoration: none;
   transition: all .15s ease;
+	font-family: WhitneyMedium, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
   &:hover {
-    background: #4eacff;
+		background: @pcl4;
     box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
   }
 }
@@ -275,7 +302,7 @@
       }
 
       .feature-title {
-        color: #1a5099;
+        color: darken(@pc, 0%);
         font-size: 24px;
         margin-top: 20px;
         margin-bottom: 10px;
@@ -356,7 +383,7 @@
     }
 
     .project-title {
-      color: #1a5099;
+      color: darken(@pc, 0%);
       font-size: 24px;
     }
   }
@@ -425,9 +452,9 @@
     font-size: 16px;
     background: none;
     border:none;
-    color: #4ba2f2;
+    color: @pc;
     &:hover {
-      color: #4eacff;
+      color: @pcl;
     }
   }
 }

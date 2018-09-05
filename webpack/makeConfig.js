@@ -5,7 +5,7 @@ const defaults = require('lodash/defaults');
 const path = require('path');
 const webpack = require('webpack');
 const availableLocales = require('../helpers/locales.json');
-
+require('dotenv').config()
 const localeRegex = new RegExp(Object.keys(availableLocales).join('|'));
 
 const DEFAULTS = {
@@ -23,8 +23,8 @@ function makePlugins(options) {
         // This has effect on the react lib size
         NODE_ENV: isDevelopment ? JSON.stringify('development') : JSON.stringify('production'),
         ENABLE_LOGGER: JSON.stringify(process.env.ENABLE_LOGGER),
-        NODE_API_URL: JSON.stringify(process.env.NODE_API_URL || 'https://api.ezira.io'),
-        NODE_API_URL_SERVER: JSON.stringify(process.env.NODE_API_URL_SERVER || 'https://api.ezira.io'),
+        NODE_API_URL: JSON.stringify(process.env.NODE_API_URL || 'https://api.weyoume.io'),
+        NODE_API_URL_SERVER: JSON.stringify(process.env.NODE_API_URL_SERVER || 'https://api.weyoume.io'),
         IS_BROWSER: JSON.stringify(true),
       },
     }),

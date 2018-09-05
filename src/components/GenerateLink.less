@@ -1,3 +1,5 @@
+@import "../styles/custom.less";
+
 .GenerateLinkContainer {
   padding: 115px 0;
   max-width: 780px;
@@ -73,7 +75,7 @@
       color: #c9ced3;
     }
     .ant-steps-item.ant-steps-status-process .ant-steps-head-inner > .ant-steps-icon .ant-steps-icon-dot {
-      background: #4ba2f2;
+      background: @pc;
     }
   }
 
@@ -135,34 +137,34 @@
 
   button.generate-link {
     width: 100%;
-    background-color: #4ba2f2;
+    background-color: @pc;
     font-size: 16px;
     text-transform: uppercase;
     height: 50px;
-    box-shadow: 0 3px 8px 0 rgba(26, 80, 153, 0.3);
+    box-shadow: 0 3px 8px 0 darken(@pc, 10%);
   }
 
   a.try-link {
     width: 100%;
     background-color: #fff;
-    border: solid 2px #4ba2f2;
+    border: solid 2px @pc;
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
     height: 50px;
-    color: #4ba2f2;
+    color: @pc;
     display: block;
     border-radius: 5px;
   }
 
   button.back {
-    color: #4ba2f2;
+    color: @pc;
     background: none;
     font-size: 14px;
     width: 100%;
 
     &:hover {
-      color: #4ba2f2;
+      color: @pc;
     }
   }
 
@@ -307,7 +309,7 @@
         }
 
         button {
-          color: #4ba2f2;
+          color: @pc;
           float: right;
           border: none;
           background: none;

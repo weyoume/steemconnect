@@ -10,6 +10,7 @@ const wehelpjs = require('wehelpjs');
 const db = require('./db/models');
 const { strategy } = require('./helpers/middleware');
 const logger = require('./helpers/logger');
+require('dotenv').config()
 
 if (process.env.NODE_API_URL_SERVER) {
   wehelpjs.api.setOptions({ url: process.env.NODE_API_URL_SERVER });
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 });
 
 // Content security policies
+console.log(process.env)
 app.use(csp({
   policies: {
     'default-src': (process.env.CONTENT_DEFAULT || "'self'").split(','),

@@ -50,13 +50,16 @@ class Index extends React.Component {
       <div>
         <div id="header">
           <img src="/img/macbook.png" id="macbook-img" alt="macbook" />
-          <object data="img/hero.svg" type="image/svg+xml" id="header-bg" />
+					<object data="img/hero.svg" type="image/svg+xml" id="header-bg" />
           <div className="lp-container">
             <div id="menu">
               <div className="menu-item logo">
-                <object data="img/logo-white.svg" type="image/svg+xml" />
+                {/* <object data="img/logo-white.svg" type="image/svg+xml" /> */}
+								<div className="nav-title">
+									WeAuth
+								</div>
               </div>
-              <div className="menu-item">
+              <div className="menu-item horizontal">
                 <Popover
                   placement="bottom"
                   content={
@@ -70,8 +73,13 @@ class Index extends React.Component {
                   }
                   trigger="click"
                 >
-                  <Button>{locales[locale]}<Icon type="down" /></Button>
+                  <Button className="language-btn">{locales[locale]}<Icon type="down" /></Button>
                 </Popover>
+								<div>
+									<a href="/login" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
+										<FormattedMessage id="login" />
+									</a>
+								</div>
               </div>
             </div>
             <div className="hero">
@@ -100,7 +108,7 @@ class Index extends React.Component {
                     )}
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" name="subscribe" htmlType="submit" className="lp-link">
+                    <Button type="primary" name="subscribe" htmlType="submit" className="pcl5-btn lp-link">
                       <FormattedMessage id="signup" />
                     </Button>
                   </Form.Item>
@@ -187,7 +195,7 @@ class Index extends React.Component {
             <div>
               <h4 className="project-title"><FormattedMessage id="lp_developers_title" /></h4>
               <p><FormattedMessage id="lp_developers_description" /></p>
-              <a href="http://eepurl.com/c1PtNX" rel="noopener noreferrer" target="_blank" className="lp-link">
+              <a href="https://github.com/eziranetwork" rel="noopener noreferrer" target="_blank" className="lp-link">
                 <FormattedMessage id="lp_developers_button" />
               </a>
             </div>
@@ -201,7 +209,7 @@ class Index extends React.Component {
               <p><FormattedMessage id="lp_subscribe_description" /></p>
             </div>
             <div>
-              <a href="http://eepurl.com/c1Z9VH" rel="noopener noreferrer" target="_blank" className="lp-link">
+              <a href="#header" rel="noopener noreferrer" className="lp-link">
                 <FormattedMessage id="lp_subscribe_button" />
               </a>
             </div>

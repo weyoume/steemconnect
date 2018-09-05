@@ -8,23 +8,23 @@ const optionalFields = ['delegator'];
 
 const parse = async (query) => {
   const cQuery = cloneDeep(query);
-  const [amount, symbol] = cQuery.ESCOR.split(' ');
+  const [amount, symbol] = cQuery.SCORE.split(' ');
   const globalProps = await wehelpjs.api.getDynamicGlobalPropertiesAsync();
 
   cQuery.delegatee = normalizeUsername(cQuery.delegatee);
   cQuery.delegator = normalizeUsername(cQuery.delegator);
 
   if (symbol === 'ePOWER') {
-    cQuery.ESCOR = join([
+    cQuery.SCORE = join([
       (
         (parseFloat(amount) *
-        parseFloat(globalProps.totalESCOR)) /
-        parseFloat(globalProps.totalECOfundForESCOR)
+        parseFloat(globalProps.totalSCORE)) /
+        parseFloat(globalProps.totalTMEfundForSCORE)
       ).toFixed(6),
-      'ESCOR',
+      'SCORE',
     ], ' ');
   } else {
-    cQuery.ESCOR = join([parseFloat(amount).toFixed(6), symbol], ' ');
+    cQuery.SCORE = join([parseFloat(amount).toFixed(6), symbol], ' ');
   }
 
   return cQuery;
@@ -38,11 +38,11 @@ const validate = async (query, errors) => {
     errors.push({ field: 'delegator', error: 'error_user_exist', values: { user: query.delegator } });
   }
 
-  if (!isEmpty(query.ESCOR)) {
-    if (!['ESCOR', 'ePOWER'].includes(query.ESCOR.split(' ')[1])) {
-      errors.push({ field: 'ESCOR', error: 'error_ESCOR_symbol' });
-    } else if (!isAsset(query.ESCOR)) {
-      errors.push({ field: 'ESCOR', error: 'error_ESCOR_format' });
+  if (!isEmpty(query.SCORE)) {
+    if (!['SCORE', 'ePOWER'].includes(query.SCORE.split(' ')[1])) {
+      errors.push({ field: 'SCORE', error: 'error_SCORE_symbol' });
+    } else if (!isAsset(query.SCORE)) {
+      errors.push({ field: 'SCORE', error: 'error_SCORE_format' });
     }
   }
 };
@@ -68,15 +68,15 @@ const normalize = async (query) => {
     }
   }
 
-  const [amount, symbol] = cQuery.ESCOR.split(' ');
-  if (amount && symbol === 'ESCOR') {
+  const [amount, symbol] = cQuery.SCORE.split(' ');
+  if (amount && symbol === 'SCORE') {
     const globalProps = await wehelpjs.api.getDynamicGlobalPropertiesAsync();
     cQuery.amount = join(
       [
-        formatter.ESCORinECOvalue(
-          cQuery.ESCOR,
-          globalProps.totalESCOR,
-          globalProps.totalECOfundForESCOR
+        formatter.SCOREinTMEvalue(
+          cQuery.SCORE,
+          globalProps.totalSCORE,
+          globalProps.totalTMEfundForSCORE
         ).toFixed(3),
         'ePOWER',
       ], ' ');

@@ -1,6 +1,6 @@
 {
   "name": "weauth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "engines": {
     "node": ">=8.1.4",
     "npm": "4.6.1"
@@ -9,14 +9,16 @@
   "main": "./bin/www",
   "private": true,
   "scripts": {
-    "start": "./bin/www",
+    "start": "pm2 start ecosystem.config.js",
     "start-dev": "nodemon --ignore src ./bin/www | bunyan -o short",
     "eslint-autofix": "eslint --fix \"src/**/*.js\" \"*.js\"",
     "test": "npm run lint && nsp check --output summary",
     "lint": "eslint \"src/**/*.js\" \"routes/**/*.js\" \"helpers/**/*.js\"",
     "build": "webpack --progress -p --config webpack/webpack.prod.config.js",
     "build-dev": "webpack --progress -p --config webpack/webpack.config.js",
-    "postinstall": "npm run build"
+		"postinstall": "npm run build",
+		"push" : "./scripts/push.sh",
+		"pull" : "./scripts/pull.sh"
   },
   "pre-commit": [
     "test"
@@ -116,7 +118,7 @@
     "pg-hstore": "^2.3.2",
     "react-addons-test-utils": "^15.3.2",
     "redux-mock-store": "^1.2.0",
-    "sequelize-cli": "^4.0.0",
+    "sequelize-cli": "^4.1.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.20.0"
   }

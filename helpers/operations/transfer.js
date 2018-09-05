@@ -25,7 +25,7 @@ const validate = async (query, errors) => {
     errors.push({ field: 'from', error: 'error_user_exist', values: { user: query.from } });
   }
 
-  if (!isEmpty(query.amount) && !['ECO', 'EUSD'].includes(query.amount.split(' ')[1])) {
+  if (!isEmpty(query.amount) && !['TME', 'TSD'].includes(query.amount.split(' ')[1])) {
     errors.push({ field: 'amount', error: 'error_amount_symbol' });
   } else if (!isEmpty(query.amount) && !isAsset(query.amount)) {
     errors.push({ field: 'amount', error: 'error_amount_format' });

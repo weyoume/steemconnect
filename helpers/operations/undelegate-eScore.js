@@ -3,14 +3,14 @@ const join = require('lodash/join');
 const wehelpjs = require('wehelpjs');
 const { isEmpty, userExists, normalizeUsername } = require('../validation-utils');
 
-const optionalFields = ['delegator', 'ESCOR'];
+const optionalFields = ['delegator', 'SCORE'];
 
 const parse = async (query) => {
   const cQuery = cloneDeep(query);
 
   cQuery.delegatee = normalizeUsername(cQuery.delegatee);
   cQuery.delegator = normalizeUsername(cQuery.delegator);
-  cQuery.ESCOR = join([parseFloat(0).toFixed(6), 'ESCOR'], ' ');
+  cQuery.SCORE = join([parseFloat(0).toFixed(6), 'SCORE'], ' ');
 
   return cQuery;
 };
