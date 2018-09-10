@@ -36,6 +36,8 @@ class RecoverAccount extends React.Component {
     const values = this.state.values;
 
     const onError = (error) => {
+			console.error(error)
+			console.error(getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }))
       notification.error({
         message: intl.formatMessage({ id: 'error' }),
         description: getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }),

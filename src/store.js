@@ -4,6 +4,10 @@ import wehelpjs from 'wehelpjs';
 import auth from './reducers/auth';
 import appLocale from './reducers/appLocale';
 
+if(window && wehelpjs){
+	window.wehelpjs = wehelpjs
+}
+
 const reducers = combineReducers({
   auth,
   appLocale,

@@ -185,7 +185,7 @@ class Index extends React.Component {
             <div>
               <h4 className="project-title"><FormattedMessage id="lp_opensource_title" /></h4>
               <p><FormattedMessage id="lp_opensource_description" /></p>
-              <a href="https://github.com/eziranetwork/weauth" target="_blank" rel="noreferrer noopener" className="lp-link">
+              <a href="https://github.com/WeYouMe/weauth" target="_blank" rel="noreferrer noopener" className="lp-link">
                 <FormattedMessage id="lp_opensource_button" />
               </a>
             </div>
@@ -195,7 +195,7 @@ class Index extends React.Component {
             <div>
               <h4 className="project-title"><FormattedMessage id="lp_developers_title" /></h4>
               <p><FormattedMessage id="lp_developers_description" /></p>
-              <a href="https://github.com/eziranetwork" rel="noopener noreferrer" target="_blank" className="lp-link">
+              <a href="https://github.com/WeYouMe" rel="noopener noreferrer" target="_blank" className="lp-link">
                 <FormattedMessage id="lp_developers_button" />
               </a>
             </div>

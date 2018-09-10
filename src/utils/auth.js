@@ -50,7 +50,7 @@ export const authorize = ({ clientId, scope, responseType = 'token' }, cb) => {
     .catch(err => cb(err, null));
 };
 
-// https://github.com/eziranetwork/weauth/blob/634c13cd0d2fafa28592e9d5f43589e201198248/app/components/elements/SuggestPassword.jsx#L97
+// https://github.com/WeYouMe/weauth/blob/634c13cd0d2fafa28592e9d5f43589e201198248/app/components/elements/SuggestPassword.jsx#L97
 export const createSuggestedPassword = () => {
   const PASSWORD_LENGTH = 32;
   const privateKey = key_utils.get_random_key();

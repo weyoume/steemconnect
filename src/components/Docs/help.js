@@ -9,7 +9,7 @@ const Method = ({ method }) => {
   const inlineParams = method.params
     ? `${method.params.join(', ')}, ` :
     '';
-  let apiLink = `https://api.weyoume.io/${method.method}`;
+  let apiLink = `https://api.WeYouMe.io/${method.method}`;
   if (method.params) {
     apiLink += `?${method.params.map(param => param).join('=value&')}=value`;
   }
@@ -76,7 +76,7 @@ const wehelpjs = () =>
         id="wehelpjs_doc"
         values={{
           version: pkg.version,
-          source: <a href="https://github.io/eziranetwork/wehelpjs"><FormattedMessage id="source_code" /></a>,
+          source: <a href="https://github.io/WeYouMe/wehelpjs"><FormattedMessage id="source_code" /></a>,
           api: <a href="#api"><FormattedMessage id="api_methods" /></a>,
           operations: <a href="#broadcast"><FormattedMessage id="api_methods" /></a>,
         }}

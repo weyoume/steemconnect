@@ -4,7 +4,7 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('metadata', [
       {
-        client_id: 'test.WeYouMe.app',
+        client_id: 'webuilder1',
         user: 'fabien',
         user_metadata: JSON.stringify({
           locale: 'fr',
@@ -14,7 +14,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        client_id: 'test.WeYouMe.app',
+        client_id: 'webuilder1',
         user: 'val',
         user_metadata: JSON.stringify({
           locale: 'ru',

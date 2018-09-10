@@ -13,11 +13,13 @@
     "eslint-autofix": "eslint --fix \"src/**/*.js\" \"*.js\"",
     "test": "npm run lint && nsp check --output summary",
     "lint": "eslint \"src/**/*.js\" \"routes/**/*.js\" \"helpers/**/*.js\"",
-    "build": "webpack --progress -p --config webpack/webpack.prod.config.js",
-    "build-dev": "webpack --progress -p --config webpack/webpack.config.js",
+    "build": "clear && webpack --progress -p --config webpack/makeWebpackProdConfig.js",
+    "build-dev": "clear && webpack --progress -p --config webpack/makeWebpackDevConfig.js",
     "postinstall": "npm run build",
     "push": "./scripts/push.sh",
-    "pull": "./scripts/pull.sh"
+    "pull": "./scripts/pull.sh",
+    "run": "clear && npm run build && npm run start",
+    "run-dev": "clear && npm run build-dev && npm run start-dev"
   },
   "pre-commit": [
     "test"
@@ -95,7 +97,7 @@
     "weauthjs": "latest",
     "webpack": "^3.8.1",
     "webpack-visualizer-plugin": "^0.1.5",
-    "wehelpjs": "latest"
+    "wehelpjs": "^1.1.11111111"
   },
   "devDependencies": {
     "babel-register": "^6.14.0",

@@ -4,14 +4,14 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('apps', [
       {
-        client_id: 'test.WeYouMe.app',
+        client_id: 'webuilder1',
         secret: '5KRteSXcJfVk6hpkqgNQtZL3ea9yWDQnqERXWJQF1CEaLSjqR9n',
         owner: 'test.WeYouMe',
-        redirect_uris: JSON.stringify(['http://localhost:5555/demo', 'http://localhost:5555', 'https://auth.weyoume.io/demo', 'https://alpha.weyoume.io/callback']),
-        name: 'alpha.weyoume.io',
+        redirect_uris: JSON.stringify(['http://localhost:5555/demo', 'http://localhost:5555', 'https://auth.WeYouMe.io/demo', 'https://alpha.WeYouMe.io/callback']),
+        name: 'alpha.WeYouMe.io',
         description: 'Ensuring non-brutal life',
         icon: 'https://byteball.co/img/logo.jpg',
-        website: 'https://alpha.weyoume.io',
+        website: 'https://alpha.WeYouMe.io',
         beneficiaries: JSON.stringify([{ account: 'test.WeYouMe', weight: 1500 }]),
         is_approved: true,
         is_public: true,
@@ -24,7 +24,7 @@ module.exports = {
         client_id: 'simple-app',
         secret: 'secretkey-abc-456',
         owner: 'val',
-        redirect_uris: JSON.stringify(['http://localhost:5555/demo', 'http://localhost:5555', 'https://sc2-angular.herokuapp.com', 'https://auth.weyoume.io/demo', 'https://alpha.weyoume.io/callback']),
+        redirect_uris: JSON.stringify(['http://localhost:5555/demo', 'http://localhost:5555', 'https://sc2-angular.herokuapp.com', 'https://auth.WeYouMe.io/demo', 'https://alpha.WeYouMe.io/callback']),
         name: 'Simple App',
         description: 'This is a test app.',
         icon: 'https://byteball.co/img/logo.jpg',

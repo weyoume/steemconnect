@@ -78,7 +78,7 @@ class Sign extends React.Component {
           this.props.form.setFields({
             password: {
               value: password,
-              errors: [new Error(intl.formatMessage({ id: 'error_password_not_valid' }))],
+              errors: [new Error(intl.formatMessage({ id: 'error_password_invalid' }))],
             },
           });
         }
