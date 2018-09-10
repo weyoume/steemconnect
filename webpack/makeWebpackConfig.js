@@ -23,8 +23,8 @@ function makePlugins(options) {
         // This has effect on the react lib size
         NODE_ENV: isDevelopment ? JSON.stringify('development') : JSON.stringify('production'),
         ENABLE_LOGGER: JSON.stringify(process.env.ENABLE_LOGGER),
-        NODE_API_URL: JSON.stringify(process.env.NODE_API_URL || 'https://api.weyoume.io'),
-        NODE_API_URL_SERVER: JSON.stringify(process.env.NODE_API_URL_SERVER || 'https://api.weyoume.io'),
+        NODE_API_URL: JSON.stringify(process.env.NODE_API_URL || 'https://api.WeYouMe.io'),
+        NODE_API_URL_SERVER: JSON.stringify(process.env.NODE_API_URL_SERVER || 'https://api.WeYouMe.io'),
         IS_BROWSER: JSON.stringify(true),
       },
     }),
@@ -89,13 +89,13 @@ function makeStyleLoaders(options) {
   ];
 }
 
-function makeConfig(options) {
+function makeWebpackConfig(options) {
   // eslint-disable-next-line no-param-reassign
   if (!options) options = {};
   defaults(options, DEFAULTS);
 
   const isDevelopment = options.isDevelopment;
-
+	console.log('isDevelopment', isDevelopment)
   return {
     devtool: isDevelopment ? 'cheap-eval-source-map' : 'source-map',
     entry: (isDevelopment ? [
@@ -135,10 +135,10 @@ function makeConfig(options) {
 }
 
 if (!module.parent) {
-  console.log(makeConfig({
+  console.log(makeWebpackConfig({
     isDevelopment: process.env.NODE_ENV !== 'production',
   }));
 }
 
-exports = module.exports = makeConfig;
+exports = module.exports = makeWebpackConfig;
 exports.DEFAULTS = DEFAULTS;

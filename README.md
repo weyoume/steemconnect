@@ -1,5 +1,5 @@
-[![CircleCI Build Status](https://circleci.com/gh/eziranetwork/weauth.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/eziranetwork/weauth)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eziranetwork/weauth/dev/LICENSE)
+[![CircleCI Build Status](https://circleci.com/gh/WeYouMe/weauth.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/WeYouMe/weauth)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/WeYouMe/weauth/dev/LICENSE)
 [![WeYouMe channel on Discord](https://img.shields.io/badge/chat-discord-738bd7.svg)](https://discord.gg/djnEYKN)
 
 # WeAuth API and Console UI
@@ -13,8 +13,8 @@ npm install
 
 Add config vars
 ```
-NODE_API_URL=https://api.weyoume.io
-NODE_API_URL_SERVER=https://api.weyoume.io
+NODE_API_URL=https://api.WeYouMe.io
+NODE_API_URL_SERVER=https://api.WeYouMe.io
 BROADCASTER_USERNAME=CHAIN_ACCOUNT_NAME_STRING
 BROADCASTER_POSTING_KEY=CHAIN_ACCOUNT_POSTING_PRIVATE_KEY
 JWT_SECRET=somerandomstringsecret
@@ -23,7 +23,7 @@ dburl=postgresql://user:pass@localhost:port/db
 PORT=5555
 CONTENT_DEFAULT='self'
 CONTENT_SCRIPT_SRC='self','unsafe-eval','unsafe-inline'
-CONTENT_CONNECT_SRC='self',*.weyoume.io
+CONTENT_CONNECT_SRC='self',*.WeYouMe.io
 CONTENT_FRAME_SRC='self'
 CONTENT_STYLE_SRC='self','unsafe-inline'
 CONTENT_IMG_SRC='self',steemitimages.com,steemit-production-imageproxy-thumbnail.s3.amazonaws.com,data:

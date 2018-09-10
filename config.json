@@ -9,11 +9,11 @@
     "claimRewardBalance"
   ],
   "offline_generated_public_keys": {
-    "owner"		: "EZT4tnGAB4q9aUmjWzbk6qhs3f81LCzcaRNSVdNqdCJ9VoFG4nJS4",
-    "active"	: "EZT6f3ttaPEyRzheUJQ3qTzYyiffhMEjHVtxZ3Sqwsobx5i6NrgSZ",
-    "posting"	: "EZT6njobCGfvrc2SUmfAvFUaEWn1G7LcENRWijaa3xBiitCMo3poD",
-    "memo"		: "EZT63WcZyr5bVVb8nTK74Rkuvz1vHyQtyBWbuEj68zgFqTxsYT9wj"
-  },
+		"active" : "TWYM6LLegbAgLAy28EHrffBVuANFWcFgmqRMW13wBmTExqFE9SCkg4",
+		"memo" : "TWYM6LLegbAgLAy28EHrffBVuANFWcFgmqRMW13wBmTExqFE9SCkg4",
+		"owner" : "TWYM6LLegbAgLAy28EHrffBVuANFWcFgmqRMW13wBmTExqFE9SCkg4",
+		"posting" : "TWYM6LLegbAgLAy28EHrffBVuANFWcFgmqRMW13wBmTExqFE9SCkg4"
+	},
   "user_metadata": {
     "max_size": 16000000
   }

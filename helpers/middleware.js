@@ -4,7 +4,7 @@ const { tokens, apps } = require('../db/models');
 
 /**
  * Check if user allow app proxy account to post on his behalf
- * And if app allow @test.WeYouMe.auth to post on his behalf
+ * And if app allow @webuilder1 to post on his behalf
  */
 const verifyPermissions = async (req, res, next) => {
   const accounts = await req.wehelpjs.api.getAccountsAsync([req.proxy, req.user]);

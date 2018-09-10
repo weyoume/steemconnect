@@ -30,6 +30,8 @@ class RecoverAccount extends React.Component {
     this.setState({ values, isLoading: true });
 
     const onError = (error) => {
+			console.error(error)
+			console.error(getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }))
       notification.error({
         message: intl.formatMessage({ id: 'error' }),
         description: getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }),
@@ -52,7 +54,7 @@ class RecoverAccount extends React.Component {
     this.setState({ isLoading: false });
   };
 
-  // https://github.com/eziranetwork/weauth/blob/0b3af70996c08423a770db2ef23189cd4e7d12be/app/redux/TransactionSaga.js#L481
+  // https://github.com/WeYouMe/weauth/blob/0b3af70996c08423a770db2ef23189cd4e7d12be/app/redux/TransactionSaga.js#L481
   recoverAccount = async (accountToRecover, oldPassword, newPassword, onError, onSuccess) => {
     const oldOwnerPrivate = wehelpjs.auth.isWif(oldPassword) ? oldPassword :
       wehelpjs.auth.toWif(accountToRecover, oldPassword, 'owner');

@@ -27,7 +27,7 @@ export const accountNotExist = (rule, value, callback) => {
   });
 };
 
-// https://github.com/eziranetwork/weauth/blob/eaf8a02658b8deaef376ec90b81d0866e52582cc/app/utils/ChainValidation.js#L4
+// https://github.com/WeYouMe/weauth/blob/eaf8a02658b8deaef376ec90b81d0866e52582cc/app/utils/ChainValidation.js#L4
 export const validateAccountName = (rule, value, callback, intl) => {
   let i;
   let label;

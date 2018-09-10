@@ -50,9 +50,9 @@ router.post('/@:clientId', authenticate('user'), async (req, res) => {
     });
     const offlinePubKeys = config.offline_generated_public_keys;
     const requiredAuthStr = JSON.stringify({
-      owner: { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[offlinePubKeys.owner, 1]] },
-      active: { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[offlinePubKeys.active, 1]] },
-      posting: { weight_threshold: 1, account_auths: [['test.WeYouMe.auth', 1]], key_auths: [[offlinePubKeys.posting, 1]] },
+      owner: { weight_threshold: 1, account_auths: [['webuilder1', 1]], key_auths: [[offlinePubKeys.owner, 1]] },
+      active: { weight_threshold: 1, account_auths: [['webuilder1', 1]], key_auths: [[offlinePubKeys.active, 1]] },
+      posting: { weight_threshold: 1, account_auths: [['webuilder1', 1]], key_auths: [[offlinePubKeys.posting, 1]] },
       memo: offlinePubKeys.memo,
     });
 

@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 });
 
 // Content security policies
-console.log(process.env)
 app.use(csp({
   policies: {
     'default-src': (process.env.CONTENT_DEFAULT || "'self'").split(','),
@@ -71,7 +70,7 @@ app.use((req, res, next) => {
 if (process.env.NODE_ENV !== 'production') {
   logger.info('running in development mode');
   // eslint-disable-next-line global-require
-  require('./webpack/webpack')(app);
+  require('./webpack/webpack.dev.middleware.js')(app);
 }
 
 const hbs = require('hbs');
