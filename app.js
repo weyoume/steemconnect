@@ -12,6 +12,8 @@ const { strategy } = require('./helpers/middleware');
 const logger = require('./helpers/logger');
 require('dotenv').config()
 
+console.log('process.env', process.env)
+
 if (process.env.NODE_API_URL_SERVER) {
   wehelpjs.api.setOptions({ url: process.env.NODE_API_URL_SERVER });
 } else if (process.env.NODE_API_URL) {

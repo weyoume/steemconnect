@@ -75,9 +75,14 @@ class Index extends React.Component {
                 >
                   <Button className="language-btn">{locales[locale]}<Icon type="down" /></Button>
                 </Popover>
-								<div>
+								<div className="nav-button">
 									<a href="/login" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
 										<FormattedMessage id="login" />
+									</a>
+								</div>
+								<div className="nav-button">
+									<a href="/register" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
+										<FormattedMessage id="register" />
 									</a>
 								</div>
               </div>
