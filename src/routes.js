@@ -44,7 +44,7 @@ export default (
       <Route path="/apps/@:clientId" component={App} />
     </Route>
     <Route path="/docs/wehelpjs" component={help} />
-    <Route path="/accounts/create" component={CreateAccount} />
+    <Route path="/(register|signup|accounts/create)" component={CreateAccount} />
     <Route path="/accounts/recover" component={RecoverAccount} />
     <Route path="/accounts/request-recovery" component={RequestAccountRecovery} />
     <Route path="/login" component={Login} />

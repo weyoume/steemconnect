@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { authorize, login } from '../../utils/auth';
-import SignForm from '../Form/Sign';
+import Sign from '../Form/Sign';
 import ChooseAccountForm from '../Form/ChooseAccount';
 import Loading from '../../widgets/Loading';
 import { getAccounts } from '../../utils/localStorage';
@@ -71,7 +71,7 @@ export default class Login extends Component {
             </div>
             <div className="Sign__wrapper">
               {step === 0 && <Loading />}
-              {step === 1 && <SignForm roles={['memo', 'posting']} sign={this.handleSubmit} />}
+              {step === 1 && <Sign roles={['memo', 'posting']} sign={this.handleSubmit} />}
               {step === 2 &&
               <ChooseAccountForm
                 addAccount={this.addAccount}
