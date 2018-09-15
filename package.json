@@ -1,6 +1,6 @@
 {
   "name": "weauth",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "engines": {
     "node": ">=8.1.4",
     "npm": "4.6.1"
@@ -21,9 +21,7 @@
     "run": "clear && npm run build && npm run start",
     "run-dev": "clear && npm run build-dev && npm run start-dev"
   },
-  "pre-commit": [
-    "test"
-  ],
+  "pre-commit": [],
   "dependencies": {
     "antd": "^2.13.11",
     "babel-core": "^6.26.0",
