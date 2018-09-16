@@ -3,7 +3,7 @@
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackConfig = require('makeWebpackDevConfig.js');
+const webpackConfig = require('./makeWebpackDevConfig.js');
 
 module.exports = function (app) {
 	const compiler = webpack(webpackConfig);

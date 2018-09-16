@@ -5,11 +5,11 @@ const defaults = require('lodash/defaults');
 const path = require('path');
 const webpack = require('webpack');
 const availableLocales = require('../helpers/locales.json');
-require('dotenv').config()
 const localeRegex = new RegExp(Object.keys(availableLocales).join('|'));
+require('dotenv').config()
 
 const DEFAULTS = {
-  isDevelopment: process.env.NODE_ENV !== 'production',
+  isDevelopment: (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'prod'),
   baseDir: path.join(__dirname, '..'),
 };
 
@@ -136,7 +136,7 @@ function makeWebpackConfig(options) {
 
 if (!module.parent) {
   console.log(makeWebpackConfig({
-    isDevelopment: process.env.NODE_ENV !== 'production',
+    isDevelopment: (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'prod'),
   }));
 }
 
