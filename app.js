@@ -12,8 +12,6 @@ const { strategy } = require('./helpers/middleware');
 const logger = require('./helpers/logger');
 require('dotenv').config()
 
-console.log('process.env', process.env)
-
 if (process.env.NODE_API_URL_SERVER) {
   wehelpjs.api.setOptions({ url: process.env.NODE_API_URL_SERVER });
 } else if (process.env.NODE_API_URL) {
@@ -69,7 +67,7 @@ app.use((req, res, next) => {
   next();
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'prod') {
   logger.info('running in development mode');
   // eslint-disable-next-line global-require
   require('./webpack/webpack.dev.middleware.js')(app);
@@ -114,7 +112,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : err;
+  res.locals.error = (req.app.get('env') === 'development' || req.app.get('env') === 'dev') ? err : err;
 
   // render the error page
   res.status(err.status || 500);
