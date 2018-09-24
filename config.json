@@ -9,10 +9,10 @@
     "claimRewardBalance"
   ],
   "offline_generated_public_keys": {
-		"active" : "TWYM8cqdmALccUX9qqbVEHei73pu8HQBibym4htMeZy83onTqL2cHr",
-		"memo" : "TWYM8cqdmALccUX9qqbVEHei73pu8HQBibym4htMeZy83onTqL2cHr",
-		"owner" : "TWYM8cqdmALccUX9qqbVEHei73pu8HQBibym4htMeZy83onTqL2cHr",
-		"posting" : "TWYM8cqdmALccUX9qqbVEHei73pu8HQBibym4htMeZy83onTqL2cHr"
+		"active" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5",
+		"memo" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5",
+		"owner" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5",
+		"posting" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5"
 	},
   "user_metadata": {
     "max_size": 16000000
