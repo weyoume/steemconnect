@@ -6,6 +6,7 @@ import AccountForm from '../Form/AccountForm';
 import SignForm from '../Form/Sign';
 import Loading from '../../widgets/Loading';
 import { getErrorMessage } from '../../../helpers/operation';
+import { browserHistory } from 'react-router';
 
 class CreateAccount extends Component {
   static propTypes = {
@@ -64,7 +65,8 @@ class CreateAccount extends Component {
           notification.success({
             message: intl.formatMessage({ id: 'success' }),
             description: intl.formatMessage({ id: 'success_accountCreate' }, { account: account.name }),
-          });
+					});
+					browserHistory.push('/@'+account.name+"/dashboard")
         }
       }
     );
