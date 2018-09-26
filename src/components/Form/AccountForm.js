@@ -9,14 +9,22 @@ export default class AccountForm extends Form {
     const password = createSuggestedPassword();
     const data = this.props.data || {
       password,
-      TME: '0.000 TME',
-      SCORE: '0.000000 SCORE',
+      TME: '1.000 TME',
+      SCORE: '100.000000 SCORE',
     };
     this.state = {
       data,
-      valid: {},
+			valid: {},
+			details: false
     };
   }
+
+	toggleDetails = (data) => {
+		this.setState({
+			details: !this.state.details
+		})
+		console.log('this.state.details', this.state.details)
+	}
 
   render() {
     const { data } = this.state;
@@ -48,30 +56,35 @@ export default class AccountForm extends Form {
             />
             <small><FormattedMessage id="password_tip" /></small>
           </div>
-          <div className="form-group">
-            <label className="label" htmlFor="TME"><FormattedMessage id="TME" /></label>
-            <input
-              id="TME"
-              type="text"
-              className="form-control"
-              name="TME"
-              onChange={this.onChange}
-              defaultValue={data.TME}
-            />
-            <small><FormattedMessage id="protocol_tip" /></small>
-          </div>
-          <div className="form-group">
-            <label className="label" htmlFor="SCORE"><FormattedMessage id="SCORE" /></label>
-            <input
-              id="SCORE"
-              type="text"
-              className="form-control"
-              name="SCORE"
-              onChange={this.onChange}
-              defaultValue={data.SCORE}
-            />
-            <small><FormattedMessage id="SCORE_tip" /></small>
-          </div>
+					<div className={this.state.details ? 'visible' : '' + " extra-details"}>
+						<div className="form-group">
+							<label className="label" htmlFor="TME"><FormattedMessage id="TME" /></label>
+							<input
+								id="TME"
+								type="text"
+								className="form-control"
+								name="TME"
+								onChange={this.onChange}
+								defaultValue={data.TME}
+							/>
+							<small><FormattedMessage id="protocol_tip" /></small>
+						</div>
+						<div className="form-group">
+							<label className="label" htmlFor="SCORE"><FormattedMessage id="SCORE" /></label>
+							<input
+								id="SCORE"
+								type="text"
+								className="form-control"
+								name="SCORE"
+								onChange={this.onChange}
+								defaultValue={data.SCORE}
+							/>
+							<small><FormattedMessage id="SCORE_tip" /></small>
+						</div>
+					</div>
+					<div className="show-details-text" onClick={this.toggleDetails}>
+						<div>{this.state.details ? 'hide details' : 'show details'}</div>
+					</div>
         </div>
         <div className="form-group py-3 text-center">
           <button

@@ -30,7 +30,7 @@ export default (
     <IndexRoute component={Index} />
     <Route component={RequireLogin}>
       <Route component={Layout}>
-        <Route path="/dashboard" component={Dashboard} />
+				<Route path="/dashboard" component={Dashboard} />
         <Route path="/apps/me" component={MyApps} />
         <Route path="/apps/create" component={CreateApp} />
         <Route path="/apps/authorized" component={AuthorizedApps} />
@@ -44,7 +44,9 @@ export default (
       <Route path="/apps/@:clientId" component={App} />
     </Route>
     <Route path="/docs/wehelpjs" component={help} />
-    <Route path="/(register|signup|accounts/create)" component={CreateAccount} />
+    <Route path="/accounts/create" component={CreateAccount} />
+    <Route path="/register" component={CreateAccount} />
+    <Route path="/signup" component={CreateAccount} />
     <Route path="/accounts/recover" component={RecoverAccount} />
     <Route path="/accounts/request-recovery" component={RequestAccountRecovery} />
     <Route path="/login" component={Login} />
@@ -54,6 +56,6 @@ export default (
     <Route path="/authorize/@:username" component={SignAuthorize} />
     <Route path="/authorize/@:username/:role" component={SignAuthorize} />
     <Route path="/revoke/@:username" component={Revoke} />
-    <Route path="/*" component={Error404} />
+    {/* <Route path="/*" component={Error404} /> */}
   </Route>
 );

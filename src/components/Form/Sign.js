@@ -92,11 +92,13 @@ class Sign extends React.Component {
     const username = this.props.form.getFieldValue('username');
     return { username, password };
   };
-
+	componentDidMount(){
+		this.usernameInput.focus();
+	}
   render() {
     const { form: { getFieldDecorator }, intl } = this.props;
     const title = this.props.title ? this.props.title : <FormattedMessage id="sign_in" />;
-    const btnTitle = this.props.btnTitle ? this.props.btnTitle : <FormattedMessage id="sign_in" />;
+		const btnTitle = this.props.btnTitle ? this.props.btnTitle : <FormattedMessage id="sign_in" />;
     return (
       <Form onSubmit={this.handleSubmit} className="SignForm">
         {/* <h5>{title}</h5> */}
@@ -108,7 +110,13 @@ class Sign extends React.Component {
               { validator: accountExist },
             ],
           })(
-            <Input prefix={<Icon type="user" size="large" />} placeholder={intl.formatMessage({ id: 'username' })} autoCorrect="off" autoCapitalize="none" />
+						<Input 
+							prefix={<Icon type="user" size="large" />} 
+							placeholder={intl.formatMessage({ id: 'username' })} 
+							autoCorrect="off" 
+							autoCapitalize="none" 
+							ref={(input) => { this.usernameInput = input; }}
+							/>
           )}
         </Form.Item>
         <Form.Item hasFeedback>
