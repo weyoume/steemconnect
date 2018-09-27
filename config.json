@@ -7,12 +7,15 @@
     "comment_options",
     "customJson",
     "claimRewardBalance"
-  ],
+	],
+	"account" : {
+		"name" : "webuilder"
+	},
   "offline_generated_public_keys": {
-		"active" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5",
-		"memo" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5",
-		"owner" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5",
-		"posting" : "TWYM7GXFkFDNkweQJHhegS1iX5vg1oEouAhZ5EZZR34cYUxQvHFii5"
+		"active" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj",
+		"memo" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj",
+		"owner" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj",
+		"posting" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj"
 	},
   "user_metadata": {
     "max_size": 16000000

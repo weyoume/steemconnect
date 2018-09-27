@@ -66,6 +66,15 @@ export default class Header extends Component {
     }
     return (
       <div className="Header container">
+				<div className="nav-link">
+					<Link to="/dashboard"><FormattedMessage id="Dashboard" />
+					</Link>
+				</div>
+				<div className="nav-link">
+					<Link to="/apps/me"><FormattedMessage id="my_apps" />
+					</Link>
+				</div>
+
         <div className="Header__log">
           {username &&
           <Dropdown
@@ -73,6 +82,7 @@ export default class Header extends Component {
             placement="bottomRight"
             overlay={
               <Menu className="switch-account-menu" onClick={this.changeAccount}>
+
                 <Menu.Item key="switch-account-active" className="active">
                   <PlatformAvatar username={username} size="72" />
                   <div className="account-information">

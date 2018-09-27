@@ -27,9 +27,10 @@ router.put('/me', authenticate('app'), async (req, res) => {
     const bytes = Buffer.byteLength(JSON.stringify(user_metadata), 'utf8');
     if (bytes <= config.user_metadata.max_size) {
       /** Save user_metadata object on database */
-      req.log.error(`Store object for ${req.user} (size ${bytes} bytes)`);
+      req.log.error(`User ${req.user} metadata ${config.user_metadata.max_size} did not match psql store size ${bytes} bytes`);
       try {
-        await updateUserMetadata(req.proxy, req.user, user_metadata);
+				await updateUserMetadata(req.proxy, req.user, user_metadata);
+				req.log.debug(`Successfully updated ${req.user} metadata`)
       } catch (err) {
         req.log.error(err, 'me: updateMetadata failed', req.user);
         res.status(501).send('request failed');

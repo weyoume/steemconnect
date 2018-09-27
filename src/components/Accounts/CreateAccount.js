@@ -86,7 +86,7 @@ class CreateAccount extends Component {
           }
           {step === 1 &&
             <div className="text-center">
-              <SignForm roles={['active']} sign={this.sign} />
+              <SignForm roles={['owner','active']} sign={this.sign} />
             </div>
           }
           {step === 2 &&
