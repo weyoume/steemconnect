@@ -27,7 +27,8 @@ export default class AccountForm extends Form {
 	}
 
   render() {
-    const { data } = this.state;
+		const { data } = this.state;
+		console.log('data', data)
     return (
       <form onSubmit={this.onSubmit}>
         <div className="block">
@@ -37,8 +38,9 @@ export default class AccountForm extends Form {
               id="username"
               type="text"
               className="form-control"
-              name="name"
-              data-validator="isNotUsername"
+              name="username"
+							data-validator="isNotUsername"
+							autocomplete
               onChange={this.onChange}
               defaultValue={data.name}
               maxLength="16"
@@ -50,7 +52,8 @@ export default class AccountForm extends Form {
               id="password"
               type="text"
               className="form-control"
-              name="password"
+							name="password"
+							autocomplete
               onChange={this.onChange}
               defaultValue={data.password}
             />

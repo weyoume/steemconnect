@@ -129,7 +129,7 @@ export default class Authorize extends Component {
 
   render() {
     const { clientId, scope, step, scopes, app } = this.state;
-    const requiredRoles = (scope === 'login') ? ['memo', 'posting'] : ['owner', 'active'];
+    const requiredRoles = (scope === 'login') ? ['owner', 'memo', 'posting'] : ['owner','owner', 'active'];
     return (
       <div className="Sign">
         {step === 0 && <Loading />}
@@ -142,17 +142,16 @@ export default class Authorize extends Component {
               {step === 1 &&
                 <Form onSubmit={this.handleSubmit} className="SignForm AuthorizeForm">
                   <div className="Avatars">
-                    <div className="Avatar-container">
+                    {/* <div className="Avatar-container">
                       <span className="Avatar" style={{ height: '40px', width: '40px' }}>
-                        <object
-                          data="/img/logo-c.svg"
-                          type="image/svg+xml"
+                        <img
+                          src="/img/logo.png"
                           id="logo-c"
                           style={{ height: '40px', width: '40px' }}
                         />
                       </span>
                     </div>
-                    <div className="Avatar-link" />
+                    <div className="Avatar-link" /> */}
                     <div className="Avatar-container">
                       {!app &&
                       <PlatformAvatar username={clientId} size="40" />}
@@ -177,8 +176,8 @@ export default class Authorize extends Component {
                     <FormattedMessage
                       id="authorize_question"
                       values={{
-                        username: <b> {(app && app.name && `${app.name} (@${clientId})`) || `@${clientId}`}</b>,
-                        role: <b><FormattedMessage id="posting" /></b>,
+                        username: <b className="bold-notice"> {`${clientId}`}</b>,
+                        role: <b className="bold-notice"><FormattedMessage id="posting" /></b>,
                       }}
                     />}
                   </p>

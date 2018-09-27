@@ -41,23 +41,63 @@ class Sign extends React.Component {
         const account = accounts[0];
 
         /** Change password to public WIF */
-        const privateWif = wehelpjs.auth.isWif(password)
-          ? password
-          : wehelpjs.auth.toWif(username, password, roles[0]);
-        const publicWif = wehelpjs.auth.wifToPublic(privateWif);
-
+				
+				var privateWif
+				var publicWif
+				let keypairs = []
+				var authTypes = [
+				]
+				for (let i = 0; i < roles.length; i += 1) {
+					keypairs['privateWif'+i] = wehelpjs.auth.isWif(password)
+          	? password
+          	: wehelpjs.auth.toWif(username, password, roles[i]);
+					keypairs['publicWif'+i] = wehelpjs.auth.wifToPublic(keypairs['privateWif'+i]);
+					if(account[roles[i]] && account[roles[i]].account_auths && account[roles[i]].account_auths.length){
+						for(let n = 0; n < account[roles[i]].account_auths.length; n += 1){
+							if(account[roles[i]].account_auths[n] && account[roles[i]].account_auths[n][0]){
+								keypairs['privateWifAccountAuth'+i+''+n] = wehelpjs.auth.isWif(password)
+									? password
+									: wehelpjs.auth.toWif(account[roles[i]].account_auths[n][0], password, roles[i]);
+								keypairs['publicWifAccountAuth'+i+''+n] = wehelpjs.auth.wifToPublic(keypairs['privateWifAccountAuth'+i+''+n]);
+							}
+						}
+					}
+				}
         /** Check if public WIF is valid */
         let wifIsValid = false;
-        let role;
+				let role;
+				
         for (let i = 0; i < roles.length; i += 1) {
-          if (
-            (roles[i] === 'memo' && account.memoKey === publicWif) ||
-            (roles[i] !== 'memo' && this.keyAuthsHasPublicWif(account[roles[i]].key_auths, publicWif))
-          ) {
-            wifIsValid = true;
-            role = roles[i];
-            break;
-          }
+					for (let n = 0; n < roles.length; n += 1) {
+						if (
+							(roles[i] === 'memo' && account.memoKey === keypairs['publicWif'+n]) ||
+							(roles[i] !== 'memo' && this.keyAuthsHasPublicWif(account[roles[i]].key_auths, keypairs['publicWif'+n]))
+						) {
+							privateWif = keypairs['privateWif'+n];
+							publicWif = keypairs['publicWif'+n];
+							wifIsValid = true;
+							role = roles[i];
+							break;
+						} else {
+							if(account[roles[i]] && account[roles[i]].account_auths && account[roles[i]].account_auths.length){
+								for(let k = 0; k < account[roles[i]].account_auths.length; k += 1){
+									if(account[roles[i]].account_auths[n] && account[roles[i]].account_auths[n][0]){
+										if (
+											(roles[i] === 'memo' && account.memoKey === keypairs['publicWifAccountAuth'+n+''+k]) ||
+											(roles[i] !== 'memo' && this.keyAuthsHasPublicWif(account[roles[i]].key_auths, keypairs['publicWifAccountAuth'+n+''+k]))
+										){
+											privateWif = keypairs['privateWifAccountAuth'+n+''+k];
+											publicWif = keypairs['publicWifAccountAuth'+n+''+k];
+											wifIsValid = true;
+											role = roles[i];
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+					if(wifIsValid) break
         }
 
         /** Submit form */
@@ -114,7 +154,9 @@ class Sign extends React.Component {
 							prefix={<Icon type="user" size="large" />} 
 							placeholder={intl.formatMessage({ id: 'username' })} 
 							autoCorrect="off" 
+							name="username"
 							autoCapitalize="none" 
+							autocomplete="on"
 							ref={(input) => { this.usernameInput = input; }}
 							/>
           )}
@@ -125,7 +167,7 @@ class Sign extends React.Component {
               { required: true, message: intl.formatMessage({ id: 'error_password_required' }) },
             ],
           })(
-            <Input prefix={<Icon type="lock" size="large" />} type="password" placeholder={intl.formatMessage({ id: 'password_or_key' })} autoCorrect="off" autoCapitalize="none" />
+            <Input prefix={<Icon type="lock" size="large" />} type="password" name="password" placeholder={intl.formatMessage({ id: 'password_or_key' })} autocomplete="on" autoCorrect="off" autoCapitalize="none" />
           )}
         </Form.Item>
         <Form.Item>

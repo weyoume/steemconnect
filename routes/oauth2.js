@@ -11,6 +11,7 @@ const Op = Sequelize.Op;
 router.get('/oauth2/authorize', async (req, res) => {
   const redirectUri = req.query.redirect_uri;
   const clientId = req.query.client_id;
+	console.log('client_id', clientId)
   const app = await req.db.apps.findOne({
     where: {
       client_id: clientId,

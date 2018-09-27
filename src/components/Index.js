@@ -85,6 +85,11 @@ class Index extends React.Component {
 										<FormattedMessage id="register" />
 									</a>
 								</div>
+								<div className="nav-button">
+									<a href="/dashboard" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
+										<FormattedMessage id="Dashboard" />
+									</a>
+								</div>
               </div>
             </div>
             <div className="hero">
