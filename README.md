@@ -130,6 +130,7 @@ CREATE DATABASE
 ```
 
 ## check the port in the PSQL Shell
+#### Hint. it's 5432
 first open psql
 ##### LINUX
 ```console
