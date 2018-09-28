@@ -13,7 +13,6 @@ sudo service postgresql94 initdb
 # Use MD5 Authentication
 sudo sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql94/data/pg_hba.conf
 #start
-# sudo /sbin/chkconfig --levels 235 postgresql on
 sudo service postgresql94 start
 
 # http://imperialwicket.com/aws-install-postgresql-on-amazon-linux-quick-and-dirty
