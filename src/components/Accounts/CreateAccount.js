@@ -66,7 +66,7 @@ class CreateAccount extends Component {
             message: intl.formatMessage({ id: 'success' }),
             description: intl.formatMessage({ id: 'success_accountCreate' }, { account: account.name }),
 					});
-					browserHistory.push('/@'+account.name+"/dashboard")
+					browserHistory.push('/@'+account.name+"/console")
         }
       }
     );
