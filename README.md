@@ -168,6 +168,7 @@ postgresql://other@localhost/otherdb?connect_timeout=10&application_name=myapp
 postgresql://localhost/mydb?user=other&password=secret
 ```
 we're going to use, make sure to replace user, password, localhost, and weauth if you didn't use weauth for your postgresql database name
+Put this in your .env file as the dburl= variable! :D
 ```
 postgresql://user:password@localhost:5432/weauth
 ```
