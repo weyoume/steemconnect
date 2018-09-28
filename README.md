@@ -95,7 +95,7 @@ sudo -u postgres psql
 ```
 ##### OSX
 ```console
-psql postgresql
+psql postgres
 ```
 then run
 ```console
@@ -117,11 +117,11 @@ ALTER USER
 first open psql
 ##### LINUX
 ```console
-sudo -u postgres psql
+sudo -u user psql // can just run psql if you made the user in postgresql/psql with the same username as your machine username ie. what whoami returns, the default postgresql username is postgres
 ```
 ##### OSX
 ```console
-psql postgresql
+psql user // can leave blank if you made the user in postgresql/psql with the same username as your machine username ie. what whoami returns, the default postgresql username is postgres
 ```
 then run
 ```console
@@ -133,11 +133,11 @@ CREATE DATABASE
 first open psql
 ##### LINUX
 ```console
-sudo -u postgres psql
+sudo -u user psql // can just run psql if you made the user in postgresql/psql with the same username as your machine username ie. what whoami returns, the default postgresql username is postgres
 ```
 ##### OSX
 ```console
-psql postgresql
+psql user // can leave blank if you made the user in postgresql/psql with the same username as your machine username ie. what whoami returns, the default postgresql username is postgres
 ```
 then run
 ```console
@@ -177,7 +177,7 @@ an npm version of mysql needs to be installed, either mysql or mysql2, it's a de
 ```console
 npm i -g mysql
 ```
-or
+or try if necessary 
 ```console
 npm i -g mysql2
 ```
