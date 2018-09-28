@@ -74,7 +74,7 @@ brew services start postgresql
 brew install postgresql && services start postgresql
 ```
 
-### Opening postgresql/postgres/psql through a cli, sh/bash
+## Opening postgresql/postgres/psql through a cli, sh/bash
 
 ### Linux
 ```
@@ -89,11 +89,11 @@ psql postgres
 ## Create a psql user within the psql shell
 #### this user will be used a lot
 first open psql
-### LINUX
+##### LINUX
 ```console
 sudo -u postgres psql
 ```
-### OSX
+##### OSX
 ```console
 psql postgresql
 ```
@@ -115,11 +115,11 @@ ALTER USER
 
 ## Create the database that WeAuth will use
 first open psql
-### LINUX
+##### LINUX
 ```console
 sudo -u postgres psql
 ```
-### OSX
+##### OSX
 ```console
 psql postgresql
 ```
@@ -131,11 +131,11 @@ CREATE DATABASE
 
 ## check the port in the PSQL Shell
 first open psql
-### LINUX
+##### LINUX
 ```console
 sudo -u postgres psql
 ```
-### OSX
+##### OSX
 ```console
 psql postgresql
 ```
