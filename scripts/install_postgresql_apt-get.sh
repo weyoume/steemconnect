@@ -8,7 +8,7 @@
 echo "*****************************************"
 echo " Installing PostgreSQL on Ubuntu"
 echo "*****************************************"
-	sudo apt-get install postgresql postgresql-devel postgresql-contrib postgresql-docs -y
+sudo apt-get install postgresql -y
 sudo service postgresql initdb
 # Use MD5 Authentication
 sudo sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql9/data/pg_hba.conf

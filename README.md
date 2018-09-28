@@ -32,92 +32,116 @@ CONTENT_IMG_SRC='self',steemitimages.com,steemit-production-imageproxy-thumbnail
 CONTENT_FONT_SRC='self'
 ```
 
-### LINUX - INSTALL POSTGRESQL VIA APT-GET/YUM
+## Install Postgresql, create a user, a database, and then generate required schemas
+### All instructions are included below :D
 
+## Install PostgreSQL
+
+### Linux
+
+#### apt-get
+```
+sudo apt-get install postgresql -y
+sudo service postgresql initdb
+sudo sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql9/data/pg_hba.conf
+sudo /sbin/chkconfig --levels 235 postgresql on
+sudo service postgresql start
+// 1 liner
+sudo apt-get install postgresql -y && service postgresql initdb && sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql9/data/pg_hba.conf && /sbin/chkconfig --levels 235 postgresql on && service postgresql start
+```
+#### yum
 ```console
 sudo yum -y install postgresql94 postgresql94-server
 sudo service postgresql94 initdb
-# Use MD5 Authentication
 sudo sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql94/data/pg_hba.conf
-#start
 sudo service postgresql94 start
+// 1 liner
+sudo yum -y install postgresql94 postgresql94-server && service postgresql94 initdb && sed -i.bak -e 's/ident$/md5/' -e 's/peer$/md5/' /var/lib/pgsql94/data/pg_hba.conf && service postgresql94 start
+
 ```
-
 or 
-
 ```./scripts/install_postgresql_yum.sh``` 
-
 or 
-
 ```./scripts/install_postgresql_apt-get.sh``` 
 
-depending on the package manager
+### OSX
 
-### OSX - INSTALL POSTGRESQL VIA BREW
-
+#### Brew
 ```console
-user@osx:~$ brew install postgresql
+brew install postgresql
+brew services start postgresql
+// 1 liner
+brew install postgresql && services start postgresql
 ```
 
-#### START AS SERVICE OSX
+### Opening postgresql/postgres/psql through a cli, sh/bash
 
+### Linux
+```
+sudo -u postgres psql 
+// postgres = linux username , psql = linux cli program
+```
+### OSX
 ```console
-user@osx:~$ brew services start postgresql
+psql postgres
 ```
 
-### LINUX USING THE POSTGRESQL SHELL
-
-you can then enter the postgresql shell via 
-
-```sudo -u postgres psql 
-// postgres : linux username , psql : linux cli program
-```
-
-### OSX USING THE POSTGRESQL SHELL
+## Create a psql user within the psql shell
+#### this user will be used a lot
+first open psql
+### LINUX
 ```console
-user@osx:~$ psql postgres
+sudo -u postgres psql
 ```
-#### FYI
+### OSX
+```console
+psql postgresql
 ```
-/** 
- * I THINK IT'S STUPID THAT THE USER IS POSTGRES 
- * THE PACKAGES ARE CALLED POSTGRESQL
- * AND THE CLI IS PSQL
- * WUT o.O
- **/
- ```
-
-##### OSX/LINUX create a psql user within psql, the one which will be running the sequelize command below
-
+then run
 ```console
 whoami
-user
+user // this is the user you want to be creating within postgresql
 sudo -u postgres psql
 psql (9.4.17)
 Type "help" for help.
 
-postgres=# CREATE ROLE user LOGIN;
+postgres=# CREATE ROLE user LOGIN; // replace "user" with the username of the machine ie. what whoami returned above
 CREATE ROLE
 postgres=# CREATE DATABASE user;
-CREATE DATABASE
-postgres=# CREATE DATABASE auth;
 CREATE DATABASE
 postgres=# ALTER USER user WITH PASSWORD 'password';
 ALTER USER
 ```
 
-##### check the port in the PSQL Shell
-###### LINUX
+## Create the database that WeAuth will use
+first open psql
+### LINUX
 ```console
 sudo -u postgres psql
 ```
-###### OSX
+### OSX
 ```console
-user@osx:~$ psql postgresql
+psql postgresql
 ```
-then
+then run
 ```console
-[sudo] password for user: __________
+postgres=# CREATE DATABASE weauth; // or name the database whatever you want
+CREATE DATABASE
+```
+
+## check the port in the PSQL Shell
+first open psql
+### LINUX
+```console
+sudo -u postgres psql
+```
+### OSX
+```console
+psql postgresql
+```
+then run
+```console
+password for user: __________
 psql (9.4.17)
 Type "help" for help.
 
@@ -128,12 +152,10 @@ postgres=# SHOW port;
 (1 row)
 
 postgres=# _
- ```
+```
 
-#### let's figure out our database url!
-
+## let's figure out our database url!
 there's a few formats
-
 ```
 postgresql://
 postgresql://localhost
@@ -144,11 +166,9 @@ postgresql://user:secret@localhost
 postgresql://other@localhost/otherdb?connect_timeout=10&application_name=myapp
 postgresql://localhost/mydb?user=other&password=secret
 ```
-
-we're going to use
-
+we're going to use, make sure to replace user, password, localhost, and weauth if you didn't use weauth for your postgresql database name
 ```
-postgresql://user:password@localhost:5432/auth
+postgresql://user:password@localhost:5432/weauth
 ```
 
 ## just a precaution
@@ -168,122 +188,74 @@ npm i -g mysql2
 npm i -g sequelize-cli
 ```
 
-We run sequelize in the root of our weauth repo to autogenerate some tables from json schema's
-The configuration is set in db/config/config.json and is used at db/model/index.js to initialize sequelize
+We use sequelize to autogenerate some tables and their schemas for postgresql from json schema's stored in db/models.
+Sequelize will use a connection config stored at db/config.json which looks like the below, you'll have to fill in the username and password and database with the postgresql username and password and database you made above
 
-MAKE SURE THAT POSTGRESQL DB "auth" OR WHATEVER YOU WANT TO USE EXISTS FIRST
+```javascript
+{
+	"database": "weauth",
+	"username": "user",
+	"password": "password",
+	"host" : "localhost",
+	"logging": false,
+	"dialect" : "postgres",
+  "operatorsAliases": false,
+  "pool": {
+    "max": 150,
+    "min": 0,
+    "idle": 10000
+	},
+	"port":5432
+}
+```
+## Set Up Psql
+
+## Create Tables in PSQL
+### run this in the root WeAuth directory you cloned to
 ```console
 sequelize db:migrate
 ```
 
-## HELPFUL POSTGRES KNOWLEDGE 
-
-```\dg``` shows roles AKA users
-```console
-user=# \dg
-                             List of roles
- Role name |                   Attributes                   | Member of
------------+------------------------------------------------+-----------
- user      | Create DB                                      | {}
- postgres  | Superuser, Create role, Create DB, Replication | {}
+# Finally Running WeAuth
+## Run Production
+### Builds and Starts
+```
+npm run run
+```
+or
+## Build Production
+```
+npm run build
+```
+## Start Production
+```
+npm run start
 ```
 
-add attributes to role
-
-```console
-user=# ALTER ROLE user WITH SUPERUSER CREATEROLE REPLICATION;
-ALTER ROLE
-user=# \dg
-                             List of roles
- Role name |                   Attributes                   | Member of
------------+------------------------------------------------+-----------
- lopu      | Superuser, Create role, Create DB, Replication | {}
- postgres  | Superuser, Create role, Create DB, Replication | {}
-
-user=# _
+## Run Dev
+### Builds and Starts
+```
+npm run rundev
+```
+or
+## Build Dev
+```
+npm run builddev
+```
+## Start Dev
+```
+npm run startdev
 ```
 
-```\dt``` shows databases
-```console
-user=# \dt
- auth      | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
- lopu      | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
- postgres  | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
- template0 | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/lopu          +
-           |       |          |             |             | lopu=CTc/lopu
- template1 | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/lopu          +
-           |       |          |             |             | lopu=CTc/lopu
-```
-```\c database``` connect to the database "database"
-```console
-user=# \dt
- public | SequelizeMeta | table | lopu
- public | apps          | table | lopu
- public | metadata      | table | lopu
- public | tokens        | table | lopu
-```
-```\dt``` shows tables in current database
-```console
-user=# \dg
-                             List of roles
- Role name |                   Attributes                   | Member of
------------+------------------------------------------------+-----------
- user      | Create DB                                      | {}
- postgres  | Superuser, Create role, Create DB, Replication | {}
-```
-
-```\d table``` shows a table's "table" schema
-```console
- id            | integer                  |           | not null | nextval('apps_id_seq'::regclass)
- client_id     | character varying(255)   |           | not null |
- secret        | character varying(255)   |           | not null |
- owner         | character varying(255)   |           |          |
- redirect_uris | jsonb                    |           |          |
- name          | character varying(255)   |           |          |
- description   | text                     |           |          |
- icon          | text                     |           |          |
- website       | text                     |           |          |
- beneficiaries | jsonb                    |           |          |
- allowed_ips   | jsonb                    |           |          |
- is_approved   | boolean                  |           |          | true
- is_public     | boolean                  |           |          | false
- is_disabled   | boolean                  |           |          | false
- created_at    | timestamp with time zone |           | not null |
- updated_at    | timestamp with time zone |           | not null |
-```
-
-```select * from "table"``` shows a table's data
-```console
-  1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.src", "http://alpha.weyoume.src"] | weapp | official weapp |      | alpha.weyoume.src |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
-```
-if you fall into authentication woes then you'll have to read about md5, trust, peer, ident authentication methods, ident is annoying, so we want md5, trust, or peer
-
-## TO RESTART POSTGRESQL
-
-```console
-/etc/init.d/postgresql reload
-```
-
-or 
-
-```console
-./scripts/repost.sh
-```
-
-## Run
-```
-npm start
-```
-
+# Docs
 ## Api
-
 ### Routes
 
 */api/me* - Get user profile (require user or app token)
 
 */api/* - Broadcast posting operation for user (require app token)
 
-## OAuth2
+#### OAuth2
 */api/oauth2/authorize* - Issue new app token (require user token)
 
 ## Tokens
@@ -310,3 +282,113 @@ The token hash is saved on user localStorage once he login.
 
 The token hash is sent to the application once user authorize the application.
 
+## POSTGRES HELPFUL STUFF 
+
+will show a kind of state info showing the database and user you're in
+```\conninfo```
+```
+psql (10.5)
+Type "help" for help.
+
+postgres=# \conninfo
+You are connected to database "postgres" as user "postgres" via socket in "/tmp" at port "5432".
+postgres=#
+```
+
+shows roles/users
+```\dg``` 
+```console
+user=# \dg
+                             List of roles
+ Role name |                   Attributes                   | Member of
+-----------+------------------------------------------------+-----------
+ user      | Create DB                                      | {}
+ postgres  | Superuser, Create role, Create DB, Replication | {}
+```
+
+add attributes to role
+```console
+user=# ALTER ROLE user WITH SUPERUSER CREATEROLE REPLICATION;
+ALTER ROLE
+user=# \dg
+                             List of roles
+ Role name |                   Attributes                   | Member of
+-----------+------------------------------------------------+-----------
+ lopu      | Superuser, Create role, Create DB, Replication | {}
+ postgres  | Superuser, Create role, Create DB, Replication | {}
+
+user=# _
+```
+
+shows databases
+```\dt``` 
+```console
+user=# \dt
+ auth      | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ lopu      | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ postgres  | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0 | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/lopu          +
+           |       |          |             |             | lopu=CTc/lopu
+ template1 | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/lopu          +
+           |       |          |             |             | lopu=CTc/lopu
+```
+
+connect to the database "database"
+```\c database```
+```console
+user=# \dt
+ public | SequelizeMeta | table | lopu
+ public | apps          | table | lopu
+ public | metadata      | table | lopu
+ public | tokens        | table | lopu
+```
+
+shows tables in current database
+```\dt```
+```console
+user=# \dg
+                             List of roles
+ Role name |                   Attributes                   | Member of
+-----------+------------------------------------------------+-----------
+ user      | Create DB                                      | {}
+ postgres  | Superuser, Create role, Create DB, Replication | {}
+```
+
+shows a table's "table" schema
+```\d table```
+```console
+ id            | integer                  |           | not null | nextval('apps_id_seq'::regclass)
+ client_id     | character varying(255)   |           | not null |
+ secret        | character varying(255)   |           | not null |
+ owner         | character varying(255)   |           |          |
+ redirect_uris | jsonb                    |           |          |
+ name          | character varying(255)   |           |          |
+ description   | text                     |           |          |
+ icon          | text                     |           |          |
+ website       | text                     |           |          |
+ beneficiaries | jsonb                    |           |          |
+ allowed_ips   | jsonb                    |           |          |
+ is_approved   | boolean                  |           |          | true
+ is_public     | boolean                  |           |          | false
+ is_disabled   | boolean                  |           |          | false
+ created_at    | timestamp with time zone |           | not null |
+ updated_at    | timestamp with time zone |           | not null |
+```
+
+shows a table's data
+```select * from "table"```
+```console
+  1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.src", "http://alpha.weyoume.src"] | weapp | official weapp |      | alpha.weyoume.src |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
+```
+
+if you fall into authentication woes then you'll have to read about md5, trust, peer, ident authentication methods, ident is annoying, so we want md5, trust, or peer
+
+## TO RESTART POSTGRESQL
+
+```console
+/etc/init.d/postgresql reload
+```
+or 
+```console
+./scripts/repost.sh
+```
