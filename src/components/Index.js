@@ -86,8 +86,8 @@ class Index extends React.Component {
 									</a>
 								</div>
 								<div className="nav-button">
-									<a href="/dashboard" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
-										<FormattedMessage id="Dashboard" />
+									<a href="/console" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
+										<FormattedMessage id="Console" />
 									</a>
 								</div>
               </div>

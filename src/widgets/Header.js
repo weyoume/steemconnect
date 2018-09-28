@@ -67,7 +67,7 @@ export default class Header extends Component {
     return (
       <div className="Header container">
 				<div className="nav-link">
-					<Link to="/dashboard"><FormattedMessage id="Dashboard" />
+					<Link to="/console"><FormattedMessage id="Console" />
 					</Link>
 				</div>
 				<div className="nav-link">

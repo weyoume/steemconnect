@@ -45,7 +45,7 @@ export default class Login extends Component {
     const { next } = this.props.location.query;
     this.setState({ step: 0 });
     login({ ...auth }, () => {
-      window.location = next || '/dashboard';
+      window.location = next || '/console';
     });
   };
 
@@ -56,7 +56,7 @@ export default class Login extends Component {
   changeAccount = () => {
     const { clientId, responseType, next, scope } = this.state;
     authorize({ clientId, scope, responseType }, () => {
-      window.location = next || '/dashboard';
+      window.location = next || '/console';
     });
   }
 

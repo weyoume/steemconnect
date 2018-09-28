@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import Wrapper from './wrapper';
 import Layout from './app';
 import Index from './components/Index';
-import Dashboard from './components/Dashboard';
+import Console from './components/Console';
 import App from './components/Apps/App';
 import Apps from './components/Apps/Apps';
 import MyApps from './components/Apps/MyApps';
@@ -30,7 +30,8 @@ export default (
     <IndexRoute component={Index} />
     <Route component={RequireLogin}>
       <Route component={Layout}>
-				<Route path="/dashboard" component={Dashboard} />
+				<Route path="/console" component={Console} />
+				<Route path="/dashboard" component={Console} />
         <Route path="/apps/me" component={MyApps} />
         <Route path="/apps/create" component={CreateApp} />
         <Route path="/apps/authorized" component={AuthorizedApps} />
