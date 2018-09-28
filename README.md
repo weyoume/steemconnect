@@ -195,19 +195,19 @@ Sequelize will use a connection config stored at db/config.json which looks like
 
 ```javascript
 {
-  "database": "weauth",
-  "username": "user",
-  "password": "password",
-  "host" : "localhost",
-  "logging": false,
-  "dialect" : "postgres",
-  "operatorsAliases": false,
-  "pool": {
-    "max": 150,
-    "min": 0,
-    "idle": 10000
-  },
-  "port":5432
+	"database": "weauth",
+	"username": "user",
+	"password": "password",
+	"host" : "localhost",
+	"logging": false,
+	"dialect" : "postgres",
+	"operatorsAliases": false,
+	"pool": {
+		"max": 150,
+		"min": 0,
+		"idle": 10000
+	},
+	"port":5432
 }
 ```
 ## Set Up Psql
