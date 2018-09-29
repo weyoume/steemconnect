@@ -300,7 +300,7 @@ postgres=#
 shows roles/users
 ```\dg``` 
 ```console
-user=# \dg
+database=# \dg
                              List of roles
  Role name |                   Attributes                   | Member of
 -----------+------------------------------------------------+-----------
@@ -310,23 +310,23 @@ user=# \dg
 
 add attributes to role
 ```console
-user=# ALTER ROLE user WITH SUPERUSER CREATEROLE REPLICATION;
+database=# ALTER ROLE user WITH SUPERUSER CREATEROLE REPLICATION;
 ALTER ROLE
-user=# \dg
+database=# \dg
                              List of roles
  Role name |                   Attributes                   | Member of
 -----------+------------------------------------------------+-----------
  lopu      | Superuser, Create role, Create DB, Replication | {}
  postgres  | Superuser, Create role, Create DB, Replication | {}
 
-user=# _
+database=# _
 ```
 
 shows databases
 ```\dt``` 
 ```console
-user=# \dt
- auth      | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+database=# \dt
+ weauth    | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
  lopu      | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
  postgres  | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
  template0 | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/lopu          +
@@ -338,7 +338,7 @@ user=# \dt
 connect to the database "database"
 ```\c database```
 ```console
-user=# \dt
+database=# \dt
  public | SequelizeMeta | table | lopu
  public | apps          | table | lopu
  public | metadata      | table | lopu
@@ -348,7 +348,7 @@ user=# \dt
 shows tables in current database
 ```\dt```
 ```console
-user=# \dg
+database=# \dg
                              List of roles
  Role name |                   Attributes                   | Member of
 -----------+------------------------------------------------+-----------
@@ -381,6 +381,12 @@ shows a table's data
 ```select * from "table"```
 ```console
   1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.src", "http://alpha.weyoume.src"] | weapp | official weapp |      | alpha.weyoume.src |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
+```
+
+delete all data from table
+```delete from table;```
+```console
+DELETE 1
 ```
 
 if you fall into authentication woes then you'll have to read about md5, trust, peer, ident authentication methods, ident is annoying, so we want md5, trust, or peer

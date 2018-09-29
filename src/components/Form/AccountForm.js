@@ -40,7 +40,7 @@ export default class AccountForm extends Form {
               className="form-control"
               name="username"
 							data-validator="isNotUsername"
-							autocomplete
+							autoComplete="on"
               onChange={this.onChange}
               defaultValue={data.name}
               maxLength="16"
@@ -53,7 +53,7 @@ export default class AccountForm extends Form {
               type="text"
               className="form-control"
 							name="password"
-							autocomplete
+							autoComplete="on"
               onChange={this.onChange}
               defaultValue={data.password}
             />
