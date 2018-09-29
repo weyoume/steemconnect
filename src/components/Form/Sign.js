@@ -156,7 +156,7 @@ class Sign extends React.Component {
 							autoCorrect="off" 
 							name="username"
 							autoCapitalize="none" 
-							autocomplete="on"
+							autoComplete="on"
 							ref={(input) => { this.usernameInput = input; }}
 							/>
           )}
@@ -167,7 +167,7 @@ class Sign extends React.Component {
               { required: true, message: intl.formatMessage({ id: 'error_password_required' }) },
             ],
           })(
-            <Input prefix={<Icon type="lock" size="large" />} type="password" name="password" placeholder={intl.formatMessage({ id: 'password_or_key' })} autocomplete="on" autoCorrect="off" autoCapitalize="none" />
+            <Input prefix={<Icon type="lock" size="large" />} type="password" name="password" placeholder={intl.formatMessage({ id: 'password_or_key' })} autoComplete="on" autoCorrect="off" autoCapitalize="none" />
           )}
         </Form.Item>
         <Form.Item>

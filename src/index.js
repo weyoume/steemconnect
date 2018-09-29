@@ -5,6 +5,11 @@ import { Provider } from 'react-redux';
 import routes from './routes';
 import store from './store';
 
+var clearToken = false;
+if(clearToken){
+  localStorage.removeItem('token')
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router
