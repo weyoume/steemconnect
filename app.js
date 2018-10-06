@@ -30,6 +30,7 @@ const server = http.Server(app);
 
 // iframe header
 app.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   next();
 });

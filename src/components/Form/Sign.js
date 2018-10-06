@@ -4,6 +4,7 @@ import wehelpjs from 'wehelpjs';
 import { Form, Icon, Input, Button } from 'antd';
 import { accountExist } from '../../utils/validator';
 import './Sign.less';
+import { Link } from 'react-router';
 
 class Sign extends React.Component {
   static propTypes = {
@@ -176,11 +177,9 @@ class Sign extends React.Component {
           </Button>
         </Form.Item>
 				<Form.Item>
-					<div>
-						<a href="/signup" rel="noopener noreferrer" className="signup-text-link">
+					<Link to="/signup" rel="noopener noreferrer" className="signup-text-link">
 							<FormattedMessage id="signup" />
-						</a>
-					</div>
+					</Link>
 				</Form.Item>
       </Form>
     );

@@ -7,10 +7,11 @@ import SignForm from '../Form/Sign';
 import Loading from '../../widgets/Loading';
 import { getErrorMessage } from '../../../helpers/operation';
 import { browserHistory } from 'react-router';
+import fetch from 'isomorphic-fetch';
 
 class CreateAccount extends Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+		intl: intlShape.isRequired
   }
 
   constructor(props) {
@@ -18,17 +19,78 @@ class CreateAccount extends Component {
     this.state = {
       step: 0,
       error: false,
-      account: {},
+			account: {},
+			options: {
+				customSignatory: false
+			}
     };
   }
 
   submit = (data) => {
+		let account = data
     this.setState({
       step: 1,
-      account: data,
-    });
+      account: account
+		});
+		const { intl } = this.props;
+		if(!this.state.options.customSignatory){
+			// $.ajax({
+			// 	type: 'POST',
+			// 	url: 'https://auth.weyoume.src/api/register',
+			// 	data
+			// }).done(res=>{
+			// 	console.log('res', res)
+			// })
+			fetch(`/api/register`, {
+        method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': "application/json"
+				}
+      })
+			.then((res) => {
+				this.setState({
+					step: 0,
+				})		
+				res.json()
+				.then(res=>{
+					if (res.success) {
+						notification.success({
+							message: intl.formatMessage({ id: 'success' }),
+							description: intl.formatMessage({ id: 'success_accountCreate' }, { account: account.name }),
+						});
+						browserHistory.push('/console')
+					} else {
+						if(res.err){
+							console.error('res.err', res.err)
+							notification.error({
+								message: intl.formatMessage({ id: 'error' }),
+								description: res.message || intl.formatMessage({ id: 'general_error' }),
+							});
+						} else {
+							notification.error({
+								message: intl.formatMessage({ id: 'error' }),
+								description: res.message || intl.formatMessage({ id: 'general_error' }),
+							});
+	
+						}
+						// browserHistory.push('/@'+account.name+'/console')
+					}
+				})
+			})
+			.catch((err) => {
+				console.error('err', err)
+				// dispatch(authenticateFailure());
+			});
+		}
   };
-
+	changeSignatoryOption = (data) => {
+		this.setState({
+			options: {
+				customSignatory: data
+			}
+		})
+	}
   sign = (auth) => {
     const { account } = this.state;
     const { intl } = this.props;
@@ -66,7 +128,8 @@ class CreateAccount extends Component {
             message: intl.formatMessage({ id: 'success' }),
             description: intl.formatMessage({ id: 'success_accountCreate' }, { account: account.name }),
 					});
-					browserHistory.push('/@'+account.name+"/console")
+					// browserHistory.push('/@'+account.name+'/console')
+					browserHistory.push('/console')
         }
       }
     );
@@ -74,19 +137,31 @@ class CreateAccount extends Component {
   };
 
   render() {
-    const { step } = this.state;
+    const { step, options } = this.state;
     return (
       <div className="Sign">
         <div className="Sign__content container text-left my-2 Sign__authorize">
           {step === 0 &&
             <div>
               <h2 className="text-center"><FormattedMessage id="create_account" /></h2>
-              <AccountForm submit={this.submit} />
+							<AccountForm 
+								customSignatory={options.customSignatory} 
+								changeSignatoryOption={this.changeSignatoryOption} 
+								submit={this.submit} 
+							/>
             </div>
           }
-          {step === 1 &&
+          {step === 1 && options.customSignatory &&
             <div className="text-center">
               <SignForm roles={['owner','active']} sign={this.sign} />
+            </div>
+					}
+					{step === 1 && !options.customSignatory &&
+            <div className="text-center">
+							{'Registering... Please wait'}
+							<br></br>
+							<Loading />
+              {/* <SignForm roles={['owner','active']} sign={this.sign} /> */}
             </div>
           }
           {step === 2 &&

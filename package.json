@@ -19,7 +19,9 @@
     "push": "git add . ; git commit -m 'ready' ; git push origin dev",
     "pull": "git pull origin dev",
     "run": "clear && npm run build && npm run start",
-    "rundev": "clear && npm run builddev && npm run startdev"
+    "rundev": "clear && npm run builddev && npm run startdev",
+    "startinspectdev": "nodemon --inspect --ignore src ./bin/www | bunyan -o short",
+    "runinspectdev": "npm run builddev && npm run startinspectdev"
   },
   "pre-commit": [],
   "dependencies": {
@@ -92,10 +94,10 @@
     "style-loader": "^0.13.1",
     "tether": "^1.3.2",
     "validator": "^5.1.0",
-    "weauthjs": "^1.1.147",
+    "weauthjs": "^1.1.155",
     "webpack": "^3.8.1",
     "webpack-visualizer-plugin": "^0.1.5",
-    "wehelpjs": "^0.6.29"
+    "wehelpjs": "^0.6.22"
   },
   "devDependencies": {
     "babel-register": "^6.14.0",

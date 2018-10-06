@@ -18,7 +18,7 @@ const SignPlaceholderDefault = ({
         <div className="TransferInfo__accounts">
           <div className="TransferInfo__account">
             <PlatformAvatar username={query.fromName} size="60" className="TransferInfo__avatar" />
-            {query.fromReputation && <span className="TransferInfo__reputation"><Badge className="badge" count={query.fromReputation} /></span>}
+            {/* {query.fromReputation && <span className="TransferInfo__reputation"><Badge className="badge" count={query.fromReputation} /></span>} */}
             <br />
             <span className="TransferInfo__username">
               {query.fromName || <FormattedMessage id="you" />}
@@ -28,7 +28,7 @@ const SignPlaceholderDefault = ({
           <div className="TransferInfo__account">
             <span className="TransferInfo__dots" />
             <PlatformAvatar username={query.toName} size="60" className="TransferInfo__avatar" />
-            {query.toReputation && <span className="TransferInfo__reputation"><Badge className="badge" count={query.toReputation} /></span>}
+            {/* {query.toReputation && <span className="TransferInfo__reputation"><Badge className="badge" count={query.toReputation} /></span>} */}
             <br />
             <span className="TransferInfo__username">
               {query.toName}

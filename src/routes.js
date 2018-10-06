@@ -31,6 +31,7 @@ export default (
     <Route component={RequireLogin}>
       <Route component={Layout}>
 				<Route path="/console" component={Console} />
+				<Route path="/me" component={Console} />
 				<Route path="/dashboard" component={Console} />
         <Route path="/apps/me" component={MyApps} />
         <Route path="/apps/create" component={CreateApp} />

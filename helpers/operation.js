@@ -45,14 +45,14 @@ const setDefaultAuthor = (operation, query, username) => {
 
 const getOperation = (type) => {
   let ops = operations.find(op =>
-    op.operation === changeCase.snakeCase(type)
+    op.operation === changeCase.snakeCase(type) || op.operation === type
   );
   if (ops) {
     return ops;
   }
 
   ops = customOperations.find(op =>
-      op.operation === changeCase.snakeCase(type)
+      op.operation === changeCase.snakeCase(type) || op.operation === type
   );
   if (ops) {
     ops.roles = operations.find(op => op.operation === ops.type).roles;
@@ -77,6 +77,7 @@ const isValid = (op, params) => {
 
 const parseQuery = (type, query, username) => {
   const snakeCaseType = changeCase.snakeCase(type);
+  // const snakeCaseType = type;
   let cQuery = cloneDeep(query);
   cQuery = setDefaultAuthor(snakeCaseType, cQuery, username);
 
@@ -116,7 +117,8 @@ const validateRequired = (type, query) => {
 };
 
 const validate = async (type, query) => {
-  const snakeCaseType = changeCase.snakeCase(type);
+  // const snakeCaseType = changeCase.snakeCase(type);
+  const snakeCaseType = type;
   const errors = validateRequired(snakeCaseType, query);
   if (hasIn(helperOperations, snakeCaseType) && typeof helperOperations[snakeCaseType].validate === 'function') {
     await helperOperations[snakeCaseType].validate(query, errors);
@@ -125,7 +127,8 @@ const validate = async (type, query) => {
 };
 
 const normalize = async (type, query) => {
-  const snakeCaseType = changeCase.snakeCase(type);
+  // const snakeCaseType = changeCase.snakeCase(type);
+  const snakeCaseType = type;
   if (hasIn(helperOperations, snakeCaseType) && typeof helperOperations[snakeCaseType].normalize === 'function') {
     return await helperOperations[snakeCaseType].normalize(query);
   }

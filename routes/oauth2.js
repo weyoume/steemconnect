@@ -22,7 +22,7 @@ router.get('/oauth2/authorize', async (req, res) => {
     debug(`The app @${clientId} has not been setup.`);
     res.redirect('/404');
   } else {
-    res.render('index', { title: 'WeAuth' });
+    res.render('index', { title: 'Me' });
   }
 });
 
@@ -41,7 +41,8 @@ router.all('/api/oauth2/authorize', authenticate('user'), async (req, res) => {
     res.json({
       access_token: accessToken,
       expires_in: config.token_expiration,
-      username: req.user,
+			username: req.user,
+			name: req.user
     });
   }
 });
@@ -53,7 +54,8 @@ router.all('/api/oauth2/token', authenticate(['code', 'refresh']), async (req, r
   const payload = {
     access_token: accessToken,
     expires_in: config.token_expiration,
-    username: req.user,
+		username: req.user,
+		name: req.user
   };
   if (req.scope.includes('offline')) {
     payload.refresh_token = issueAppRefreshToken(req.proxy, req.user, req.scope);
