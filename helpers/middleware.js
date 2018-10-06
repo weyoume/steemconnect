@@ -9,7 +9,7 @@ const { tokens, apps } = require('../db/models');
 const verifyPermissions = async (req, res, next) => {
   const accounts = await req.wehelpjs.api.getAccountsAsync([req.proxy, req.user]);
 
-  const userAccountAuths = accounts[1].posting.account_auths.map(account => account[0]);
+  const userAccountAuths = accounts[1] ? accounts[1].posting ? accounts[1].posting.account_auths.map(account => account[0]) : [] : [];
   if (userAccountAuths.indexOf(req.proxy) === -1) {
     res.status(401).json({
       error: 'unauthorized_client',

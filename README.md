@@ -322,10 +322,16 @@ database=# \dg
 database=# _
 ```
 
-shows databases
-```\dt``` 
+creates a database completely from a database
+```create database "database"```
 ```console
-database=# \dt
+CREATE DATABASE
+```
+
+shows databases
+```\l``` 
+```console
+database=# \l
  weauth    | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
  lopu      | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
  postgres  | lopu  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
@@ -338,11 +344,13 @@ database=# \dt
 connect to the database "database"
 ```\c database```
 ```console
-database=# \dt
- public | SequelizeMeta | table | lopu
- public | apps          | table | lopu
- public | metadata      | table | lopu
- public | tokens        | table | lopu
+You are now connected to database "database" as user "user".
+```
+
+deletes a database completely from a database
+```drop database "database"```
+```console
+DROP DATABASE
 ```
 
 shows tables in current database
@@ -377,7 +385,8 @@ shows a table's "table" schema
  updated_at    | timestamp with time zone |           | not null |
 ```
 
-shows a table's data
+shows all of a table's data
+```select from "table"```
 ```select * from "table"```
 ```console
   1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.src", "http://alpha.weyoume.src"] | weapp | official weapp |      | alpha.weyoume.src |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
@@ -387,6 +396,19 @@ delete all data from table
 ```delete from table;```
 ```console
 DELETE 1
+```
+
+deletes a table completely from a database
+```drop table "table"```
+```console
+  1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.src", "http://alpha.weyoume.src"] | weapp | official weapp |      | alpha.weyoume.src |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
+```
+
+Helpful 1 Liner
+```
+\c user ; drop database database ; create database database ; \c database ;
+\c lopu ; drop database weauth ; create database weauth ; \c weauth ;
+
 ```
 
 if you fall into authentication woes then you'll have to read about md5, trust, peer, ident authentication methods, ident is annoying, so we want md5, trust, or peer

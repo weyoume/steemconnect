@@ -188,7 +188,7 @@ export default class Authorize extends Component {
                   </ul>}
                   {scope === '' &&
                   <ul className="authorize-operations">
-                    {config.authorized_operations.map(op => <li><object data="/img/authorize/check.svg" type="image/svg+xml" className="check-icon" />{titleCase(op === 'offline' ? 'offline_access' : op)}</li>)}
+                    {config.authorized_operations.map(op => <li key={op}><object data="/img/authorize/check.svg" type="image/svg+xml" className="check-icon" />{titleCase(op === 'offline' ? 'offline_access' : op)}</li>)}
                   </ul>}
                   <Form.Item>
                     <Button

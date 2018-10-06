@@ -56,7 +56,7 @@ class Index extends React.Component {
               <div className="menu-item logo">
                 {/* <object data="img/logo-white.svg" type="image/svg+xml" /> */}
 								<div className="nav-title">
-									WeAuth
+									Me
 								</div>
               </div>
               <div className="menu-item horizontal">
@@ -76,18 +76,18 @@ class Index extends React.Component {
                   <Button className="language-btn">{locales[locale]}<Icon type="down" /></Button>
                 </Popover>
 								<div className="nav-button">
-									<a href="/login" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
+									<a href="/login" rel="noopener noreferrer" className="login-btn pw-btn pcd-text lp-link ant-btn-lg">
 										<FormattedMessage id="login" />
 									</a>
 								</div>
 								<div className="nav-button">
-									<a href="/register" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
+									<a href="/register" rel="noopener noreferrer" className="login-btn pw-btn pcd-text lp-link ant-btn-lg">
 										<FormattedMessage id="register" />
 									</a>
 								</div>
 								<div className="nav-button">
-									<a href="/console" rel="noopener noreferrer" className="login-btn pcl5-btn lp-link ant-btn-lg">
-										<FormattedMessage id="Console" />
+									<a href="/me" rel="noopener noreferrer" className="login-btn pw-btn pcd-text lp-link ant-btn-lg">
+										<FormattedMessage id="me" />
 									</a>
 								</div>
               </div>
@@ -118,8 +118,8 @@ class Index extends React.Component {
                     )}
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" name="subscribe" htmlType="submit" className="pcl5-btn lp-link">
-                      <FormattedMessage id="signup" />
+                    <Button type="primary" name="subscribe" htmlType="submit" className="pcd2-btn lp-link">
+                      <FormattedMessage id="subscribe" />
                     </Button>
                   </Form.Item>
                 </Form>
@@ -192,12 +192,15 @@ class Index extends React.Component {
         <div className="lp-container project">
           <div className="project-item">
             <object data="img/opensource.svg" type="image/svg+xml" />
-            <div>
+            <div className="project-content">
               <h4 className="project-title"><FormattedMessage id="lp_opensource_title" /></h4>
               <p><FormattedMessage id="lp_opensource_description" /></p>
-              <a href="https://github.com/WeYouMe/weauth" target="_blank" rel="noreferrer noopener" className="lp-link">
+              <a href="https://github.com/WeYouMe" target="_blank" rel="noreferrer noopener" className="lp-link gh">
                 <FormattedMessage id="lp_opensource_button" />
               </a>
+              {/* <a href="https://github.com/WeYouMe/weauth" target="_blank" rel="noreferrer noopener" className="lp-link gh">
+                <FormattedMessage id="WeAuth Github" />
+              </a> */}
             </div>
           </div>
           <div className="project-item">
@@ -205,7 +208,7 @@ class Index extends React.Component {
             <div>
               <h4 className="project-title"><FormattedMessage id="lp_developers_title" /></h4>
               <p><FormattedMessage id="lp_developers_description" /></p>
-              <a href="https://github.com/WeYouMe" rel="noopener noreferrer" target="_blank" className="lp-link">
+              <a href="https://auth.weyoume.src/console" rel="noopener noreferrer" className="lp-link">
                 <FormattedMessage id="lp_developers_button" />
               </a>
             </div>

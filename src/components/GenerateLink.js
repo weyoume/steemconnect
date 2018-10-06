@@ -38,10 +38,10 @@ class Index extends React.Component {
     const { operation } = this.props.location.query;
     if (operation) {
       let opt = customOperations.find(
-        o => o.operation === changeCase.snakeCase(operation));
+        o => o.operation === changeCase.snakeCase(operation) || o.operation === operation);
       if (!opt) {
         opt = networkOperations.find(
-          o => o.operation === changeCase.snakeCase(operation));
+          o => o.operation === changeCase.snakeCase(operation) || o.operation === operation);
       }
       if (opt) {
         this.selectOperationStep1(opt.operation);
@@ -132,14 +132,16 @@ class Index extends React.Component {
 
   isRequiredField = (field) => {
     const { operation } = this.state;
-    if (Object.keys(helperOperations).includes(changeCase.snakeCase(operation))) {
-      const optionalFields = helperOperations[changeCase.snakeCase(operation)].optionalFields;
+    if (Object.keys(helperOperations).includes(changeCase.snakeCase(operation)) || Object.keys(helperOperations).includes(operation)) {
+      // const optionalFields = helperOperations[changeCase.snakeCase(operation)].optionalFields;
+      const optionalFields = helperOperations[operation].optionalFields;
       if (optionalFields && optionalFields.includes(field)) {
         return false;
       }
     }
 
-    const author = authorOperations[changeCase.snakeCase(operation)];
+    // const author = authorOperations[changeCase.snakeCase(operation)];
+    const author = authorOperations[operation];
     if (author && author.includes(field)) {
       return false;
     }
@@ -189,10 +191,10 @@ class Index extends React.Component {
     let opt;
     if (operation) {
       opt = customOperations.find(
-        o => o.operation === changeCase.snakeCase(operation));
+        o => o.operation === changeCase.snakeCase(operation) || o.operation === operation);
       if (!opt) {
         opt = networkOperations.find(
-          o => o.operation === changeCase.snakeCase(operation));
+          o => o.operation === changeCase.snakeCase(operation) || o.operation === operation);
       }
       fields = opt.params;
     }
@@ -266,6 +268,7 @@ class Index extends React.Component {
                       required: isRequired, message: `${changeCase.titleCase(field)} ${intl.formatMessage({ id: 'is_required' })}`,
                     }],
                     initialValue:
+                    query[field] ||
                     query[changeCase.camelCase(field)] ||
                     query[changeCase.paramCase(field)] ||
                     query[changeCase.snakeCase(field)],

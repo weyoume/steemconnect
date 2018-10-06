@@ -106,8 +106,8 @@ export default class Sign extends Component {
   getPlaceholder = (type) => {
     let Placeholder = SignPlaceholderDefault;
     Placeholder = (type === 'comment') ? SignPlaceholderComment : Placeholder;
-    Placeholder = (changeCase.snakeCase(type) === 'profile_update') ? SignPlaceholderNonFiltered : Placeholder;
-    Placeholder = (['transfer', 'delegateSCORE', 'undelegateSCORE'].includes(changeCase.snakeCase(type))) ? SignPlaceholderTransferDelegate : Placeholder;
+    Placeholder = (changeCase.snakeCase(type) === 'profile_update' || type === 'profile_update') ? SignPlaceholderNonFiltered : Placeholder;
+    Placeholder = (['transfer', 'delegateSCORE', 'undelegateSCORE'].includes(changeCase.snakeCase(type)) || ['transfer', 'delegateSCORE', 'undelegateSCORE'].includes(type)) ? SignPlaceholderTransferDelegate : Placeholder;
     return Placeholder;
   }
 
@@ -187,7 +187,7 @@ export default class Sign extends Component {
         const operationParams = operationsParsed[i][1];
         const params = await parseQuery(operation, operationParams, auth.username);
         const customOp = customOperations.find(
-          o => o.operation === changeCase.snakeCase(operation)
+          o => o.operation === changeCase.snakeCase(operation) || o.operation === operation
         );
         const mappedType = customOp ? customOp.type : operation;
         operationsToSend.push(
@@ -220,10 +220,11 @@ export default class Sign extends Component {
       const params = await parseQuery(type, query, auth.username);
 
       /* Broadcast */
-      const customOp = customOperations.find(o => o.operation === changeCase.snakeCase(type));
+      const customOp = customOperations.find(o => o.operation === changeCase.snakeCase(type) || o.operation === type);
       const mappedType = customOp ? customOp.type : type;
-      wehelpjs.broadcast[`${changeCase.camelCase(mappedType)}With`](auth.wif, params, (err, result) => {
-        if (!err) {
+      // wehelpjs.broadcast[`${changeCase.camelCase(mappedType)}With`](auth.wif, params, (err, result) => {
+			wehelpjs.broadcast[`${mappedType}With`](auth.wif, params, (err, result) => {
+					if (!err) {
           if (result && (query.cb || query.redirect_uri) && query.auto_return) {
             window.location.href = query.cb || query.redirect_uri;
           } else {

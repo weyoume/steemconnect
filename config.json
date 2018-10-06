@@ -9,7 +9,11 @@
     "claimRewardBalance"
 	],
 	"account" : {
-		"name" : "webuilder"
+		"name" : "webuilder",
+		"username" : "webuilder",
+		"ownerKeys" : {
+			"private" : "5KiKoeKLVtEZuLkR488hSNNzgJ5JDV28DvbYcgRTL8JSbM2Hipv"
+		}
 	},
   "offline_generated_public_keys": {
 		"active" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj",
