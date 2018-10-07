@@ -27,11 +27,13 @@ class CreateAccount extends Component {
   }
 
   submit = (data) => {
+		data.name = data.name.toLowerCase()
 		let account = data
     this.setState({
       step: 1,
       account: account
 		});
+		
 		const { intl } = this.props;
 		if(!this.state.options.customSignatory){
 			// $.ajax({
@@ -93,7 +95,8 @@ class CreateAccount extends Component {
 	}
   sign = (auth) => {
     const { account } = this.state;
-    const { intl } = this.props;
+		const { intl } = this.props;
+		account.name = account.name.toLowerCase()
     const publicKeys = wehelpjs.auth.generateKeys(account.name, account.password, ['owner', 'active', 'posting', 'memo']);
     const owner = { weight_threshold: 1, account_auths: [], key_auths: [[publicKeys.owner, 1]] };
     const active = { weight_threshold: 1, account_auths: [], key_auths: [[publicKeys.active, 1]] };
@@ -106,7 +109,7 @@ class CreateAccount extends Component {
       auth.wif,
       account.TME,
       account.SCORE,
-      auth.username,
+      auth.username.toLowerCase(),
       account.name,
       owner,
       active,

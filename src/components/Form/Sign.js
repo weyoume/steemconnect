@@ -40,7 +40,7 @@ class Sign extends React.Component {
         const { roles, intl } = this.props;
         const accounts = await wehelpjs.api.getAccountsAsync([username]);
         const account = accounts[0];
-
+				account.name = account.name.toLowerCase()
         /** Change password to public WIF */
 				
 				var privateWif
