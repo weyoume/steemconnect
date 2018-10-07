@@ -36,7 +36,7 @@ class CreateAccount extends Component {
 		if(!this.state.options.customSignatory){
 			// $.ajax({
 			// 	type: 'POST',
-			// 	url: 'https://auth.weyoume.src/api/register',
+			// 	url: 'https://auth.weyoume.io/api/register',
 			// 	data
 			// }).done(res=>{
 			// 	console.log('res', res)

@@ -9,7 +9,7 @@ const Method = ({ method }) => {
   const inlineParams = method.params
     ? `${method.params.join(', ')}, ` :
     '';
-  let apiLink = `https://api.WeYouMe.src/${method.method}`;
+  let apiLink = `https://api.weyoume.io/${method.method}`;
   if (method.params) {
     apiLink += `?${method.params.map(param => param).join('=value&')}=value`;
   }
