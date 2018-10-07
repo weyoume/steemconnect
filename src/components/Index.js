@@ -208,7 +208,7 @@ class Index extends React.Component {
             <div>
               <h4 className="project-title"><FormattedMessage id="lp_developers_title" /></h4>
               <p><FormattedMessage id="lp_developers_description" /></p>
-              <a href="https://auth.weyoume.src/console" rel="noopener noreferrer" className="lp-link">
+              <a href="https://auth.weyoume.io/console" rel="noopener noreferrer" className="lp-link">
                 <FormattedMessage id="lp_developers_button" />
               </a>
             </div>

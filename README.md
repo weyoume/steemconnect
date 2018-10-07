@@ -389,7 +389,7 @@ shows all of a table's data
 ```select from "table"```
 ```select * from "table"```
 ```console
-  1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.src", "http://alpha.weyoume.src"] | weapp | official weapp |      | alpha.weyoume.src |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
+  1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.io", "http://alpha.weyoume.io"] | weapp | official weapp |      | alpha.weyoume.io |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
 ```
 
 delete all data from table
@@ -401,7 +401,7 @@ DELETE 1
 deletes a table completely from a database
 ```drop table "table"```
 ```console
-  1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.src", "http://alpha.weyoume.src"] | weapp | official weapp |      | alpha.weyoume.src |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
+  1 | weapp     | g34h4w6jw645h54 | webuilder   | ["https://alpha.weyoume.io", "http://alpha.weyoume.io"] | weapp | official weapp |      | alpha.weyoume.io |               |             | t           | t         | f           | 2018-09-26 05:54:41.036+10 | 2018-09-26 05:55:20.358+10
 ```
 
 Helpful 1 Liner
