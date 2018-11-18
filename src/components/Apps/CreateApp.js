@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import fetch from 'isomorphic-fetch';
-import steem from '@steemit/steem-js';
+import wehelpjs from 'wehelpjs';
 import { notification, Modal } from 'antd';
 import { browserHistory } from 'react-router';
 import CreateAppForm from '../Form/CreateApp';
@@ -48,20 +48,20 @@ class CreateApp extends React.Component {
     this.setState({ isLoading: true });
     const clientId = this.state.values.username;
 
-    /** Calculate required STEEM to create new account */
+    /** Calculate required TME to create new account */
     const accountCreationFee = await getAccountCreationFee();
 
     /** Generate account authorities */
     const publicKeys = config.offline_generated_public_keys;
-    const owner = { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[publicKeys.owner, 1]] };
-    const active = { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[publicKeys.active, 1]] };
-    const posting = { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[publicKeys.posting, 1]] };
+    const owner = { weight_threshold: 1, account_auths: [[config.account.name, 1]], key_auths: [[publicKeys.owner, 1]] };
+    const active = { weight_threshold: 1, account_auths: [[config.account.name, 1]], key_auths: [[publicKeys.active, 1]] };
+    const posting = { weight_threshold: 1, account_auths: [[config.account.name, 1]], key_auths: [[publicKeys.posting, 1]] };
 
     /** Create proxy account */
-    await steem.broadcast.accountCreateWithDelegationAsync(
+    await wehelpjs.broadcast.accountCreateWithDelegationAsync(
       auth.wif,
       accountCreationFee,
-      '0.000000 VESTS',
+      '0.000000 SCORE',
       auth.username,
       clientId,
       owner,
@@ -91,7 +91,9 @@ class CreateApp extends React.Component {
               description: intl.formatMessage({ id: 'success_proxy_account' }, { clientId }),
             });
           } else {
-            this.setState({ isLoading: false });
+						this.setState({ isLoading: false });
+						console.error(data.error)
+						console.error(getErrorMessage(data.error) || intl.formatMessage({ id: 'general_error' }))			
             notification.error({
               message: intl.formatMessage({ id: 'error' }),
               description: data.error || intl.formatMessage({ id: 'general_error' }),
@@ -99,7 +101,9 @@ class CreateApp extends React.Component {
           }
         });
     }).catch((err) => {
-      this.setState({ isLoading: false });
+			this.setState({ isLoading: false });
+			console.error(err)
+			console.error(getErrorMessage(err) || intl.formatMessage({ id: 'general_error' }))
       notification.error({
         message: intl.formatMessage({ id: 'error' }),
         description: getErrorMessage(err) || intl.formatMessage({ id: 'general_error' }),
@@ -132,7 +136,7 @@ class CreateApp extends React.Component {
           className="Sign__authorize"
         >
           <SignForm
-            roles={['active']}
+            roles={['owner','active']}
             onSubmit={this.handleSignFormSubmit}
           />
         </Modal>

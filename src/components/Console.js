@@ -25,14 +25,15 @@ export default class Login extends Component {
   render() {
     return (
       <div className="container my-5">
-        <h4><FormattedMessage id="account" /></h4>
-        <p><Link onClick={this.handleLogoutClick}><FormattedMessage id="log_out" /></Link></p>
         <h4><FormattedMessage id="applications" /></h4>
         <p><Link to="/apps"><FormattedMessage id="apps" /></Link></p>
         <p><Link to="/apps/authorized"><FormattedMessage id="authorized_apps" /></Link></p>
         <h4><FormattedMessage id="developers" /></h4>
         <p><Link to="/apps/me"><FormattedMessage id="my_apps" /></Link></p>
         <p><Link to="/docs/oauth2"><FormattedMessage id="oauth2" /></Link></p>
+        <h4><FormattedMessage id="accounts" /></h4>
+				<p><Link to="/register"><FormattedMessage id="create_account" /></Link></p>
+        <p><Link onClick={this.handleLogoutClick}><FormattedMessage id="log_out" /></Link></p>
       </div>
     );
   }

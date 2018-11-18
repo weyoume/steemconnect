@@ -1,4 +1,5 @@
 @import "../../../styles/screen-sizes";
+@import "../../../styles/custom.less";
 
 .TransferInfo {
   strong {
@@ -13,7 +14,7 @@
     margin-bottom: 10px;
 
     .TransferInfo__dots {
-      border: 1px dashed #4ba2f2;
+      border: 1px dashed @pc;
       margin-top: -32px;
       width: 35px;
       position: absolute;
@@ -59,7 +60,10 @@
           border: 3px solid white;
           height: 26px;
           border-radius: 13px;
-        }
+				}
+				&.badge {
+					background: @pc;
+				}
       }
     }
   }

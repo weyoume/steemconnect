@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Card, notification } from 'antd';
-import steem from '@steemit/steem-js';
+import wehelpjs from 'wehelpjs';
 import RequestAccountRecoveryForm from '../Form/RequestAccountRecovery';
 import Loading from '../../widgets/Loading';
 import SignForm from '../Form/Sign';
@@ -36,6 +36,8 @@ class RecoverAccount extends React.Component {
     const values = this.state.values;
 
     const onError = (error) => {
+			console.error(error)
+			console.error(getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }))
       notification.error({
         message: intl.formatMessage({ id: 'error' }),
         description: getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }),
@@ -51,8 +53,8 @@ class RecoverAccount extends React.Component {
 
     await this.requestAccountRecovery(
       auth.wif,
-      values.recovery_account,
-      values.account_to_recover,
+      values.recoveryAccount,
+      values.accountToRecover,
       values.new_password,
       onError,
       onSuccess);
@@ -66,8 +68,8 @@ class RecoverAccount extends React.Component {
            newPassword,
            onError,
            onSuccess) => {
-      const newOwnerPrivate = steem.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
-      const newOwner = steem.auth.wifToPublic(newOwnerPrivate);
+      const newOwnerPrivate = wehelpjs.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
+      const newOwner = wehelpjs.auth.wifToPublic(newOwnerPrivate);
       const newOwnerAuthority = {
         weight_threshold: 1,
         account_auths: [],
@@ -75,7 +77,7 @@ class RecoverAccount extends React.Component {
       };
 
       try {
-        await steem.broadcast.requestAccountRecoveryAsync(
+        await wehelpjs.broadcast.requestAccountRecoveryAsync(
           creatorOwnerPrivate,
           recoveryAccount,
           accountToRecover,

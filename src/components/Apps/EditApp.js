@@ -68,7 +68,9 @@ class EditApp extends Component {
           description: intl.formatMessage({ id: 'success_app_updated' }),
         });
       })
-      .catch(() => {
+      .catch((err) => {
+				console.error(err)
+				console.error(getErrorMessage(err) || intl.formatMessage({ id: 'general_error' }))		
         notification.error({
           message: intl.formatMessage({ id: 'error' }),
           description: intl.formatMessage({ id: 'general_error' }),

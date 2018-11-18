@@ -1,15 +1,15 @@
 {
-  "name": "sc2",
+  "name": "weauth",
   "scripts": {
   },
   "env": {
-    "BROADCASTER_POSTING_WIF": {
+    "BROADCASTER_POSTING_KEY": {
       "required": true
     },
     "BROADCASTER_USERNAME": {
       "required": true
     },
-    "DATABASE_URL": {
+    "dburl": {
       "required": true
     },
     "NODE_MODULES_CACHE": {
@@ -18,31 +18,31 @@
     "JWT_SECRET": {
       "generator": "secret"
     },
-    "STEEMD_URL": {
+    "NODE_API_URL": {
       "required": true
     },
-    "STEEMD_URL_SERVER": "",
-    "DEBUG": "sc2:*",
+    "NODE_API_URL_SERVER": "",
+    "DEBUG": "weauth:*",
     "LOG_LEVEL": "info",
-    "CSP_DEFAULT": {
+    "CONTENT_DEFAULT": {
       "required": true
     },
-    "CSP_SCRIPT_SRC": {
+    "CONTENT_SCRIPT_SRC": {
       "required": true
     },
-    "CSP_CONNECT_SRC": {
+    "CONTENT_CONNECT_SRC": {
       "required": true
     },
-    "CSP_FRAME_SRC": {
+    "CONTENT_FRAME_SRC": {
       "required": true
     },
-    "CSP_STYLE_SRC": {
+    "CONTENT_STYLE_SRC": {
       "required": true
     },
-    "CSP_IMG_SRC": {
+    "CONTENT_IMG_SRC": {
       "required": true
     },
-    "CSP_FONT_SRC": {
+    "CONTENT_FONT_SRC": {
       "required": true
     }
   },

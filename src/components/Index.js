@@ -51,13 +51,16 @@ class Index extends React.Component {
       <div>
         <div id="header">
           <img src="/img/macbook.png" id="macbook-img" alt="macbook" />
-          <object data="img/hero.svg" type="image/svg+xml" id="header-bg" />
+					<object data="img/hero.svg" type="image/svg+xml" id="header-bg" />
           <div className="lp-container">
             <div id="menu">
               <div className="menu-item logo">
-                <object data="img/logo-white.svg" type="image/svg+xml" />
+                {/* <object data="img/logo-white.svg" type="image/svg+xml" /> */}
+								<div className="nav-title">
+									Me
+								</div>
               </div>
-              <div className="menu-item">
+              <div className="menu-item horizontal">
                 <Popover
                   placement="bottom"
                   content={
@@ -71,8 +74,23 @@ class Index extends React.Component {
                   }
                   trigger="click"
                 >
-                  <Button>{locales[locale]}<Icon type="down" /></Button>
+                  <Button className="language-btn">{locales[locale]}<Icon type="down" /></Button>
                 </Popover>
+								<div className="nav-button">
+									<a href="/login" rel="noopener noreferrer" className="login-btn pw-btn pcd-text lp-link ant-btn-lg">
+										<FormattedMessage id="login" />
+									</a>
+								</div>
+								<div className="nav-button">
+									<a href="/register" rel="noopener noreferrer" className="login-btn pw-btn pcd-text lp-link ant-btn-lg">
+										<FormattedMessage id="register" />
+									</a>
+								</div>
+								<div className="nav-button">
+									<a href="/me" rel="noopener noreferrer" className="login-btn pw-btn pcd-text lp-link ant-btn-lg">
+										<FormattedMessage id="me" />
+									</a>
+								</div>
               </div>
             </div>
             <div className="hero">
@@ -81,7 +99,7 @@ class Index extends React.Component {
               <div className="newsletter">
                 <Form
                   onSubmit={() => {}}
-                  action="//busy.us14.list-manage.com/subscribe/post?u=c8daffe293678b527521abf65&amp;id=0a6cefe541"
+                  action=""
                   method="post"
                   name="mc-embedded-subscribe-form"
                   target="_blank"
@@ -101,8 +119,8 @@ class Index extends React.Component {
                     )}
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" name="subscribe" htmlType="submit" className="lp-link">
-                      <FormattedMessage id="signup" />
+                    <Button type="primary" name="subscribe" htmlType="submit" className="pcd2-btn lp-link">
+                      <FormattedMessage id="subscribe" />
                     </Button>
                   </Form.Item>
                 </Form>
@@ -118,9 +136,9 @@ class Index extends React.Component {
           <h3><FormattedMessage id="lp_section_1_title" /></h3>
         </div>
 
-        <div className="steem-features-container">
-          <div className="lp-container steem-features">
-            <div className="steem-feature">
+        <div className="protocol-features-container">
+          <div className="lp-container protocol-features">
+            <div className="protocol-feature">
               <object data="img/apps.svg" type="image/svg+xml" />
               <strong className="feature-title">
                 <FormattedMessage id="lp_feature_1_title" />
@@ -129,7 +147,7 @@ class Index extends React.Component {
                 <FormattedMessage id="lp_feature_1_description" />
               </p>
             </div>
-            <div className="steem-feature">
+            <div className="protocol-feature">
               <object data="img/account.svg" type="image/svg+xml" />
               <strong className="feature-title">
                 <FormattedMessage id="lp_feature_2_title" />
@@ -138,7 +156,7 @@ class Index extends React.Component {
                 <FormattedMessage id="lp_feature_2_description" />
               </p>
             </div>
-            <div className="steem-feature">
+            <div className="protocol-feature">
               <object data="img/wallet.svg" type="image/svg+xml" />
               <strong className="feature-title">
                 <FormattedMessage id="lp_feature_3_title" />
@@ -175,12 +193,15 @@ class Index extends React.Component {
         <div className="lp-container project">
           <div className="project-item">
             <object data="img/opensource.svg" type="image/svg+xml" />
-            <div>
+            <div className="project-content">
               <h4 className="project-title"><FormattedMessage id="lp_opensource_title" /></h4>
               <p><FormattedMessage id="lp_opensource_description" /></p>
-              <a href="https://github.com/steemit/steemconnect" target="_blank" rel="noreferrer noopener" className="lp-link">
+              <a href="https://github.com/WeYouMe" target="_blank" rel="noreferrer noopener" className="lp-link gh">
                 <FormattedMessage id="lp_opensource_button" />
               </a>
+              {/* <a href="https://github.com/WeYouMe/weauth" target="_blank" rel="noreferrer noopener" className="lp-link gh">
+                <FormattedMessage id="WeAuth Github" />
+              </a> */}
             </div>
           </div>
           <div className="project-item">
@@ -188,7 +209,7 @@ class Index extends React.Component {
             <div>
               <h4 className="project-title"><FormattedMessage id="lp_developers_title" /></h4>
               <p><FormattedMessage id="lp_developers_description" /></p>
-              <Link to="/dashboard" className="lp-link">
+              <a href="https://auth.weyoume.io/console" rel="noopener noreferrer" className="lp-link">
                 <FormattedMessage id="lp_developers_button" />
               </Link>
             </div>
@@ -202,7 +223,7 @@ class Index extends React.Component {
               <p><FormattedMessage id="lp_subscribe_description" /></p>
             </div>
             <div>
-              <a href="http://eepurl.com/c1Z9VH" rel="noopener noreferrer" target="_blank" className="lp-link">
+              <a href="#header" rel="noopener noreferrer" className="lp-link">
                 <FormattedMessage id="lp_subscribe_button" />
               </a>
             </div>

@@ -4,7 +4,7 @@ import { Menu, Dropdown } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import SteemitAvatar from './SteemitAvatar';
+import PlatformAvatar from './PlatformAvatar';
 import './Header.less';
 import { logout, authenticate } from '../actions/auth';
 import { getAccounts } from '../utils/localStorage';
@@ -52,9 +52,9 @@ export default class Header extends Component {
     const { username, auth } = this.props;
     const accounts = getAccounts();
     let user = '';
-    if (auth && auth.user && auth.user.json_metadata) {
+    if (auth && auth.user && auth.user.json) {
       try {
-        const metadata = JSON.parse(auth.user.json_metadata);
+        const metadata = JSON.parse(auth.user.json);
         if (metadata && metadata.profile && metadata.profile.name) {
           user = metadata.profile.name;
         } else {
@@ -66,6 +66,19 @@ export default class Header extends Component {
     }
     return (
       <div className="Header container">
+				<div className="nav-link">
+					<Link to="/"><FormattedMessage id="Home" />
+					</Link>
+				</div>
+				<div className="nav-link">
+					<Link to="/me"><FormattedMessage id="me" />
+					</Link>
+				</div>
+				<div className="nav-link">
+					<Link to="/apps/me"><FormattedMessage id="my_apps" />
+					</Link>
+				</div>
+
         <div className="Header__log">
           {username &&
           <Dropdown
@@ -73,10 +86,11 @@ export default class Header extends Component {
             placement="bottomRight"
             overlay={
               <Menu className="switch-account-menu" onClick={this.changeAccount}>
+
                 <Menu.Item key="switch-account-active" className="active">
-                  <SteemitAvatar username={username} size="72" />
+                  <PlatformAvatar username={username} size="72" />
                   <div className="account-information">
-                    <span className="account-name">{user}</span>
+                    <span className="account-name">{username}</span>
                     <span className="username">@{username}</span>
                     <Link onClick={this.handleLogoutClick} className="logout">
                       <FormattedMessage id="log_out" />
@@ -85,7 +99,9 @@ export default class Header extends Component {
                 </Menu.Item>
                 {accounts.filter(account => account.username !== username).map(account =>
                   <Menu.Item key={account.username}>
-                    <SteemitAvatar username={account.username} size="36" /><span className="other-account">{account.username}</span>
+                    <PlatformAvatar username={account.username} size="36" />
+										<br></br>
+										<span className="account-name">{account.username}</span>
                   </Menu.Item>
                 )}
                 <Menu.Item key="switch-account-actions" className="actions" disabled>
@@ -97,7 +113,9 @@ export default class Header extends Component {
             }
           >
             <a className="ant-dropdown-link" href={undefined}>
-              <span className="account-name">{username}</span>&nbsp;<SteemitAvatar username={username} />
+              <span className="account-name">{username}</span>
+							<br></br>
+							<PlatformAvatar username={username} />
             </a>
           </Dropdown>
           }

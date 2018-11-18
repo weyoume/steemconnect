@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import steem from '@steemit/steem-js';
+import wehelpjs from 'wehelpjs';
 import SignForm from '../Form/Sign';
 import SignSuccess from '../Sign/Success';
 import SignError from '../Sign/Error';
@@ -41,7 +41,7 @@ export default class Authorize extends Component {
     const { username, role, weight } = this.state;
     this.setState({ step: 2 });
 
-    steem.api.getAccounts([auth.username], (err, accounts) => {
+    wehelpjs.api.getAccounts([auth.username], (err, accounts) => {
       if (!hasAuthority(accounts[0], username, role)) {
         const updatedAuthority = accounts[0][role];
         updatedAuthority.account_auths.push([username, parseInt(weight, 10)]);
@@ -51,14 +51,14 @@ export default class Authorize extends Component {
         const posting = role === 'posting' ? updatedAuthority : undefined;
 
         /** Add authority on user account */
-        steem.broadcast.accountUpdate(
+        wehelpjs.broadcast.accountUpdate(
           auth.wif,
           auth.username,
           owner,
           active,
           posting,
-          accounts[0].memo_key,
-          accounts[0].json_metadata,
+          accounts[0].memoKey,
+          accounts[0].json,
           (errBc, result) => {
             if (!errBc) {
               if (redirectUri && autoReturn) {

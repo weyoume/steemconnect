@@ -1,7 +1,7 @@
 const profileUpdate = require('./profile-update');
 const comment = require('./comment');
 const customJson = require('./custom-json');
-const delegateVestingShares = require('./delegate-vesting-shares');
+const delegateSCORE = require('./delegate-SCORE');
 const escrowApprove = require('./escrow-approve');
 const escrowDispute = require('./escrow-dispute');
 const escrowRelease = require('./escrow-release');
@@ -9,10 +9,10 @@ const escrowTransfer = require('./escrow-transfer');
 const follow = require('./follow');
 const mute = require('./mute');
 const reblog = require('./reblog');
-const setWithdrawVestingRoute = require('./set-withdraw-vesting-route');
 const changeRecoveryAccount = require('./change-recovery-account');
+const setWithdrawSCOREasTMEroute = require('./set-withdraw-SCORE-route');
 const transfer = require('./transfer');
-const undelegateVestingShares = require('./undelegate-vesting-shares');
+const undelegateSCORE = require('./undelegate-SCORE');
 const unfollow = require('./unfollow');
 const unmute = require('./unmute');
 const vote = require('./vote');
@@ -20,8 +20,8 @@ const convert = require('./convert');
 
 module.exports = {
   comment,
-  custom_json: customJson,
-  delegate_vesting_shares: delegateVestingShares,
+  customJson: customJson,
+  delegateSCORE: delegateSCORE,
   escrow_approve: escrowApprove,
   escrow_dispute: escrowDispute,
   escrow_release: escrowRelease,
@@ -29,10 +29,10 @@ module.exports = {
   follow,
   mute,
   reblog,
-  set_withdraw_vesting_route: setWithdrawVestingRoute,
   change_recovery_account: changeRecoveryAccount,
+  setWithdrawSCOREasTMEroute: setWithdrawSCOREasTMEroute,
   transfer,
-  undelegate_vesting_shares: undelegateVestingShares,
+  undelegateSCORE: undelegateSCORE,
   unfollow,
   unmute,
   profile_update: profileUpdate,

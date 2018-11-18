@@ -4,9 +4,9 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('tokens', [
       {
-        client_id: 'busy.app',
-        user: 'guest123',
-        token: 'secret-token-123',
+        client_id: 'webuilder',
+        user: 'webuilder',
+        token: '2973tyfu32bfp923f239fgp9237gf23f',
         created_at: new Date(),
         updated_at: new Date(),
       }

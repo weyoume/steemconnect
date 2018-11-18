@@ -12,7 +12,7 @@ import intersection from 'lodash/intersection';
 import difference from 'lodash/difference';
 import { authorize, login, addPostingAuthority } from '../../utils/auth';
 import { getAccounts } from '../../utils/localStorage';
-import SteemitAvatar from '../../widgets/SteemitAvatar';
+import PlatformAvatar from '../../widgets/PlatformAvatar';
 import Loading from '../../widgets/Loading';
 import SignForm from '../Form/Sign';
 import ChooseAccountForm from '../Form/ChooseAccount';
@@ -129,33 +129,32 @@ export default class Authorize extends Component {
 
   render() {
     const { clientId, scope, step, scopes, app } = this.state;
-    const requiredRoles = (scope === 'login') ? ['posting'] : ['owner', 'active'];
+    const requiredRoles = (scope === 'login') ? ['owner', 'memo', 'posting'] : ['owner','owner', 'active'];
     return (
       <div className="Sign">
         {step === 0 && <Loading />}
         {step !== 0 && <div className="Sign__content">
           <div className="Sign_frame">
             <div className="Sign__header">
-              <object data="/img/logo.svg" type="image/svg+xml" id="logo" />
+              <div className="brand-name"><span>WeYouMe Login</span></div>
             </div>
             <div className="Sign__wrapper">
               {step === 1 &&
                 <Form onSubmit={this.handleSubmit} className="SignForm AuthorizeForm">
                   <div className="Avatars">
-                    <div className="Avatar-container">
+                    {/* <div className="Avatar-container">
                       <span className="Avatar" style={{ height: '40px', width: '40px' }}>
-                        <object
-                          data="/img/logo-c.svg"
-                          type="image/svg+xml"
+                        <img
+                          src="/img/logo.png"
                           id="logo-c"
                           style={{ height: '40px', width: '40px' }}
                         />
                       </span>
                     </div>
-                    <div className="Avatar-link" />
+                    <div className="Avatar-link" /> */}
                     <div className="Avatar-container">
                       {!app &&
-                      <SteemitAvatar username={clientId} size="40" />}
+                      <PlatformAvatar username={clientId} size="40" />}
                       {app &&
                       <img
                         src={`https://steemitimages.com/40x40/${app.icon}`}
@@ -177,8 +176,8 @@ export default class Authorize extends Component {
                     <FormattedMessage
                       id="authorize_question"
                       values={{
-                        username: <b> {(app && app.name && `${app.name} (@${clientId})`) || `@${clientId}`}</b>,
-                        role: <b><FormattedMessage id="posting" /></b>,
+                        username: <b className="bold-notice"> {`${clientId}`}</b>,
+                        role: <b className="bold-notice"><FormattedMessage id="posting" /></b>,
                       }}
                     />}
                   </p>
@@ -189,7 +188,7 @@ export default class Authorize extends Component {
                   </ul>}
                   {scope === '' &&
                   <ul className="authorize-operations">
-                    {config.authorized_operations.map(op => <li><object data="/img/authorize/check.svg" type="image/svg+xml" className="check-icon" />{titleCase(op === 'offline' ? 'offline_access' : op)}</li>)}
+                    {config.authorized_operations.map(op => <li key={op}><object data="/img/authorize/check.svg" type="image/svg+xml" className="check-icon" />{titleCase(op === 'offline' ? 'offline_access' : op)}</li>)}
                   </ul>}
                   <Form.Item>
                     <Button
@@ -218,7 +217,7 @@ export default class Authorize extends Component {
               }
             </div>
             <div className="Sign__footer">
-              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_steemconnect" /></Link>
+              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_native_auth" /></Link>
             </div>
           </div>
         </div>}

@@ -10,11 +10,11 @@ const parse = (query) => {
   cQuery.agent = normalizeUsername(cQuery.agent);
   cQuery.escrow_id = parseInt(cQuery.escrow_id, 0);
 
-  let [amount, symbol] = cQuery.sbd_amount.split(' ');
-  cQuery.sbd_amount = join([parseFloat(amount).toFixed(3), symbol], ' ');
+  let [amount, symbol] = cQuery.TSDamount.split(' ');
+  cQuery.TSDamount = join([parseFloat(amount).toFixed(3), symbol], ' ');
 
-  [amount, symbol] = cQuery.steem_amount.split(' ');
-  cQuery.steem_amount = join([parseFloat(amount).toFixed(3), symbol], ' ');
+  [amount, symbol] = cQuery.TMEamount.split(' ');
+  cQuery.TMEamount = join([parseFloat(amount).toFixed(3), symbol], ' ');
 
   [amount, symbol] = cQuery.fee.split(' ');
   cQuery.fee = join([parseFloat(amount).toFixed(3), symbol], ' ');
@@ -35,19 +35,19 @@ const validate = async (query, errors) => {
     errors.push({ field: 'agent', error: 'error_user_exist', values: { user: query.agent } });
   }
 
-  if (!isEmpty(query.sbd_amount) && query.sbd_amount.split(' ')[1] !== 'SBD') {
-    errors.push({ field: 'sbd_amount', error: 'error_amount_symbol' });
-  } else if (!isEmpty(query.sbd_amount) && !isAsset(query.sbd_amount)) {
-    errors.push({ field: 'sbd_amount', error: 'error_amount_format' });
+  if (!isEmpty(query.TSDamount) && query.TSDamount.split(' ')[1] !== 'TSD') {
+    errors.push({ field: 'TSDamount', error: 'error_amount_symbol' });
+  } else if (!isEmpty(query.TSDamount) && !isAsset(query.TSDamount)) {
+    errors.push({ field: 'TSDamount', error: 'error_amount_format' });
   }
 
-  if (!isEmpty(query.steem_amount) && query.steem_amount.split(' ')[1] !== 'STEEM') {
-    errors.push({ field: 'steem_amount', error: 'error_amount_symbol' });
-  } else if (!isEmpty(query.steem_amount) && !isAsset(query.steem_amount)) {
-    errors.push({ field: 'steem_amount', error: 'error_amount_format' });
+  if (!isEmpty(query.TMEamount) && query.TMEamount.split(' ')[1] !== 'TME') {
+    errors.push({ field: 'TMEamount', error: 'error_amount_symbol' });
+  } else if (!isEmpty(query.TMEamount) && !isAsset(query.TMEamount)) {
+    errors.push({ field: 'TMEamount', error: 'error_amount_format' });
   }
 
-  if (!isEmpty(query.fee) && !['STEEM', 'SBD'].includes(query.fee.split(' ')[1])) {
+  if (!isEmpty(query.fee) && !['TME', 'TSD'].includes(query.fee.split(' ')[1])) {
     errors.push({ field: 'fee', error: 'error_amount_symbol' });
   } else if (!isEmpty(query.fee) && !isAsset(query.fee)) {
     errors.push({ field: 'fee', error: 'error_amount_format' });
@@ -74,9 +74,9 @@ const validate = async (query, errors) => {
   }
 
   try {
-    JSON.parse(query.json_meta);
+    JSON.parse(query.json);
   } catch (err) {
-    errors.push({ field: 'json_meta', error: 'error_json_valid', values: { field: 'json_meta' } });
+    errors.push({ field: 'json', error: 'error_json_valid', values: { field: 'json' } });
   }
 };
 

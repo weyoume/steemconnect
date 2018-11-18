@@ -6,15 +6,21 @@ const http = require('http');
 const https = require('https');
 const csp = require('express-csp-header');
 const cors = require('cors');
-const steem = require('@steemit/steem-js');
+const wehelpjs = require('wehelpjs');
 const db = require('./db/models');
 const { strategy } = require('./helpers/middleware');
 const logger = require('./helpers/logger');
+require('dotenv').config()
 
-if (process.env.STEEMD_URL_SERVER) {
-  steem.api.setOptions({ url: process.env.STEEMD_URL_SERVER });
-} else if (process.env.STEEMD_URL) {
-  steem.api.setOptions({ url: process.env.STEEMD_URL });
+// Allow self-signed cert dev
+if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'prod') {
+	process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+}
+
+if (process.env.NODE_API_URL_SERVER) {
+  wehelpjs.api.setOptions({ url: process.env.NODE_API_URL_SERVER });
+} else if (process.env.NODE_API_URL) {
+  wehelpjs.api.setOptions({ url: process.env.NODE_API_URL });
 }
 
 http.globalAgent.maxSockets = Infinity;
@@ -24,6 +30,7 @@ const server = http.Server(app);
 
 // iframe header
 app.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   next();
 });
@@ -31,13 +38,13 @@ app.use((req, res, next) => {
 // Content security policies
 app.use(csp({
   policies: {
-    'default-src': (process.env.CSP_DEFAULT || "'self'").split(','),
-    'script-src': (process.env.CSP_SCRIPT_SRC || "'self','unsafe-eval','unsafe-inline'").split(','),
-    'connect-src': (process.env.CSP_CONNECT_SRC || "'self'").split(','),
-    'frame-src': (process.env.CSP_FRAME_SRC || "'self'").split(','),
-    'style-src': (process.env.CSP_STYLE_SRC || "'self'").split(','),
-    'img-src': (process.env.CSP_IMG_SRC || "'self'").split(','),
-    'font-src': (process.env.CSP_FONT_SRC || "'self'").split(','),
+    'default-src': (process.env.CONTENT_DEFAULT || "'self'").split(','),
+    'script-src': (process.env.CONTENT_SCRIPT_SRC || "'self','unsafe-eval','unsafe-inline'").split(','),
+    'connect-src': (process.env.CONTENT_CONNECT_SRC || "'self'").split(','),
+    'frame-src': (process.env.CONTENT_FRAME_SRC || "'self'").split(','),
+    'style-src': (process.env.CONTENT_STYLE_SRC || "'self'").split(','),
+    'img-src': (process.env.CONTENT_IMG_SRC || "'self'").split(','),
+    'font-src': (process.env.CONTENT_FONT_SRC || "'self'").split(','),
   },
 }));
 
@@ -66,10 +73,10 @@ app.use((req, res, next) => {
   next();
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'prod') {
   logger.info('running in development mode');
   // eslint-disable-next-line global-require
-  require('./webpack/webpack')(app);
+  require('./webpack/webpack.dev.middleware.js')(app);
 }
 
 const hbs = require('hbs');
@@ -82,7 +89,7 @@ app.enable('trust proxy');
 app.disable('x-powered-by');
 
 app.use((req, res, next) => {
-  req.steem = steem;
+  req.wehelpjs = wehelpjs;
   req.db = db;
   next();
 });
@@ -90,6 +97,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+app.options('*', cors());
 
 app.use(strategy);
 
@@ -111,7 +119,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : err;
+  res.locals.error = (req.app.get('env') === 'development' || req.app.get('env') === 'dev') ? err : err;
 
   // render the error page
   res.status(err.status || 500);

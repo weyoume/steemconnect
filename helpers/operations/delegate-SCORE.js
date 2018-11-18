@@ -1,30 +1,30 @@
 const cloneDeep = require('lodash/cloneDeep');
 const join = require('lodash/join');
-const steem = require('@steemit/steem-js');
-const { formatter } = require('@steemit/steem-js');
+const wehelpjs = require('wehelpjs');
+const { formatter } = require('wehelpjs');
 const { isAsset, isEmpty, userExists, normalizeUsername } = require('../validation-utils');
 
 const optionalFields = ['delegator'];
 
 const parse = async (query) => {
   const cQuery = cloneDeep(query);
-  const [amount, symbol] = cQuery.vesting_shares.split(' ');
-  const globalProps = await steem.api.getDynamicGlobalPropertiesAsync();
+  const [amount, symbol] = cQuery.SCORE.split(' ');
+  const globalProps = await wehelpjs.api.getDynamicGlobalPropertiesAsync();
 
   cQuery.delegatee = normalizeUsername(cQuery.delegatee);
   cQuery.delegator = normalizeUsername(cQuery.delegator);
 
-  if (symbol === 'SP') {
-    cQuery.vesting_shares = join([
+  if (symbol === 'ePOWER') {
+    cQuery.SCORE = join([
       (
         (parseFloat(amount) *
-        parseFloat(globalProps.total_vesting_shares)) /
-        parseFloat(globalProps.total_vesting_fund_steem)
+        parseFloat(globalProps.totalSCORE)) /
+        parseFloat(globalProps.totalTMEfundForSCORE)
       ).toFixed(6),
-      'VESTS',
+      'SCORE',
     ], ' ');
   } else {
-    cQuery.vesting_shares = join([parseFloat(amount).toFixed(6), symbol], ' ');
+    cQuery.SCORE = join([parseFloat(amount).toFixed(6), symbol], ' ');
   }
 
   return cQuery;
@@ -38,11 +38,11 @@ const validate = async (query, errors) => {
     errors.push({ field: 'delegator', error: 'error_user_exist', values: { user: query.delegator } });
   }
 
-  if (!isEmpty(query.vesting_shares)) {
-    if (!['VESTS', 'SP'].includes(query.vesting_shares.split(' ')[1])) {
-      errors.push({ field: 'vesting_shares', error: 'error_vests_symbol' });
-    } else if (!isAsset(query.vesting_shares)) {
-      errors.push({ field: 'vesting_shares', error: 'error_vests_format' });
+  if (!isEmpty(query.SCORE)) {
+    if (!['SCORE', 'ePOWER'].includes(query.SCORE.split(' ')[1])) {
+      errors.push({ field: 'SCORE', error: 'error_SCORE_symbol' });
+    } else if (!isAsset(query.SCORE)) {
+      errors.push({ field: 'SCORE', error: 'error_SCORE_format' });
     }
   }
 };
@@ -51,36 +51,36 @@ const normalize = async (query) => {
   const cQuery = cloneDeep(query);
 
   let sUsername = normalizeUsername(query.delegatee);
-  let accounts = await steem.api.getAccountsAsync([sUsername]);
+  let accounts = await wehelpjs.api.getAccountsAsync([sUsername]);
   let account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
   if (account) {
     cQuery.toName = account.name;
-    cQuery.toReputation = steem.formatter.reputation(account.reputation);
+    cQuery.toReputation = wehelpjs.formatter.reputation(account.reputation);
   }
 
   if (query.delegator) {
     sUsername = normalizeUsername(query.delegator);
-    accounts = await steem.api.getAccountsAsync([sUsername]);
+    accounts = await wehelpjs.api.getAccountsAsync([sUsername]);
     account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
     if (account) {
       cQuery.fromName = account.name;
-      cQuery.fromReputation = steem.formatter.reputation(account.reputation);
+      cQuery.fromReputation = wehelpjs.formatter.reputation(account.reputation);
     }
   }
 
-  const [amount, symbol] = cQuery.vesting_shares.split(' ');
-  if (amount && symbol === 'VESTS') {
-    const globalProps = await steem.api.getDynamicGlobalPropertiesAsync();
+  const [amount, symbol] = cQuery.SCORE.split(' ');
+  if (amount && symbol === 'SCORE') {
+    const globalProps = await wehelpjs.api.getDynamicGlobalPropertiesAsync();
     cQuery.amount = join(
       [
-        formatter.vestToSteem(
-          cQuery.vesting_shares,
-          globalProps.total_vesting_shares,
-          globalProps.total_vesting_fund_steem
+        formatter.SCOREinTMEvalue(
+          cQuery.SCORE,
+          globalProps.totalSCORE,
+          globalProps.totalTMEfundForSCORE
         ).toFixed(3),
-        'SP',
+        'ePOWER',
       ], ' ');
-  } else if (amount && symbol === 'SP') {
+  } else if (amount && symbol === 'ePOWER') {
     cQuery.amount = join(
       [parseFloat(amount).toFixed(3), symbol],
       ' ');

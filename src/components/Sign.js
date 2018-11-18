@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import steem from '@steemit/steem-js';
+import wehelpjs from 'wehelpjs';
 import changeCase from 'change-case';
 import { Link } from 'react-router';
 import { Button } from 'antd';
@@ -106,8 +106,8 @@ export default class Sign extends Component {
   getPlaceholder = (type) => {
     let Placeholder = SignPlaceholderDefault;
     Placeholder = (type === 'comment') ? SignPlaceholderComment : Placeholder;
-    Placeholder = (changeCase.snakeCase(type) === 'profile_update') ? SignPlaceholderNonFiltered : Placeholder;
-    Placeholder = (['transfer', 'delegate_vesting_shares', 'undelegate_vesting_shares'].includes(changeCase.snakeCase(type))) ? SignPlaceholderTransferDelegate : Placeholder;
+    Placeholder = (changeCase.snakeCase(type) === 'profile_update' || type === 'profile_update') ? SignPlaceholderNonFiltered : Placeholder;
+    Placeholder = (['transfer', 'delegateSCORE', 'undelegateSCORE'].includes(changeCase.snakeCase(type)) || ['transfer', 'delegateSCORE', 'undelegateSCORE'].includes(type)) ? SignPlaceholderTransferDelegate : Placeholder;
     return Placeholder;
   }
 
@@ -187,7 +187,7 @@ export default class Sign extends Component {
         const operationParams = operationsParsed[i][1];
         const params = await parseQuery(operation, operationParams, auth.username);
         const customOp = customOperations.find(
-          o => o.operation === changeCase.snakeCase(operation)
+          o => o.operation === changeCase.snakeCase(operation) || o.operation === operation
         );
         const mappedType = customOp ? customOp.type : operation;
         operationsToSend.push(
@@ -197,7 +197,7 @@ export default class Sign extends Component {
           ]
         );
       }
-      steem.broadcast.send(
+      wehelpjs.broadcast.send(
         {
           extensions: [],
           operations: operationsToSend,
@@ -220,10 +220,11 @@ export default class Sign extends Component {
       const params = await parseQuery(type, query, auth.username);
 
       /* Broadcast */
-      const customOp = customOperations.find(o => o.operation === changeCase.snakeCase(type));
+      const customOp = customOperations.find(o => o.operation === changeCase.snakeCase(type) || o.operation === type);
       const mappedType = customOp ? customOp.type : type;
-      steem.broadcast[`${changeCase.camelCase(mappedType)}With`](auth.wif, params, (err, result) => {
-        if (!err) {
+      // wehelpjs.broadcast[`${changeCase.camelCase(mappedType)}With`](auth.wif, params, (err, result) => {
+			wehelpjs.broadcast[`${mappedType}With`](auth.wif, params, (err, result) => {
+					if (!err) {
           if (result && (query.cb || query.redirect_uri) && query.auto_return) {
             window.location.href = query.cb || query.redirect_uri;
           } else {
@@ -259,10 +260,10 @@ export default class Sign extends Component {
         {step !== 'loading' && <div className="Sign__content">
           <div className="Sign_frame">
             <div className="Sign__header">
-              <object data="/img/logo.svg" type="image/svg+xml" id="logo" />
+              <div className="brand-name"><span>WeYouMe Login</span></div>
             </div>
             {step === 'signin' &&
-            <div className="Sign__signin-warning"><FormattedMessage id="steemconnect_website_confirm" /></div>}
+            <div className="Sign__signin-warning"><FormattedMessage id="native_auth_website_confirm" /></div>}
             <div className="Sign__wrapper">
               {step === 'validationErrors' && <SignValidationErrors errors={validationErrors} />}
               {step === 'form' && normalizedQuery &&
@@ -300,7 +301,7 @@ export default class Sign extends Component {
               {step === 'result' && error && <SignError error={error} resetForm={this.resetForm} />}
             </div>
             <div className="Sign__footer">
-              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_steemconnect" /></Link>
+              <Link to="/" target="_blank" rel="noopener noreferrer"><FormattedMessage id="about_native_auth" /></Link>
             </div>
           </div>
         </div>}

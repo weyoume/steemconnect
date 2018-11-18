@@ -1,5 +1,5 @@
 @import "../styles/screen-sizes";
-
+@import "../styles/custom.less";
 .Sign {
   display: flex;
   flex-direction: column;
@@ -163,9 +163,9 @@
 }
 
 a.cancel-link {
-  color: #4ba2f2 !important;
+  color: @pc !important;
   &:hover {
-    color: #49a9ee !important;
+    color: @pcl !important;
   }
 }
 
@@ -178,16 +178,16 @@ a.cancel-link {
   height: 52px;
   border-radius: 5px;
   border: none;
-  background-color: #4ba2f2;
-  box-shadow: 0 3px 8px 0 rgba(26, 80, 153, 0.3);
+  background-color: @pc;
+  box-shadow: 0 3px 8px 0 darken(@pc, 10%);
 }
 
 .Sign__button {
   font-family: Whitney,"Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
   text-transform: uppercase;
-  color: #4ba2f2 !important;
+  color: @pc !important;
   background: none;
-  border: 1px solid #4ba2f2;
+  border: 1px solid @pc;
   border-radius: 5px;
   width: 100%;
   padding: 15px 0;

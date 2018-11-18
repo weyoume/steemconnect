@@ -1,16 +1,16 @@
 const cloneDeep = require('lodash/cloneDeep');
 const join = require('lodash/join');
-const steem = require('@steemit/steem-js');
+const wehelpjs = require('wehelpjs');
 const { isEmpty, userExists, normalizeUsername } = require('../validation-utils');
 
-const optionalFields = ['delegator', 'vesting_shares'];
+const optionalFields = ['delegator', 'SCORE'];
 
 const parse = async (query) => {
   const cQuery = cloneDeep(query);
 
   cQuery.delegatee = normalizeUsername(cQuery.delegatee);
   cQuery.delegator = normalizeUsername(cQuery.delegator);
-  cQuery.vesting_shares = join([parseFloat(0).toFixed(6), 'VESTS'], ' ');
+  cQuery.SCORE = join([parseFloat(0).toFixed(6), 'SCORE'], ' ');
 
   return cQuery;
 };
@@ -28,20 +28,20 @@ const normalize = async (query) => {
   const cQuery = cloneDeep(query);
 
   let sUsername = normalizeUsername(query.delegatee);
-  let accounts = await steem.api.getAccountsAsync([sUsername]);
+  let accounts = await wehelpjs.api.getAccountsAsync([sUsername]);
   let account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
   if (account) {
     cQuery.toName = account.name;
-    cQuery.toReputation = steem.formatter.reputation(account.reputation);
+    cQuery.toReputation = wehelpjs.formatter.reputation(account.reputation);
   }
 
   if (query.delegator) {
     sUsername = normalizeUsername(query.delegator);
-    accounts = await steem.api.getAccountsAsync([sUsername]);
+    accounts = await wehelpjs.api.getAccountsAsync([sUsername]);
     account = accounts && accounts.length > 0 && accounts.find(a => a.name === sUsername);
     if (account) {
       cQuery.fromName = account.name;
-      cQuery.fromReputation = steem.formatter.reputation(account.reputation);
+      cQuery.fromReputation = wehelpjs.formatter.reputation(account.reputation);
     }
   }
 
