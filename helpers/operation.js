@@ -1,5 +1,5 @@
 const changeCase = require('change-case');
-const operations = require('@steemit/steem-js/lib/broadcast/operations');
+const operations = require('wehelpjs/lib/broadcast/operations');
 const cloneDeep = require('lodash/cloneDeep');
 const get = require('lodash/get');
 const has = require('lodash/has');
@@ -9,7 +9,7 @@ const operationAuthor = require('./operation-author.json');
 const customOperations = require('./operations/custom-operations');
 const helperOperations = require('./operations');
 
-/** Parse error message from Steemd response */
+/** Parse error message from Node response */
 const getErrorMessage = (error) => {
   let errorMessage = '';
   if (has(error, 'data.stack[0].format')) {
@@ -45,17 +45,16 @@ const setDefaultAuthor = (operation, query, username) => {
 
 const getOperation = (type) => {
   let ops = operations.find(op =>
-    op.operation === changeCase.snakeCase(type)
+    op.operation === changeCase.snakeCase(type) || op.operation === type
   );
   if (ops) {
     return ops;
   }
-
   ops = customOperations.find(op =>
-      op.operation === changeCase.snakeCase(type)
+      op.operation === changeCase.snakeCase(type) || op.operation === type
   );
   if (ops) {
-    ops.roles = operations.find(op => op.operation === ops.type).roles;
+    ops.roles = operations.find(op => op.operation === changeCase.snakeCase(type) || op.operation === ops.type).roles;
     return ops;
   }
 
@@ -77,11 +76,16 @@ const isValid = (op, params) => {
 
 const parseQuery = (type, query, username) => {
   const snakeCaseType = changeCase.snakeCase(type);
+  // const snakeCaseType = type;
   let cQuery = cloneDeep(query);
   cQuery = setDefaultAuthor(snakeCaseType, cQuery, username);
+  cQuery = setDefaultAuthor(type, cQuery, username);
 
   if (hasIn(helperOperations, snakeCaseType)) {
     return helperOperations[snakeCaseType].parse(cQuery);
+  }
+  if (hasIn(helperOperations, type)) {
+    return helperOperations[type].parse(cQuery);
   }
 
   return cQuery;
@@ -117,17 +121,25 @@ const validateRequired = (type, query) => {
 
 const validate = async (type, query) => {
   const snakeCaseType = changeCase.snakeCase(type);
+  // const snakeCaseType = type;
   const errors = validateRequired(snakeCaseType, query);
   if (hasIn(helperOperations, snakeCaseType) && typeof helperOperations[snakeCaseType].validate === 'function') {
     await helperOperations[snakeCaseType].validate(query, errors);
+  }
+  if (hasIn(helperOperations, type) && typeof helperOperations[type].validate === 'function') {
+    await helperOperations[type].validate(query, errors);
   }
   return errors;
 };
 
 const normalize = async (type, query) => {
   const snakeCaseType = changeCase.snakeCase(type);
+  // const snakeCaseType = type;
   if (hasIn(helperOperations, snakeCaseType) && typeof helperOperations[snakeCaseType].normalize === 'function') {
     return await helperOperations[snakeCaseType].normalize(query);
+  }
+  if (hasIn(helperOperations, type) && typeof helperOperations[type].normalize === 'function') {
+    return await helperOperations[type].normalize(query);
   }
   return query;
 };

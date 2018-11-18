@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const debug = require('debug')('sc2:server');
+const debug = require('debug')('weauth:server');
 const { tokens } = require('../db/models');
 const config = require('../config.json');
 

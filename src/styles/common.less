@@ -93,10 +93,10 @@ b {
 }
 
 .btn-success {
-  background-color: #02d895;
+  background-color: @pc;
 
   &:hover, &:focus, &:active {
-    background-color: #02a572 !important;
+    background-color: @pcd1 !important;
   }
 }
 
@@ -106,12 +106,12 @@ b {
 }
 
 .btn-outline-success {
-  color: #02d895 !important;
-  box-shadow: inset 0 0 0 2px #02d895;
+  color: @pc !important;
+  box-shadow: inset 0 0 0 2px @pc;
 
   &:hover, &:focus, &:active {
     color: #ffffff !important;
-    background-color: #02a572;
+    background-color: @pcd1;
     box-shadow: none;
   }
 }
@@ -207,10 +207,10 @@ pre {
 .button-link {
   background: none;
   border: none;
-  color:#108ee9;
+  color: @pc;
 
   &:hover {
-    color:#49a9ee;
+    color: @pcl;
   }
 }
 
@@ -222,15 +222,15 @@ pre {
   height: 52px;
   border-radius: 5px;
   border: none;
-  background-color: #4ba2f2;
-  box-shadow: 0 3px 8px 0 rgba(26, 80, 153, 0.3);
+  background-color: @pc;
+  box-shadow: 0 3px 8px 0 darken(@pc, 10%);
 }
 
 .ant-popover-message > .anticon {
   line-height: 24px;
 }
 
-.steemconnect-form {
+.native-auth-form {
   label {
     margin-bottom: 0;
   }
@@ -244,4 +244,25 @@ pre {
   .ant-form-item-label {
     font-weight: bold;
   }
+}
+
+
+.nav-button {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.ant-btn-lg {
+	&.white-btn {
+		background-color: darken(white, 3%);
+		// color: lighten(black, 10%) !important;
+		color: mix(@pc, white, 80%) !important;
+		>span{
+			color: inherit;			
+		}
+		&:hover,
+		&:active,
+		&:focus {
+			background-color: darken(white, 1%)
+		}
+	}
 }

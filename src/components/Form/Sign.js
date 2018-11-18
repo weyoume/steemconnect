@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import steem from '@steemit/steem-js';
+import wehelpjs from 'wehelpjs';
 import { Form, Icon, Input, Button } from 'antd';
 import { accountExist } from '../../utils/validator';
 import './Sign.less';
+import { Link } from 'react-router';
 
 class Sign extends React.Component {
   static propTypes = {
@@ -37,27 +38,67 @@ class Sign extends React.Component {
       if (!err) {
         const { username, password } = values;
         const { roles, intl } = this.props;
-        const accounts = await steem.api.getAccountsAsync([username]);
+        const accounts = await wehelpjs.api.getAccountsAsync([username]);
         const account = accounts[0];
-
+				account.name = account.name.toLowerCase()
         /** Change password to public WIF */
-        const privateWif = steem.auth.isWif(password)
-          ? password
-          : steem.auth.toWif(username, password, roles[0]);
-        const publicWif = steem.auth.wifToPublic(privateWif);
-
+				
+				var privateWif
+				var publicWif
+				let keypairs = []
+				var authTypes = [
+				]
+				for (let i = 0; i < roles.length; i += 1) {
+					keypairs['privateWif'+i] = wehelpjs.auth.isWif(password)
+          	? password
+          	: wehelpjs.auth.toWif(username, password, roles[i]);
+					keypairs['publicWif'+i] = wehelpjs.auth.wifToPublic(keypairs['privateWif'+i]);
+					if(account[roles[i]] && account[roles[i]].account_auths && account[roles[i]].account_auths.length){
+						for(let n = 0; n < account[roles[i]].account_auths.length; n += 1){
+							if(account[roles[i]].account_auths[n] && account[roles[i]].account_auths[n][0]){
+								keypairs['privateWifAccountAuth'+i+''+n] = wehelpjs.auth.isWif(password)
+									? password
+									: wehelpjs.auth.toWif(account[roles[i]].account_auths[n][0], password, roles[i]);
+								keypairs['publicWifAccountAuth'+i+''+n] = wehelpjs.auth.wifToPublic(keypairs['privateWifAccountAuth'+i+''+n]);
+							}
+						}
+					}
+				}
         /** Check if public WIF is valid */
         let wifIsValid = false;
-        let role;
+				let role;
+				
         for (let i = 0; i < roles.length; i += 1) {
-          if (
-            (roles[i] === 'memo' && account.memo_key === publicWif) ||
-            (roles[i] !== 'memo' && this.keyAuthsHasPublicWif(account[roles[i]].key_auths, publicWif))
-          ) {
-            wifIsValid = true;
-            role = roles[i];
-            break;
-          }
+					for (let n = 0; n < roles.length; n += 1) {
+						if (
+							(roles[i] === 'memo' && account.memoKey === keypairs['publicWif'+n]) ||
+							(roles[i] !== 'memo' && this.keyAuthsHasPublicWif(account[roles[i]].key_auths, keypairs['publicWif'+n]))
+						) {
+							privateWif = keypairs['privateWif'+n];
+							publicWif = keypairs['publicWif'+n];
+							wifIsValid = true;
+							role = roles[i];
+							break;
+						} else {
+							if(account[roles[i]] && account[roles[i]].account_auths && account[roles[i]].account_auths.length){
+								for(let k = 0; k < account[roles[i]].account_auths.length; k += 1){
+									if(account[roles[i]].account_auths[n] && account[roles[i]].account_auths[n][0]){
+										if (
+											(roles[i] === 'memo' && account.memoKey === keypairs['publicWifAccountAuth'+n+''+k]) ||
+											(roles[i] !== 'memo' && this.keyAuthsHasPublicWif(account[roles[i]].key_auths, keypairs['publicWifAccountAuth'+n+''+k]))
+										){
+											privateWif = keypairs['privateWifAccountAuth'+n+''+k];
+											publicWif = keypairs['publicWifAccountAuth'+n+''+k];
+											wifIsValid = true;
+											role = roles[i];
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+					if(wifIsValid) break
         }
 
         /** Submit form */
@@ -78,7 +119,7 @@ class Sign extends React.Component {
           this.props.form.setFields({
             password: {
               value: password,
-              errors: [new Error(intl.formatMessage({ id: 'error_password_not_valid' }))],
+              errors: [new Error(intl.formatMessage({ id: 'error_password_invalid' }))],
             },
           });
         }
@@ -92,14 +133,16 @@ class Sign extends React.Component {
     const username = this.props.form.getFieldValue('username');
     return { username, password };
   };
-
+	componentDidMount(){
+		this.usernameInput.focus();
+	}
   render() {
     const { form: { getFieldDecorator }, intl } = this.props;
     const title = this.props.title ? this.props.title : <FormattedMessage id="sign_in" />;
-    const btnTitle = this.props.btnTitle ? this.props.btnTitle : <FormattedMessage id="sign_in" />;
+		const btnTitle = this.props.btnTitle ? this.props.btnTitle : <FormattedMessage id="sign_in" />;
     return (
       <Form onSubmit={this.handleSubmit} className="SignForm">
-        <h5>{title}</h5>
+        {/* <h5>{title}</h5> */}
         <p><FormattedMessage id="operation_require_roles" values={{ roles: this.props.roles.join(', ') }} /></p>
         <Form.Item hasFeedback>
           {getFieldDecorator('username', {
@@ -108,7 +151,15 @@ class Sign extends React.Component {
               { validator: accountExist },
             ],
           })(
-            <Input prefix={<Icon type="user" size="large" />} placeholder={intl.formatMessage({ id: 'username' })} autoCorrect="off" autoCapitalize="none" />
+						<Input 
+							prefix={<Icon type="user" size="large" />} 
+							placeholder={intl.formatMessage({ id: 'username' })} 
+							autoCorrect="off" 
+							name="username"
+							autoCapitalize="none" 
+							autoComplete="on"
+							ref={(input) => { this.usernameInput = input; }}
+							/>
           )}
         </Form.Item>
         <Form.Item hasFeedback>
@@ -117,7 +168,7 @@ class Sign extends React.Component {
               { required: true, message: intl.formatMessage({ id: 'error_password_required' }) },
             ],
           })(
-            <Input prefix={<Icon type="lock" size="large" />} type="password" placeholder={intl.formatMessage({ id: 'password_or_key' })} autoCorrect="off" autoCapitalize="none" />
+            <Input prefix={<Icon type="lock" size="large" />} type="password" name="password" placeholder={intl.formatMessage({ id: 'password_or_key' })} autoComplete="on" autoCorrect="off" autoCapitalize="none" />
           )}
         </Form.Item>
         <Form.Item>
@@ -125,6 +176,11 @@ class Sign extends React.Component {
             {btnTitle}
           </Button>
         </Form.Item>
+				<Form.Item>
+					<Link to="/signup" rel="noopener noreferrer" className="signup-text-link">
+							<FormattedMessage id="signup" />
+					</Link>
+				</Form.Item>
       </Form>
     );
   }

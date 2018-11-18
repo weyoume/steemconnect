@@ -6,8 +6,8 @@ const basename = path.basename(module.filename);
 const config = require(`${__dirname}/../config/config.json`);
 const logger = require(`${__dirname}/../../helpers/logger`).child({ module: 'db' });
 const db = {};
-const sequelize = new Sequelize(process.env[config.use_env_variable], config);
-
+var dotenv = require('dotenv')
+const sequelize = new Sequelize(config);
 config.logging = function (msg) {
   logger.debug(msg);
 };
@@ -16,7 +16,10 @@ fs
   .readdirSync(__dirname)
   .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
   .forEach((file) => {
-    const model = sequelize.import(path.join(__dirname, file));
+		const model = sequelize.import(path.join(__dirname, file));
+		// if(model.name == 'ips'){
+			
+		// }
     db[model.name] = model;
   });
 

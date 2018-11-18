@@ -82,7 +82,7 @@ class App extends Component {
       }),
     })
       .then(res => res.json())
-      .then((result) => {
+      .then((result, err) => {
         this.handleCancel();
         if (result.success) {
           notification.success({
@@ -90,7 +90,17 @@ class App extends Component {
             description: intl.formatMessage({ id: 'success_revoke_app_tokens' }),
           });
         } else {
-          notification.error({
+					if(err){
+						console.error(err)
+						console.error(getErrorMessage(err) || intl.formatMessage({ id: 'general_error' }))		
+					} else if (result && result.err) {
+						console.error(result.err)
+						console.error(getErrorMessage(result.err) || intl.formatMessage({ id: 'general_error' }))		
+					} else if (result && result.error) {
+						console.error(result.error)
+						console.error(getErrorMessage(result.error) || intl.formatMessage({ id: 'general_error' }))		
+					}
+					notification.error({
             message: intl.formatMessage({ id: 'error' }),
             description: intl.formatMessage({ id: 'general_error_short' }),
           });
@@ -119,8 +129,10 @@ class App extends Component {
           description: intl.formatMessage({ id: 'success_secret_reset' }),
         });
       })
-      .catch(() => {
-        this.handleCancel();
+      .catch((err) => {
+				this.handleCancel();
+				console.error(err)
+				console.error(getErrorMessage(err) || intl.formatMessage({ id: 'general_error' }))		
         notification.error({
           message: intl.formatMessage({ id: 'error' }),
           description: intl.formatMessage({ id: 'general_error' }),

@@ -5,11 +5,11 @@ const defaults = require('lodash/defaults');
 const path = require('path');
 const webpack = require('webpack');
 const availableLocales = require('../helpers/locales.json');
-
 const localeRegex = new RegExp(Object.keys(availableLocales).join('|'));
+require('dotenv').config()
 
 const DEFAULTS = {
-  isDevelopment: process.env.NODE_ENV !== 'production',
+  isDevelopment: (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'prod'),
   baseDir: path.join(__dirname, '..'),
 };
 
@@ -23,7 +23,8 @@ function makePlugins(options) {
         // This has effect on the react lib size
         NODE_ENV: isDevelopment ? JSON.stringify('development') : JSON.stringify('production'),
         ENABLE_LOGGER: JSON.stringify(process.env.ENABLE_LOGGER),
-        STEEMD_URL: JSON.stringify(process.env.STEEMD_URL || 'https://api.steemit.com'),
+        NODE_API_URL: JSON.stringify(process.env.NODE_API_URL),
+        NODE_API_URL_SERVER: JSON.stringify(process.env.NODE_API_URL_SERVER),
         IS_BROWSER: JSON.stringify(true),
       },
     }),
@@ -50,7 +51,7 @@ function makePlugins(options) {
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: true,
         minimize: true,
-        compress: {
+        iopress: {
           warnings: false,
         },
       }),
@@ -88,13 +89,13 @@ function makeStyleLoaders(options) {
   ];
 }
 
-function makeConfig(options) {
+function makeWebpackConfig(options) {
   // eslint-disable-next-line no-param-reassign
   if (!options) options = {};
   defaults(options, DEFAULTS);
 
   const isDevelopment = options.isDevelopment;
-
+	console.log('isDevelopment', isDevelopment)
   return {
     devtool: isDevelopment ? 'cheap-eval-source-map' : 'source-map',
     entry: (isDevelopment ? [
@@ -134,10 +135,10 @@ function makeConfig(options) {
 }
 
 if (!module.parent) {
-  console.log(makeConfig({
-    isDevelopment: process.env.NODE_ENV !== 'production',
+  console.log(makeWebpackConfig({
+    isDevelopment: (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'prod'),
   }));
 }
 
-exports = module.exports = makeConfig;
+exports = module.exports = makeWebpackConfig;
 exports.DEFAULTS = DEFAULTS;

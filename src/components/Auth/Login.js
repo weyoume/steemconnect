@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { authorize, login } from '../../utils/auth';
-import SignForm from '../Form/Sign';
+import Sign from '../Form/Sign';
 import ChooseAccountForm from '../Form/ChooseAccount';
 import Loading from '../../widgets/Loading';
 import { getAccounts } from '../../utils/localStorage';
@@ -45,7 +45,7 @@ export default class Login extends Component {
     const { next } = this.props.location.query;
     this.setState({ step: 0 });
     login({ ...auth }, () => {
-      window.location = next || '/dashboard';
+      window.location = next || '/console';
     });
   };
 
@@ -56,7 +56,7 @@ export default class Login extends Component {
   changeAccount = () => {
     const { clientId, responseType, next, scope } = this.state;
     authorize({ clientId, scope, responseType }, () => {
-      window.location = next || '/dashboard';
+      window.location = next || '/console';
     });
   }
 
@@ -67,11 +67,11 @@ export default class Login extends Component {
         <div className="Sign__content container my-2 login-form Sign__authorize">
           <div className="Sign_frame">
             <div className="Sign__header">
-              <object data="/img/logo.svg" type="image/svg+xml" id="logo" />
+              <div className="brand-name"><span>WeYouMe Login</span></div>
             </div>
             <div className="Sign__wrapper">
               {step === 0 && <Loading />}
-              {step === 1 && <SignForm title={<FormattedMessage id="log_in" />} roles={['posting']} sign={this.handleSubmit} />}
+              {step === 1 && <Sign roles={['owner', 'active','memo', 'posting']} sign={this.handleSubmit} />}
               {step === 2 &&
               <ChooseAccountForm
                 addAccount={this.addAccount}

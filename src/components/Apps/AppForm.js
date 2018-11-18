@@ -73,7 +73,7 @@ class AppForm extends Component {
       }),
     })
       .then(res => res.json())
-      .then((result) => {
+      .then((result, err) => {
         this.handleCancel();
         if (result.success) {
           notification.success({
@@ -81,6 +81,16 @@ class AppForm extends Component {
             description: intl.formatMessage({ id: 'success_revoke_app_tokens' }),
           });
         } else {
+					if(err){
+						console.error(err)
+						console.error(getErrorMessage(err) || intl.formatMessage({ id: 'general_error' }))		
+					} else if (result && result.err) {
+						console.error(result.err)
+						console.error(getErrorMessage(result.err) || intl.formatMessage({ id: 'general_error' }))		
+					} else if (result && result.error) {
+						console.error(result.error)
+						console.error(getErrorMessage(result.error) || intl.formatMessage({ id: 'general_error' }))		
+					}
           notification.error({
             message: intl.formatMessage({ id: 'error' }),
             description: intl.formatMessage({ id: 'general_error_short' }),
@@ -131,7 +141,7 @@ class AppForm extends Component {
     const redirectUris = data.redirect_uris && data.redirect_uris.join('\n');
     const allowedIPs = data.allowed_ips && data.allowed_ips.join('\n');
     return (
-      <Form onSubmit={this.handleSubmit} className="steemconnect-form">
+      <Form onSubmit={this.handleSubmit} className="native-auth-form">
         <Form.Item
           label={<FormattedMessage id="app_name" />}
         >

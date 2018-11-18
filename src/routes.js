@@ -3,14 +3,14 @@ import { Route, IndexRoute } from 'react-router';
 import Wrapper from './wrapper';
 import Layout from './app';
 import Index from './components/Index';
-import Dashboard from './components/Dashboard';
+import Console from './components/Console';
 import App from './components/Apps/App';
 import Apps from './components/Apps/Apps';
 import MyApps from './components/Apps/MyApps';
 import AuthorizedApps from './components/Apps/AuthorizedApps';
 import EditApp from './components/Apps/EditApp';
 import CreateApp from './components/Apps/CreateApp';
-import Steemjs from './components/Docs/Steemjs';
+import help from './components/Docs/help';
 import OAuth2 from './components/Docs/OAuth2';
 import Sign from './components/Sign';
 import Generate from './components/GenerateLink';
@@ -30,7 +30,9 @@ export default (
     <IndexRoute component={Index} />
     <Route component={RequireLogin}>
       <Route component={Layout}>
-        <Route path="/dashboard" component={Dashboard} />
+				<Route path="/console" component={Console} />
+				<Route path="/me" component={Console} />
+				<Route path="/dashboard" component={Console} />
         <Route path="/apps/me" component={MyApps} />
         <Route path="/apps/create" component={CreateApp} />
         <Route path="/apps/authorized" component={AuthorizedApps} />
@@ -43,8 +45,10 @@ export default (
       <Route path="/@:username/permissions" component={Permissions} />
       <Route path="/apps/@:clientId" component={App} />
     </Route>
-    <Route path="/docs/steemjs" component={Steemjs} />
+    <Route path="/docs/wehelpjs" component={help} />
     <Route path="/accounts/create" component={CreateAccount} />
+    <Route path="/register" component={CreateAccount} />
+    <Route path="/signup" component={CreateAccount} />
     <Route path="/accounts/recover" component={RecoverAccount} />
     <Route path="/accounts/request-recovery" component={RequestAccountRecovery} />
     <Route path="/login" component={Login} />
@@ -54,6 +58,6 @@ export default (
     <Route path="/authorize/@:username" component={SignAuthorize} />
     <Route path="/authorize/@:username/:role" component={SignAuthorize} />
     <Route path="/revoke/@:username" component={Revoke} />
-    <Route path="/*" component={Error404} />
+    {/* <Route path="/*" component={Error404} /> */}
   </Route>
 );

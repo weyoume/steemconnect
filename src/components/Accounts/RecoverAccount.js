@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Card, notification } from 'antd';
-import steem from '@steemit/steem-js';
+import wehelpjs from 'wehelpjs';
 import { Link } from 'react-router';
 import RecoverAccountForm from '../Form/RecoverAccount';
 import Loading from '../../widgets/Loading';
@@ -30,6 +30,8 @@ class RecoverAccount extends React.Component {
     this.setState({ values, isLoading: true });
 
     const onError = (error) => {
+			console.error(error)
+			console.error(getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }))
       notification.error({
         message: intl.formatMessage({ id: 'error' }),
         description: getErrorMessage(error) || intl.formatMessage({ id: 'general_error' }),
@@ -39,12 +41,12 @@ class RecoverAccount extends React.Component {
     const onSuccess = () => {
       notification.success({
         message: intl.formatMessage({ id: 'success' }),
-        description: intl.formatMessage({ id: 'account_recovered' }, { account: values.account_to_recover }),
+        description: intl.formatMessage({ id: 'account_recovered' }, { account: values.accountToRecover }),
       });
     };
 
     await this.recoverAccount(
-      values.account_to_recover,
+      values.accountToRecover,
       values.old_password,
       values.new_password,
       onError,
@@ -52,17 +54,17 @@ class RecoverAccount extends React.Component {
     this.setState({ isLoading: false });
   };
 
-  // https://github.com/steemit/condenser/blob/0b3af70996c08423a770db2ef23189cd4e7d12be/app/redux/TransactionSaga.js#L481
+  // https://github.com/WeYouMe/weauth/blob/0b3af70996c08423a770db2ef23189cd4e7d12be/app/redux/TransactionSaga.js#L481
   recoverAccount = async (accountToRecover, oldPassword, newPassword, onError, onSuccess) => {
-    const oldOwnerPrivate = steem.auth.isWif(oldPassword) ? oldPassword :
-      steem.auth.toWif(accountToRecover, oldPassword, 'owner');
+    const oldOwnerPrivate = wehelpjs.auth.isWif(oldPassword) ? oldPassword :
+      wehelpjs.auth.toWif(accountToRecover, oldPassword, 'owner');
 
-    const oldOwner = steem.auth.wifToPublic(oldOwnerPrivate);
+    const oldOwner = wehelpjs.auth.wifToPublic(oldOwnerPrivate);
 
-    const newOwnerPrivate = steem.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
-    const newOwner = steem.auth.wifToPublic(newOwnerPrivate);
+    const newOwnerPrivate = wehelpjs.auth.toWif(accountToRecover, newPassword.trim(), 'owner');
+    const newOwner = wehelpjs.auth.wifToPublic(newOwnerPrivate);
     const pwPubkey = (name, pw, role) =>
-      steem.auth.wifToPublic(steem.auth.toWif(name, pw.trim(), role));
+      wehelpjs.auth.wifToPublic(wehelpjs.auth.toWif(name, pw.trim(), role));
     const newActive = pwPubkey(accountToRecover, newPassword.trim(), 'active');
     const newPosting = pwPubkey(accountToRecover, newPassword.trim(), 'posting');
     const newMemo = pwPubkey(accountToRecover, newPassword.trim(), 'memo');
@@ -80,10 +82,10 @@ class RecoverAccount extends React.Component {
     };
 
     try {
-      await steem.broadcast.sendAsync({ extensions: [],
+      await wehelpjs.broadcast.sendAsync({ extensions: [],
         operations: [
           ['recover_account', {
-            account_to_recover: accountToRecover,
+            accountToRecover: accountToRecover,
             new_owner_authority: newOwnerAuthority,
             recent_owner_authority: recentOwnerAuthority,
           }],
@@ -91,14 +93,14 @@ class RecoverAccount extends React.Component {
 
       // change password
       // change password probably requires a separate transaction (single trx has not been tested)
-      await steem.broadcast.sendAsync({ extensions: [],
+      await wehelpjs.broadcast.sendAsync({ extensions: [],
         operations: [
-          ['account_update', {
+          ['accountUpdate', {
             account: accountToRecover,
             active: { weight_threshold: 1, account_auths: [], key_auths: [[newActive, 1]] },
             posting: { weight_threshold: 1, account_auths: [], key_auths: [[newPosting, 1]] },
-            memo_key: newMemo,
-            json_metadata: '',
+            memoKey: newMemo,
+            json: '',
           }],
         ] }, [newOwnerPrivate]);
       onSuccess();

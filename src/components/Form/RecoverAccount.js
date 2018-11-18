@@ -53,10 +53,10 @@ class RecoverAccountForm extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
-          label={<FormattedMessage id="account_to_recover" />}
+          label={<FormattedMessage id="accountToRecover" />}
           hasFeedback
         >
-          {getFieldDecorator('account_to_recover', {
+          {getFieldDecorator('accountToRecover', {
             rules: [
               { validator: accountExist },
               { required: true, message: intl.formatMessage({ id: 'error_account_recover_required' }) },

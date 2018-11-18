@@ -1,37 +1,37 @@
 module.exports = [
   {
     operation: 'follow',
-    type: 'custom_json',
+    type: 'customJson',
     params: ['follower', 'following'],
   },
   {
     operation: 'unfollow',
-    type: 'custom_json',
+    type: 'customJson',
     params: ['follower', 'following'],
   },
   {
     operation: 'reblog',
-    type: 'custom_json',
+    type: 'customJson',
     params: ['author', 'permlink'],
   },
   {
     operation: 'mute',
-    type: 'custom_json',
+    type: 'customJson',
     params: ['follower', 'following'],
   },
   {
     operation: 'unmute',
-    type: 'custom_json',
+    type: 'customJson',
     params: ['follower', 'following'],
   },
   {
-    operation: 'undelegate_vesting_shares',
-    type: 'delegate_vesting_shares',
+    operation: 'undelegateSCORE',
+    type: 'delegateSCORE',
     params: ['delegator', 'delegatee'],
   },
   {
     operation: 'profile_update',
-    type: 'account_update',
+    type: 'accountUpdate',
     params: ['account'],
   },
 ];

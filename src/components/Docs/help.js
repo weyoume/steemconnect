@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import changeCase from 'change-case';
-import pkg from '@steemit/steem-js/package.json';
-import methods from '@steemit/steem-js/lib/api/methods';
-import operations from '@steemit/steem-js/lib/broadcast/operations';
+import pkg from 'wehelpjs/package.json';
+import methods from 'wehelpjs/lib/api/methods';
+import operations from 'wehelpjs/lib/broadcast/operations';
 
 const Method = ({ method }) => {
   const inlineParams = method.params
     ? `${method.params.join(', ')}, ` :
     '';
-  let apiLink = `https://api.steemjs.com/${method.method}`;
+  let apiLink = `https://api.weyoume.io/${method.method}`;
   if (method.params) {
     apiLink += `?${method.params.map(param => param).join('=value&')}=value`;
   }
@@ -23,7 +23,7 @@ const Method = ({ method }) => {
       <p><a href={apiLink} target="_blank" rel="noopener noreferrer">Try it</a></p>
       <pre>
         <code>
-          {`steem.api.${changeCase.camelCase(method.method)}(${inlineParams}function(err, result) {
+          {`wehelpjs.api.${changeCase.camelCase(method.method)}(${inlineParams}function(err, result) {
   console.log(err, result);
 });`}
         </code>
@@ -55,7 +55,7 @@ const Operation = ({ operation }) => {
       <p><b><FormattedMessage id="required_authority" />:</b> {inlineRoles}. <a href={signLink} target="_blank" rel="noopener noreferrer"><FormattedMessage id="try_it" /></a></p>
       <pre>
         <code>
-          {`steem.broadcast.${changeCase.camelCase(operation.operation)}(wif, ${inlineParams}function(err, result) {
+          {`wehelpjs.broadcast.${changeCase.camelCase(operation.operation)}(wif, ${inlineParams}function(err, result) {
   console.log(err, result);
 });`}
         </code>
@@ -68,15 +68,15 @@ Operation.propTypes = {
   operation: PropTypes.shape(),
 };
 
-const Steemjs = () =>
+const wehelpjs = () =>
   <div className="container my-5">
-    <h1><FormattedMessage id="steemjs" /></h1>
+    <h1><FormattedMessage id="wehelpjs" /></h1>
     <p>
       <FormattedMessage
-        id="steemjs_doc"
+        id="wehelpjs_doc"
         values={{
           version: pkg.version,
-          source: <a href="https://github.com/steemit/steem-js"><FormattedMessage id="source_code" /></a>,
+          source: <a href="https://github.io/WeYouMe/wehelpjs"><FormattedMessage id="source_code" /></a>,
           api: <a href="#api"><FormattedMessage id="api_methods" /></a>,
           operations: <a href="#broadcast"><FormattedMessage id="api_methods" /></a>,
         }}
@@ -93,4 +93,4 @@ const Steemjs = () =>
   </div>
 ;
 
-export default Steemjs;
+export default wehelpjs;

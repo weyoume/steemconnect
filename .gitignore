@@ -39,6 +39,11 @@ build/Release
 node_modules
 .tern-port
 .envrc
+.env
 
 # WebStorm
 .idea
+
+scripts/private*
+
+private*.*

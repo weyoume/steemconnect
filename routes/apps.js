@@ -37,7 +37,7 @@ router.get('/@:clientId', async (req, res, next) => {
 router.post('/@:clientId', authenticate('user'), async (req, res) => {
   const { clientId } = req.params;
 
-  const accounts = await req.steem.api.getAccountsAsync([clientId]);
+  const accounts = await req.wehelpjs.api.getAccountsAsync([clientId]);
   if (!accounts[0]) {
     res.status(400).json({ error: `Proxy account @${clientId} does not exist` });
   } else {
@@ -46,26 +46,26 @@ router.post('/@:clientId', authenticate('user'), async (req, res) => {
       owner: proxy.owner,
       active: proxy.active,
       posting: proxy.posting,
-      memo: proxy.memo_key,
+      memo: proxy.memoKey,
     });
     const offlinePubKeys = config.offline_generated_public_keys;
     const requiredAuthStr = JSON.stringify({
-      owner: { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[offlinePubKeys.owner, 1]] },
-      active: { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[offlinePubKeys.active, 1]] },
-      posting: { weight_threshold: 1, account_auths: [['steemconnect', 1]], key_auths: [[offlinePubKeys.posting, 1]] },
+      owner: { weight_threshold: 1, account_auths: [[config.account.name, 1]], key_auths: [[offlinePubKeys.owner, 1]] },
+      active: { weight_threshold: 1, account_auths: [[config.account.name, 1]], key_auths: [[offlinePubKeys.active, 1]] },
+      posting: { weight_threshold: 1, account_auths: [[config.account.name, 1]], key_auths: [[offlinePubKeys.posting, 1]] },
       memo: offlinePubKeys.memo,
     });
 
-    let jsonMetadata;
+    let json;
     try {
-      jsonMetadata = JSON.parse(proxy.json_metadata);
+      json = JSON.parse(proxy.json);
     } catch (e) {
-      jsonMetadata = {};
+      json = {};
     }
 
     if (
       proxyAuthStr === requiredAuthStr
-      && jsonMetadata.owner && jsonMetadata.owner === req.user
+      && json.owner && json.owner === req.user
     ) {
       const secret = crypto.randomBytes(24).toString('hex');
       req.db.apps.create({
@@ -131,7 +131,7 @@ router.put('/@:clientId/reset-secret', authenticate('user'), async (req, res, ne
 });
 
 router.all('/authorized', authenticate('user'), async (req, res) => {
-  const accounts = await req.steem.api.getAccountsAsync([req.user]);
+  const accounts = await req.wehelpjs.api.getAccountsAsync([req.user]);
   const postingAccountAuths = accounts[0].posting.account_auths;
   const apps = await req.db.apps.findAll({
     where: {

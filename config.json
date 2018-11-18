@@ -3,17 +3,24 @@
   "authorized_operations": [
     "vote",
     "comment",
-    "delete_comment",
+    "deleteComment",
     "comment_options",
-    "custom_json",
-    "claim_reward_balance"
-  ],
+    "customJson",
+    "claimRewardBalance"
+	],
+	"account" : {
+		"name" : "webuilder",
+		"username" : "webuilder",
+		"ownerKeys" : {
+			"private" : "someprivatekey"
+		}
+	},
   "offline_generated_public_keys": {
-    "owner": "STM82hFUKjN2j8KGqQ8rz9YgFAbMrWFuCPkabtrAnUfV2JQshNPLz",
-    "active": "STM78mV5drS6a5SredobAJXvzZv7tvBo4Cj15rumRcBtMzTWT173a",
-    "posting": "STM6ZVzWQvbYSzVpY2PRJHu7QSASVy8aB8xSVcJgx5seYGHPFvJkZ",
-    "memo": "STM7o1DigBaUEF28n2ap5PeY9Jqhndz3zWmF7xZ3zfRgSqeLaMnyA"
-  },
+		"active" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj",
+		"memo" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj",
+		"owner" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj",
+		"posting" : "TWYM68K7veT6Wz9tp9vXoAwgSH5D5nFqfKqs7j8KXugwBWoyPykoPj"
+	},
   "user_metadata": {
     "max_size": 16000000
   }
